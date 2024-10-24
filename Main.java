@@ -6,6 +6,7 @@
 
 //Importo todas las clases de java.io
 import java.io.*;
+import java.nio.channels.Pipe.SourceChannel;
 
 public class Main {
 
@@ -31,14 +32,14 @@ public class Main {
         //Aqui faltaria limpiar la pantalla por consola
         
         sueloTecho(RESOLUCION_ANCHO);
-        paredes(RESOLUCION_ALTURA, 14, -1, pedirNombre);
+        paredes(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, -1, pedirNombre);
         //System.out.println("Buenos dias, ¿Como te puedo llamar?");
         sueloTecho(RESOLUCION_ANCHO);
         name = br.readLine();
-        
+
         while (!quit) {
             sueloTecho(120);
-            paredes(RESOLUCION_ALTURA, 14, -1, pedirJugar);
+            paredes(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, -1, pedirJugar);
 
             //System.out.print("¿A que deseas jugar " + name + "?");
 
@@ -69,7 +70,7 @@ public class Main {
         System.out.printf("%n");
     }
 
-    public static void paredes(int longitud, int fila, int espaciado, String[] frases) {
+    public static void paredes(int anchura, int longitud, int fila, int espaciado, String[] frases) {
 
         //Hay que tener en cuenta el espaciado y el numero de frases
 
@@ -78,27 +79,53 @@ public class Main {
 
             System.out.printf("=");
 
-            //
+            //Si ha llegado a la fila entra dentro
             if(i == fila) {
-                
+
+                //Depende si la fila tiene que estar centrada 
                 if (espaciado <= -1){
-                    for(int j = 0; j != ((118 - frases[0].length()) / 2); j++) {
-                        System.out.print(" ");
-                    }
 
-                    System.out.print(frases[0]);
+                    if(frases.length > 1) {
+                        for(int k = 0; k < frases.length; k++) {
 
-                    //Terminacion de la frase dependiendo si es impar o par
-                    if (frases[0].length() % 2 == 0) {
-                        for(int j = 0; j != (118 - frases[0].length() - espaciado); j++) {
+                            //Imprime los primeros espacios
+                            for(int j = 0; j != (((anchura-2) - frases[k].length()) / 2); j++) {
+                                System.out.print(" ");
+                            }
+        
+                            System.out.print(frases[k]);
+        
+                            //Terminacion de la frase dependiendo si es impar o par
+                            if (frases[k].length() % 2 == 0) {
+                                for(int j = 0; j != ((anchura-2) - frases[k].length() - espaciado); j++) {
+                                    System.out.print(" ");
+                                }
+                            } else { //Si la frase es impar se le sumara 1 para que no se joda
+                                for(int j = 0; j != (((anchura-2) - frases[k].length()) / 2 + 1); j++) {
+                                    System.out.print(" ");
+                                }
+                            }
+                        }
+                    } else {
+                        for(int j = 0; j != (((anchura-2) - frases[0].length()) / 2); j++) {
                             System.out.print(" ");
                         }
-                    } else { //Si la frase es impar se le sumara 1 para que no se joda
-                        for(int j = 0; j != ((118 - frases[0].length()) / 2 + 1); j++) {
-                            System.out.print(" ");
+    
+                        System.out.print(frases[0]);
+    
+                        //Terminacion de la frase dependiendo si es impar o par
+                        if (frases[0].length() % 2 == 0) {
+                            for(int j = 0; j != ((anchura-2) - frases[0].length() - espaciado); j++) {
+                                System.out.print(" ");
+                            }
+                        } else { //Si la frase es impar se le sumara 1 para que no se joda
+                            for(int j = 0; j != (((anchura-2) - frases[0].length()) / 2 + 1); j++) {
+                                System.out.print(" ");
+                            }
                         }
                     }
-                } else {
+
+                } else { //Si no tiene que estar centrada
                     //Imprimira el espaciado y luego la frase
                     for(int j = 0; j != (espaciado); j++) {
                         System.out.print(" ");
@@ -107,20 +134,21 @@ public class Main {
                     System.out.print(frases[0]);
 
                     //Imprime el resto de la linea
-                    for(int j = 0; j != (118 - frases[0].length() - espaciado); j++) {
+                    for(int j = 0; j != ((anchura-2) - frases[0].length() - espaciado); j++) {
                         System.out.print(" ");
                     }
                 }
                 
-            } else {
+            } else { //Imprime espacios
 
-                for(int j = 0; j != 118; j++) {
+                for(int j = 0; j != (anchura-2); j++) {
                     System.out.print(" ");
                 }
 
             }
             System.out.print("=");
             }
+            
 
         
     }
