@@ -6,7 +6,6 @@
 
 //Importo todas las clases de java.io
 import java.io.*;
-import java.nio.channels.Pipe.SourceChannel;
 
 public class Main {
 
@@ -23,7 +22,12 @@ public class Main {
         int option = 0;
 
         String[] pedirNombre = {"Buenos dias, ¿Como te puedo llamar?"};
-        String[] pedirJugar = {"¿A que deseas jugar " + name + "?", "1 = Jugar", "2 = Conf", "3 = Salir"};
+        String[] pedirJugar = {
+            "¿A que deseas jugar " + name + "?",
+            "1 = Jugar",
+            "2 = Conf",
+            "3 = Salir"
+        };
 
         final int RESOLUCION_ALTURA = 30;
         final int RESOLUCION_ANCHO = 120;
@@ -67,9 +71,7 @@ public class Main {
         for(int i = longitud; i > 0; i--) {
             System.out.print("-");
         }
-        System.out.printf("%n");
     }
-
     public static void paredes(int anchura, int longitud, int fila, int espaciado, String[] frases) {
 
         //Hay que tener en cuenta el espaciado y el numero de frases
@@ -85,7 +87,10 @@ public class Main {
                 //Depende si la fila tiene que estar centrada 
                 if (espaciado <= -1){
 
+                    //Si tiene mas de una frase
                     if(frases.length > 1) {
+
+                        //Hace este bucle para imprimir todas las frases
                         for(int k = 0; k < frases.length; k++) {
 
                             //Imprime los primeros espacios
@@ -105,6 +110,8 @@ public class Main {
                                     System.out.print(" ");
                                 }
                             }
+                            System.out.printf("=");
+                            System.out.printf("=");
                         }
                     } else {
                         for(int j = 0; j != (((anchura-2) - frases[0].length()) / 2); j++) {
@@ -152,4 +159,6 @@ public class Main {
 
         
     }
+        
+        
 }
