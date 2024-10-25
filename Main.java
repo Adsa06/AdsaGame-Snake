@@ -7,6 +7,8 @@
 //Importo todas las clases de java.io
 import java.io.*;
 
+import src.ColoresConsola;
+
 public class Main {
 
     //Creo la funcion princiapl con un throws IOException para capturar mensajes por consola
@@ -21,7 +23,7 @@ public class Main {
         Boolean quit = false;
         int option = 0;
 
-        String pedirNombre = "Buenos dias, ¿Como te puedo llamar?";
+        String[] pedirNombre = {"Buenos dias, ¿Como te puedo llamar?"};
         String[] pedirJugar = {
             "¿A que deseas jugar " + name + "?",
             "",
@@ -37,7 +39,7 @@ public class Main {
         //Aqui faltaria limpiar la pantalla por consola
         
         sueloTecho(RESOLUCION_ANCHO);
-        paredes(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, -1, pedirNombre);
+        paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, pedirNombre);
         //System.out.println("Buenos dias, ¿Como te puedo llamar?");
         sueloTecho(RESOLUCION_ANCHO);
         name = br.readLine();
@@ -93,7 +95,7 @@ public class Main {
                             System.out.print(" ");
                         }
     
-                        System.out.print(frase);
+                        System.out.println(ColoresConsola.ANSI_RED() + frase);
     
                         //Terminacion de la frase dependiendo si es impar o par
                         if (frase.length() % 2 == 0) {
@@ -107,7 +109,8 @@ public class Main {
                         }
 
                 } else { //Si no tiene que estar centrada
-                    //Imprimira el espaciado y luego la frase
+                    //Imprimira el espaciado y luego la frase 
+                    
                     for(int j = 0; j != (espaciado); j++) {
                         System.out.print(" ");
                     }
@@ -119,6 +122,7 @@ public class Main {
                         System.out.print(" ");
                     }
                 }
+                    
                 
             } else { //Imprime espacios
 
@@ -131,7 +135,7 @@ public class Main {
             }
     }
     public static void paredesMultiplesFrases(int anchura, int longitud, int fila, String[] frases) {
-        for(int i = 0; i != (longitud-3- (frases.length)); i++) {
+        for(int i = 0; i != (longitud-3 -(frases.length - 1)); i++) {
 
             //Si ha llegado a la fila entra dentro
             if(i == fila) {
@@ -141,7 +145,7 @@ public class Main {
                         System.out.print(" ");
                     }
                 
-                    System.out.print(frases[k]);
+                    System.out.print(ColoresConsola.ANSI_RED() + frases[k] +  ColoresConsola.ANSI_RESET());
                 
                     //Terminacion de la frase dependiendo si es impar o par
                     if (frases[k].length() % 2 == 0) {
@@ -153,7 +157,7 @@ public class Main {
                             System.out.print(" ");
                         }
                     }
-                    System.out.printf("=");
+                    System.out.printf("=%n");
 
                 }
                 
@@ -163,9 +167,14 @@ public class Main {
                 for(int j = 0; j != (anchura-2); j++) {
                     System.out.print(" ");
                 }
-                System.out.printf("=");
+                System.out.printf("=%n");
             }
         }
     }
      
 }
+/*
+ * Unir las 2 funciones de paredes
+ * Agregar colores con una nueva lista xD
+ * Cambio en ColesConsola.java, una sola funcion con un switch
+ */
