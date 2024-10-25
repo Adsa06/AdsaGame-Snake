@@ -3,12 +3,13 @@ import java.io.*;
 public class ArchivoPrincipal {
     public static void main(String[] args) throws IOException, InterruptedException{
         
-        File file = new File("content.txt");
-        FileReader fr = new FileReader(file.getAbsolutePath());
-
+        BufferedReader reader = new BufferedReader(new FileReader("content.txt"));
         while(true) {
-            System.out.println("Hola");
-            System.out.println(fr.read());
+            if (reader.readLine() != null) {
+                System.out.println("------------");
+                System.out.println(reader.readLine());
+                System.out.println("------------");
+            }
             Thread.sleep(1000);
         }
     }
