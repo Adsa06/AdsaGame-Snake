@@ -4,9 +4,8 @@
  * 
  */
 
-//Importo todas las clases de java.io
+//Importo las clases de java.io i la carpeta de src
 import java.io.*;
-
 import src.ColoresConsola;
 
 public class Main {
@@ -45,12 +44,10 @@ public class Main {
         name = br.readLine();
 
         while (!quit) {
-            sueloTecho(120);
+            sueloTecho(RESOLUCION_ANCHO);
             paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 11, pedirJugar);
 
-            //System.out.print("¿A que deseas jugar " + name + "?");
-
-            sueloTecho(120);
+            sueloTecho(RESOLUCION_ANCHO);
             option = Integer.parseInt(br.readLine());
             switch (option) {
                 case 1:
@@ -76,6 +73,11 @@ public class Main {
         }
         System.out.printf("%n");
     }
+
+    public static void funcParedes(int anchura, int longitud, int fila, int espaciado, String[] frases) {
+
+    }
+
     public static void paredes(int anchura, int longitud, int fila, int espaciado, String frase) {
 
         //Hay que tener en cuenta el espaciado y el numero de frases
@@ -176,5 +178,5 @@ public class Main {
 /*
  * Unir las 2 funciones de paredes
  * Agregar colores con una nueva lista xD
- * Cambio en ColesConsola.java, una sola funcion con un switch
+ * 
  */
