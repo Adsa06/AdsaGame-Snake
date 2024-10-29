@@ -14,7 +14,7 @@ public class ArchivoPrincipal {
             //Operador ternario sencillo que identifica q no es nulo y lo escribe
             System.out.printf(br.readLine() != null ? "------------%n" + br.readLine() + "%n------------%n" : "");
 
-            //Tiempo de espera de medio segundo
+            //Tiempo de espera de medio segundo (Con hilos)
             Thread.sleep(500);
         }
     }
