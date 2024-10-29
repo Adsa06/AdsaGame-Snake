@@ -7,7 +7,8 @@ public class Snake {
             '#'
         };
         int[] cords = {
-            
+            10,
+            10
         };
         final int[] POSICION_INICIAL = {
             10,
@@ -19,7 +20,7 @@ public class Snake {
         //while (alive) {
             sueloTecho(120);
 
-            System.out.printf("%10s", snake[0] , posicion);
+            System.out.printf("%" + cords[0] +"s", snake[0]);
             for(int i = 1; i < snake.length; i++) {
                 System.out.printf("%s", snake[i] , posicion);
             }
