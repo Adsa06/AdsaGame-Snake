@@ -5,22 +5,23 @@ public class Snake {
         
         boolean alive = true;
         String[] snake = { "#" };
+        
         int snakeLongitud = 2;
         int dimensiones[] = { 
             20, 
             20
         };
-        Long cordenadas2[] = {
-            11000000000L,
-            11111111111L,
-            11111011111L,
-            11111111111L,
-            11111111111L,
-            11110001111L,
-            11111111111L,
-            11001111111L,
-            11111111111L,
-            11101111011L,
+        String cordenadas2[] = {
+            "00000000000000000000",
+            "00000000000000000000",
+            "00000000000000000000",
+            "00000000000000000000",
+            "00000000000000000000",
+            "00001100000000000000",
+            "00000000000000000000",
+            "00000000000000000000",
+            "00000000000000000000",
+            "00000000000000000000",
         };
         long cordenadas[] = {
             00000000000000000000L,
@@ -36,14 +37,12 @@ public class Snake {
         };
         int posicion = 4;
         /* ----- Parte principal ----- */
-        //while (alive) {
+        while (alive) {
 
-            //System.out.printf("%" + cords[0] +"s", snake[0]);
             for (int i = 0; i < cordenadas2.length; i++) {
-                for (int j = 1; j < String.valueOf(cordenadas2).length() - 3; j++) {
-                    String linea = Long.toString(cordenadas2[i]);
+                for (int j = 0; j < cordenadas2[i].length(); j++) {
                     
-                    Character character = linea.charAt(j);
+                    Character character = cordenadas2[i].charAt(j);
                    
                     System.out.printf("%s", character.equals('0') ? " " : snake[0]);
 
@@ -51,17 +50,10 @@ public class Snake {
                 System.out.printf("%n");
             };
 
-            /*
-            for(int i = 0; i < snakeLongitud; i++) {
-                System.out.printf("%" + posicion + "s", snake[0]);
-            }
-            */
-
-
             //Tiempo de espera con hilos
             separacion();
             Thread.sleep(1000);
-        //}
+        }
     }
     public static void separacion() {
         for(int i = 0; i < 10; i++) {
