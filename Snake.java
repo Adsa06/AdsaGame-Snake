@@ -17,12 +17,17 @@ public class Snake {
             "00000000000000000000",
             "00000000000000000000",
             "00000000000000000000",
-            "00001100000000000000",
+            "00001110000000000000",
             "00000000000000000000",
             "00000000000000000000",
             "00000000000000000000",
             "00000000000000000000",
         };
+        int CordsCabeza[] = {7,6};
+        int CordsCola[] = {5,6};
+        String direcion = "D";
+
+
         long cordenadas[] = {
             00000000000000000000L,
             00000000000000000000L,
@@ -50,9 +55,36 @@ public class Snake {
                 System.out.printf("%n");
             };
 
-            //Tiempo de espera con hilos
+            
             separacion();
+            //Tiempo de espera con hilos
             Thread.sleep(1000);
+            switch (direcion) {
+                case "W":
+                    //Faltaria cambiar el string
+                    CordsCabeza[1] += 1;
+                    CordsCola[1] += 1;
+                    break;
+
+                case "A":
+                    CordsCabeza[0] -= 1;
+                    CordsCola[0] -= 1;
+                    break;
+
+                case "S":
+                    CordsCabeza[1] -= 1;
+                    CordsCola[1] -= 1;
+                    break;
+
+                case "D":
+                    CordsCabeza[0] += 1;
+                    CordsCola[0] += 1;
+                    break;
+            
+                default:
+                    break;
+            }
+
         }
     }
     public static void separacion() {
