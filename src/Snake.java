@@ -5,14 +5,20 @@ public class Snake {
         
         /* ----- Parte declarativa ----- */
         
+        //El snake y si esta vivo
         boolean alive = true;
         String[] snake = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
         
-        int snakeLongitud = 2;
+        //longitud de la serpiente
+        int snakeLongitud = 3;
+
+        //Dimension del nivel
         int dimensiones[] = { 
             20, 
-            20
+            10
         };
+
+        //Literalmente el mapa
         String cordenadas2[] = {
             "00000000000000000000",
             "00000000000000000000",
@@ -25,30 +31,20 @@ public class Snake {
             "00000000000000000000",
             "00000000000000000000",
         };
+
+        //Cordenadas de la cabeza y de la cola
         //Primera cordenada la "x", posicion de una frase (empieza en 1) 
         //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
         int CordsCabeza[] = {7,5};
         int CordsCola[] = {5,5};
+
+        //Direccion
         String direcion = "D";
 
-
-        long cordenadas[] = {
-            00000000000000000000L,
-            00000000000000000000L,
-            00000000000010000000L,
-            00000000000000000000L,
-            00000000000000000000L,
-            00000000000000000000L,
-            00000000000000000000L,
-            00000001000000000000L,
-            00000000000000000000L,
-            00000000000000000000L,
-        };
-        int posicion = 4;
         /* ----- Parte principal ----- */
         
         while (alive) {
-            /* 
+            
             for (int i = 0; i < cordenadas2.length; i++) {
                 for (int j = 0; j < cordenadas2[i].length(); j++) {
                     
@@ -58,7 +54,7 @@ public class Snake {
 
                 }
                 System.out.printf("%n");
-            }*/
+            }
 
             
             separacion();
@@ -86,17 +82,23 @@ public class Snake {
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
                     String subCadenaCabeza1 = cordenadas2[CordsCabeza[1]].substring(0,CordsCabeza[0]);
                     String subCadenaCabeza2 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0], CordsCabeza[0]+1);
+
+                    /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
+
                     String subCadenaCabeza3 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0]+1);
                     //Renuevo la cadena utilizando la particion
                     cordenadas2[CordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
             
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    String subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]);
-                    String subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0], CordsCola[0]+1);
-                    subCadenaCola2 = subCadenaCola2.replace("0","1");
-                    String subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]+1);
+                    String subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]-1);
+                    String subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0]-1, CordsCola[0]);
+
+                    /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
+                    subCadenaCola2 = subCadenaCola2.replace("1","0");
+
+                    String subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
                     
                     cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
                     
@@ -107,8 +109,6 @@ public class Snake {
                 default:
                     break;
             }
-            System.out.println(cordenadas2[CordsCabeza[0]]);
-
         }
     }
     public static void separacion() {
