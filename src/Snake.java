@@ -25,8 +25,10 @@ public class Snake {
             "00000000000000000000",
             "00000000000000000000",
         };
-        int CordsCabeza[] = {7,6};
-        int CordsCola[] = {5,6};
+        //Primera cordenada la "x", posicion de una frase (empieza en 1) 
+        //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
+        int CordsCabeza[] = {7,5};
+        int CordsCola[] = {5,5};
         String direcion = "D";
 
 
@@ -44,8 +46,9 @@ public class Snake {
         };
         int posicion = 4;
         /* ----- Parte principal ----- */
+        
         while (alive) {
-
+            /* 
             for (int i = 0; i < cordenadas2.length; i++) {
                 for (int j = 0; j < cordenadas2[i].length(); j++) {
                     
@@ -55,7 +58,7 @@ public class Snake {
 
                 }
                 System.out.printf("%n");
-            };
+            }*/
 
             
             separacion();
@@ -79,14 +82,24 @@ public class Snake {
                     break;
 
                 case "D":
-                    //MAL, MAAAAAAAAAAAL
-                    String subCadena1 = cordenadas2[CordsCabeza[0]].substring(0,CordsCabeza[1]-1);
-                    String subCadena2 = cordenadas2[CordsCabeza[0]].substring(CordsCabeza[1], CordsCabeza[1] );
-                    subCadena2 = subCadena2.replace("1","0");
-                    String subCadena3 = cordenadas2[CordsCabeza[0]].substring(CordsCabeza[1]+1);
-                    
-                    cordenadas2[CordsCabeza[0]] = subCadena1 + subCadena2 + subCadena3;
+                    //DIOS SANTO PORFIN!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
+                    String subCadenaCabeza1 = cordenadas2[CordsCabeza[1]].substring(0,CordsCabeza[0]);
+                    String subCadenaCabeza2 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0], CordsCabeza[0]+1);
+                    subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
+                    String subCadenaCabeza3 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0]+1);
+                    //Renuevo la cadena utilizando la particion
+                    cordenadas2[CordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
+            
+                    //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
+                    String subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]);
+                    String subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0], CordsCola[0]+1);
+                    subCadenaCola2 = subCadenaCola2.replace("0","1");
+                    String subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]+1);
+                    
+                    cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    
                     CordsCabeza[0] += 1;
                     CordsCola[0] += 1;
                     break;
@@ -94,6 +107,7 @@ public class Snake {
                 default:
                     break;
             }
+            System.out.println(cordenadas2[CordsCabeza[0]]);
 
         }
     }
