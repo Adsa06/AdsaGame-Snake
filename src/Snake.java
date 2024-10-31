@@ -1,10 +1,12 @@
+package src;
+
 public class Snake {
     public static void main(String[] args) throws InterruptedException {
         
         /* ----- Parte declarativa ----- */
         
         boolean alive = true;
-        String[] snake = { "#" };
+        String[] snake = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
         
         int snakeLongitud = 2;
         int dimensiones[] = { 
@@ -77,6 +79,14 @@ public class Snake {
                     break;
 
                 case "D":
+                    //MAL, MAAAAAAAAAAAL
+                    String subCadena1 = cordenadas2[CordsCabeza[0]].substring(0,CordsCabeza[1]-1);
+                    String subCadena2 = cordenadas2[CordsCabeza[0]].substring(CordsCabeza[1], CordsCabeza[1] );
+                    subCadena2 = subCadena2.replace("1","0");
+                    String subCadena3 = cordenadas2[CordsCabeza[0]].substring(CordsCabeza[1]+1);
+                    
+                    cordenadas2[CordsCabeza[0]] = subCadena1 + subCadena2 + subCadena3;
+
                     CordsCabeza[0] += 1;
                     CordsCola[0] += 1;
                     break;
