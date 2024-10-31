@@ -14,7 +14,7 @@ public class ArchivoControlador {
         /* ----- Parte principal ----- */
             while (true) {
                 //Pergunto y leo una linea por consola
-                System.out.printf("Dime un numero: ");
+                System.out.printf("Escribe: ");
                 name = br.readLine();
 
                 //write escribe en el archivo (hago que se escriba 2 veces ya que al leerlo en el otro programa primero identifica si no es nulo y despues lo escribe)

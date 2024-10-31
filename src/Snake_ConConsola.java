@@ -1,10 +1,12 @@
 package src;
 
-public class Snake {
-    public static void main(String[] args) throws InterruptedException {
+import java.io.*;
+public class Snake_ConConsola {
+    public static void main(String[] args) throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
-        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         //El snake y si esta vivo
         boolean alive = true;
         String[] snake = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
@@ -65,6 +67,8 @@ public class Snake {
                 }
                 System.out.printf("%n");
             }
+        
+            direcion = br.readLine();
 
             switch (direcion) {
                 case "W":
@@ -90,8 +94,8 @@ public class Snake {
                     subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
                     //Renuevo la cadena utilizando la particion
                     cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
-                    CordsCabeza[1] += 1;
-                    CordsCola[1] += 1;
+                    CordsCabeza[1] -= 1;
+                    CordsCola[1] -= 1;
                     break;
 
                 case "A":
@@ -144,8 +148,8 @@ public class Snake {
                     subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
                     //Renuevo la cadena utilizando la particion
                     cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
-                    CordsCabeza[1] -= 1;
-                    CordsCola[1] -= 1;
+                    CordsCabeza[1] += 1;
+                    CordsCola[1] += 1;
                     break;
 
                 case "D":
