@@ -37,12 +37,12 @@ public class Snake_ConConsola {
         //Cordenadas de la cabeza y de la cola
         //Primera cordenada la "x", posicion de una frase (empieza en 1) 
         //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
-        int CordsCabeza[] = {7,5};
-        int CordsCola[] = {5,5};
-        
+        int cordsCabeza[] = {7,5};
+        int cordsCola[] = {5,5};
+        String movs = ""; //Se cuencia de movimientos para saber la continuacion de la cola
 
         //Direccion
-        String direcion = "S";
+        String direcion = "D";
 
         //La sub cadenas para que se mueva
         String subCadenaCabeza1;
@@ -70,116 +70,116 @@ public class Snake_ConConsola {
         
             direcion = br.readLine();
 
-            switch (direcion) {
+            switch (direcion) {// Esto se tiene que poder hacer con un .replace()
                 case "W":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[CordsCabeza[1]-1].substring(0,CordsCabeza[0]-1);
-                    subCadenaCabeza2 = cordenadas2[CordsCabeza[1]-1].substring(CordsCabeza[0]-1, CordsCabeza[0]);
+                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]-1].substring(0,cordsCabeza[0]-1);
+                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]-1].substring(cordsCabeza[0]-1, cordsCabeza[0]);
 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
 
-                    subCadenaCabeza3 = cordenadas2[CordsCabeza[1]-1].substring(CordsCabeza[0]);
+                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]-1].substring(cordsCabeza[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCabeza[1]-1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas2[cordsCabeza[1]-1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0]-1, CordsCola[0]);
+                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0,cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
+                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
-                    CordsCabeza[1] -= 1;
-                    CordsCola[1] -= 1;
+                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordsCabeza[1] -= 1;
+                    cordsCola[1] -= 1;
                     break;
 
                 case "A":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[CordsCabeza[1]].substring(0,CordsCabeza[0]-2);
-                    subCadenaCabeza2 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0]-2, CordsCabeza[0]-1);
+                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]].substring(0, cordsCabeza[0]-2);
+                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0]-2, cordsCabeza[0]-1);
                 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
                                 
-                    subCadenaCabeza3 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0]-1);
+                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0]-1);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas2[cordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
                                 
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0]-1, CordsCola[0]);
+                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0,cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
                                 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
                                 
-                    subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
+                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
-                    CordsCabeza[0] -= 1;
-                    CordsCola[0] -= 1;
+                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordsCabeza[0] -= 1;
+                    cordsCola[0] -= 1;
                     break;
 
                 case "S":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[CordsCabeza[1]+1].substring(0,CordsCabeza[0]-1);
-                    subCadenaCabeza2 = cordenadas2[CordsCabeza[1]+1].substring(CordsCabeza[0]-1, CordsCabeza[0]);
+                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]+1].substring(0, cordsCabeza[0]-1);
+                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]+1].substring(cordsCabeza[0]-1, cordsCabeza[0]);
                 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
 
-                    subCadenaCabeza3 = cordenadas2[CordsCabeza[1]+1].substring(CordsCabeza[0]);
+                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]+1].substring(cordsCabeza[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCabeza[1]+1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas2[cordsCabeza[1]+1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0]-1, CordsCola[0]);
+                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0, cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
+                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
-                    CordsCabeza[1] += 1;
-                    CordsCola[1] += 1;
+                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordsCabeza[1] += 1;
+                    cordsCola[1] += 1;
                     break;
 
                 case "D":
 
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[CordsCabeza[1]].substring(0,CordsCabeza[0]);
-                    subCadenaCabeza2 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0], CordsCabeza[0]+1);
+                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]].substring(0, cordsCabeza[0]);
+                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0], cordsCabeza[0]+1);
 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
 
-                    subCadenaCabeza3 = cordenadas2[CordsCabeza[1]].substring(CordsCabeza[0]+1);
+                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0]+1);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas2[cordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[CordsCola[1]].substring(0,CordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[CordsCola[1]].substring(CordsCola[0]-1, CordsCola[0]);
+                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0,cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[CordsCola[1]].substring(CordsCola[0]);
+                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[CordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
                     
                     //Y le sumo 1 a la posicion de cada 1 para q se actualiza
-                    CordsCabeza[0] += 1;
-                    CordsCola[0] += 1;
+                    cordsCabeza[0] += 1;
+                    cordsCola[0] += 1;
                     break;
             
                 default:

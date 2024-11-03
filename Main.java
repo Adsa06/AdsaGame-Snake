@@ -48,6 +48,7 @@ public class Main {
             paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 11, pedirJugar);
 
             sueloTecho(RESOLUCION_ANCHO);
+            //Conversion de tipo de dato
             option = Integer.parseInt(br.readLine());
             switch (option) {
                 case 1:
@@ -124,8 +125,8 @@ public class Main {
                         System.out.print(" ");
                     }
                 }
-                    
-                
+
+
             } else { //Imprime espacios
 
                 for(int j = 0; j != (anchura-2); j++) {
