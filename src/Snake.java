@@ -8,7 +8,7 @@ public class Snake {
         /* ----- Parte declarativa ----- */
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
         BufferedReader br = new BufferedReader(new FileReader("./content.txt"));
-        
+        String guardarDireccion;
         //El snake y si esta vivo
         boolean alive = true;
         String[] snake = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
@@ -90,10 +90,11 @@ public class Snake {
             }
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
-            direcion = br.readLine() != null ? br.readLine() : direcion;
+            guardarDireccion = br.readLine();
+            direcion = (guardarDireccion.equals("W") || guardarDireccion.equals("A") || guardarDireccion.equals("S") || guardarDireccion.equals("D")) ? guardarDireccion : direcion;
 
-            //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento, (en realidad podria ponerlo dentro de los switch)
-            movs = (direcion.equals("W") || direcion.equals("A") || direcion.equals("S") || direcion.equals("D")) ? movs.concat(direcion) : "";
+            //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento
+            movs = movs.concat(direcion);
 
             /*
              * 
