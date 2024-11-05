@@ -2,10 +2,11 @@ package src;
 
 import java.io.*;
 public class Snake {
-    public static void snake() throws IOException, InterruptedException {
+    public static void main() throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
+        BufferedReader br = new BufferedReader(new FileReader("content.txt"));
 
         //El snake y si esta vivo
         boolean alive = true;
@@ -89,7 +90,7 @@ public class Snake {
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
             //direcion = br.readLine().equals("") ? direcion : br.readLine();
-            direcion = br.readLine();
+            direcion = br.readLine() != null ? br.readLine() : direcion;
 
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento, (en realidad podria ponerlo dentro de los switch)
             movs = (direcion.equals("W") || direcion.equals("A") || direcion.equals("S") || direcion.equals("D")) ? movs.concat(direcion) : "";
@@ -100,7 +101,7 @@ public class Snake {
              *  Switch para crear la cabeza
              * 
              */
-            switch (direcion) {// Esto se tiene que poder hacer con un .replace()
+            switch (direcion) {
                 case "W":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
@@ -243,6 +244,7 @@ public class Snake {
                 default:
                     break;
             }
+            
             //Elimina el primer movimiento ya que deberia ya haberse ejecutado
             movs = movs.substring(1);
 
