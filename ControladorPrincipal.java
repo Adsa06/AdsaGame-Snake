@@ -1,4 +1,4 @@
-package src;
+
 
 import java.io.*;
 
@@ -9,7 +9,7 @@ public class ControladorPrincipal {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         //Creo una variable BufferedWriter, y hago que sea un objeto de la clase FileWriter para que pueda escribir archivos por consola
-        BufferedWriter fr = new BufferedWriter(new FileWriter("content.txt"));
+        BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt"));
         
         String instrucion;
         /* ----- Parte principal ----- */

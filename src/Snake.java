@@ -1,13 +1,14 @@
 package src;
 
 import java.io.*;
+
 public class Snake {
     public static void main() throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
-        BufferedReader br = new BufferedReader(new FileReader("content.txt"));
-
+        BufferedReader br = new BufferedReader(new FileReader("./content.txt"));
+        
         //El snake y si esta vivo
         boolean alive = true;
         String[] snake = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
@@ -89,12 +90,10 @@ public class Snake {
             }
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
-            //direcion = br.readLine().equals("") ? direcion : br.readLine();
             direcion = br.readLine() != null ? br.readLine() : direcion;
 
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento, (en realidad podria ponerlo dentro de los switch)
             movs = (direcion.equals("W") || direcion.equals("A") || direcion.equals("S") || direcion.equals("D")) ? movs.concat(direcion) : "";
-
 
             /*
              * 
@@ -248,9 +247,9 @@ public class Snake {
             //Elimina el primer movimiento ya que deberia ya haberse ejecutado
             movs = movs.substring(1);
 
-            separacion();
             //Tiempo de espera con hilos
-            Thread.sleep(500);
+            Thread.sleep(2000);
+            separacion();
         }
     }
     public static void separacion() {

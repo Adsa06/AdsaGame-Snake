@@ -7,7 +7,7 @@
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
 import src.ColoresConsola;
-//import src.Snake;
+import src.Snake;
 
 public class Main {
 
@@ -55,7 +55,7 @@ public class Main {
             option = Integer.parseInt(br.readLine());
             switch (option) {
                 case 1:
-                    //Snake.snake();
+                    Snake.main();
                     break;
                 case 2:
                     break;
