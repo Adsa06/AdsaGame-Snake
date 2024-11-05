@@ -15,13 +15,13 @@ public class Snake_ConConsola {
         int snakeLongitud = 3;
 
         //Dimension del nivel
-        int dimensiones[] = { 
+        int[] dimensiones = { 
             20, 
             10
         };
 
         //Literalmente el mapa
-        String cordenadas2[] = {
+        String[] cordenadas2 = {
             "00000000000000000000",
             "00000000000000000000",
             "00000000000000000000",
@@ -53,8 +53,8 @@ public class Snake_ConConsola {
         //Cordenadas de la cabeza y de la cola
         //Primera cordenada la "x", posicion de una frase (empieza en 1) 
         //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
-        int cordsCabeza[] = {7,5};
-        int cordsCola[] = {5,5};
+        int[] cordsCabeza = {7,5};
+        int[] cordsCola = {5,5};
         String movs = "DDD"; //Se cuencia de movimientos para saber la continuacion de la cola
 
         //Direccion

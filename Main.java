@@ -33,6 +33,8 @@ public class Main {
 
         final int RESOLUCION_ALTURA = 30;
         final int RESOLUCION_ANCHO = 120;
+
+        
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
