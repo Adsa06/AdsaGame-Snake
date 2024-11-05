@@ -7,11 +7,12 @@
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
 import src.ColoresConsola;
+import src.Snake;
 
 public class Main {
 
     //Creo la funcion princiapl con un throws IOException para capturar mensajes por consola
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
 
@@ -34,7 +35,7 @@ public class Main {
         final int RESOLUCION_ALTURA = 30;
         final int RESOLUCION_ANCHO = 120;
 
-        
+
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
@@ -57,7 +58,7 @@ public class Main {
                     
                     break;
                 case 2:
-                    
+                    Snake.snake();
                     break;
                 case 3:
                     quit = true;     
