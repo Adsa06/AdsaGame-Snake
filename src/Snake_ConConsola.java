@@ -34,12 +34,28 @@ public class Snake_ConConsola {
             "00000000000000000000",
         };
 
+        //Lo hago con un array multidimensiona? nah, por ahora no
+        /* 
+        String cordenadas[][] = {  
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "1" , "1" ,"1" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
+            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"},
+        };
+        */
+
         //Cordenadas de la cabeza y de la cola
         //Primera cordenada la "x", posicion de una frase (empieza en 1) 
         //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
         int cordsCabeza[] = {7,5};
         int cordsCola[] = {5,5};
-        String movs = ""; //Se cuencia de movimientos para saber la continuacion de la cola
+        String movs = "DDD"; //Se cuencia de movimientos para saber la continuacion de la cola
 
         //Direccion
         String direcion = "D";
@@ -69,6 +85,9 @@ public class Snake_ConConsola {
             }
         
             direcion = br.readLine();
+
+            //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento, (en realidad podria ponerlo dentro de los switch)
+            movs = (direcion.equals("W") || direcion.equals("A") || direcion.equals("S") || direcion.equals("D")) ? movs.concat(direcion) : "";
 
             switch (direcion) {// Esto se tiene que poder hacer con un .replace()
                 case "W":
@@ -185,6 +204,30 @@ public class Snake_ConConsola {
                 default:
                     break;
             }
+
+            //Switch para eliminar la cola (no se si me hara falta)
+            switch (movs.charAt(0)) {
+                case 'W':
+                    
+                    break;
+
+                case 'A':
+                    
+                    break;
+
+                case 'S':
+                    
+                    break;
+
+                case 'D':
+                    
+                    break;
+            
+                default:
+                    break;
+            }
+            //Elimina el primer movimiento ya que deberia ya haberse ejecutado
+            movs = movs.substring(1);
 
             separacion();
             //Tiempo de espera con hilos
