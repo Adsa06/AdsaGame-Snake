@@ -52,7 +52,7 @@ public class Snake {
         
         while (alive) {
             
-            //" bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1"
+            //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
                 System.out.printf("=");
                 for (int columnas = 0; columnas < cordenadas[filas].length(); columnas++) {
@@ -68,8 +68,8 @@ public class Snake {
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
             guardarDireccion = br.readLine();
-            direcion = guardarDireccion != null ? ((guardarDireccion.equals("W") || guardarDireccion.equals("A") || guardarDireccion.equals("S") || guardarDireccion.equals("D")) ? guardarDireccion : direcion) : direcion;
-
+            //2 condiciones ternarias para validar si no es nulo y si es W, A, S o D
+            direcion = (guardarDireccion != null && "WASD".contains(guardarDireccion)) ? guardarDireccion : direcion;
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento
             movs = movs.concat(direcion);
 

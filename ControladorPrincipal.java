@@ -18,8 +18,8 @@ public class ControladorPrincipal {
                 System.out.printf("Escribe: ");
                 instrucion = br.readLine();
 
-                //write escribe en el archivo (hago que se escriba 2 veces ya que al leerlo en el otro programa primero identifica si no es nulo y despues lo escribe)
-                fr.write(instrucion + "\n" + instrucion + "\n");
+                //write escribe en el archivo
+                fr.write(instrucion + "\n");
                 //flush fuerza a escribir los fatos en el archivo
                 fr.flush();
             }
