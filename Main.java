@@ -35,7 +35,7 @@ public class Main {
         final int RESOLUCION_ALTURA = 30;
         final int RESOLUCION_ANCHO = 120;
 
-
+        final int[] DIMENSIONES_SNAKE = {10, 20};
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
@@ -55,7 +55,7 @@ public class Main {
             option = Integer.parseInt(br.readLine());
             switch (option) {
                 case 1:
-                    Snake.main();
+                    Snake.main(DIMENSIONES_SNAKE);
                     break;
                 case 2:
                     break;

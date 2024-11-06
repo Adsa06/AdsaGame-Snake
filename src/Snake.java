@@ -3,7 +3,7 @@ package src;
 import java.io.*;
 
 public class Snake {
-    public static void main() throws IOException, InterruptedException {
+    public static void main(int[] dimensiones) throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
@@ -16,47 +16,14 @@ public class Snake {
         //longitud de la serpiente
         int snakeLongitud = 3;
 
-        //Dimension del nivel
-        int[] dimensiones = { 
-            20, 
-            10
-        };
-
         //Literalmente el mapa
-        String[] cordenadas2 = {
-            "00000000000000000000",
-            "00000000000000000000",
-            "00000000000000000000",
-            "00000000000000000000",
-            "00000000000000000000",
-            "00001110000000000000",
-            "00000000000000000000",
-            "00000000000000000000",
-            "00000000000000000000",
-            "00000000000000000000",
-        };
-
-        //Lo hago con un array multidimensiona? nah, por ahora no
-        /* 
-        String cordenadas[][] = {  
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "1" , "1" ,"1" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"}, 
-            {"0" , "0" ,"0" ,"0" ,"0", "0" , "0" ,"0" ,"0" ,"0"},
-        };
-        */
+        String[] cordenadas = new String[dimensiones[0]];
 
         //Cordenadas de la cabeza y de la cola
         //Primera cordenada la "x", posicion de una frase (empieza en 1) 
         //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
-        int[] cordsCabeza = {7,5};
-        int[] cordsCola = {5,5};
+        int[] cordsCabeza = {3,0};
+        int[] cordsCola = {1,0};
         String movs = "DD"; //Se cuencia de movimientos para saber la continuacion de la cola
 
         //Direccion
@@ -72,15 +39,25 @@ public class Snake {
 
 
         /* ----- Parte principal ----- */
+
+        //Creacion del mapa segun las variables de dimensiones
+        for (int i = 0; i < dimensiones[0]; i++) {
+            cordenadas[i] = "";
+            for(int j = 0; j < dimensiones[1]; j++) {
+                cordenadas[i] = cordenadas[i] + "0";
+            }
+        }
+        //Aqui creo la serpiente arriba izquierda en el mapa
+        cordenadas[0] = (cordenadas[0].concat("111") + cordenadas[0].concat(cordenadas[0].substring(0, dimensiones[1] - 3))).substring(dimensiones[1], dimensiones[1] * 2);
         
         while (alive) {
             
             //" bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1"
-            for (int filas = 0; filas < cordenadas2.length; filas++) {
+            for (int filas = 0; filas < cordenadas.length; filas++) {
                 System.out.printf("=");
-                for (int columnas = 0; columnas < cordenadas2[filas].length(); columnas++) {
+                for (int columnas = 0; columnas < cordenadas[filas].length(); columnas++) {
                     
-                    Character character = cordenadas2[filas].charAt(columnas);
+                    Character character = cordenadas[filas].charAt(columnas);
                    
                     System.out.printf("%s", character.equals('0') ? " " : snake[0]);
 
@@ -91,7 +68,7 @@ public class Snake {
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
             guardarDireccion = br.readLine();
-            direcion = (guardarDireccion.equals("W") || guardarDireccion.equals("A") || guardarDireccion.equals("S") || guardarDireccion.equals("D")) ? guardarDireccion : direcion;
+            direcion = guardarDireccion != null ? ((guardarDireccion.equals("W") || guardarDireccion.equals("A") || guardarDireccion.equals("S") || guardarDireccion.equals("D")) ? guardarDireccion : direcion) : direcion;
 
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento
             movs = movs.concat(direcion);
@@ -105,15 +82,15 @@ public class Snake {
                 case "W":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]-1].substring(0,cordsCabeza[0]-1);
-                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]-1].substring(cordsCabeza[0]-1, cordsCabeza[0]);
+                    subCadenaCabeza1 = cordenadas[cordsCabeza[1]-1].substring(0,cordsCabeza[0]-1);
+                    subCadenaCabeza2 = cordenadas[cordsCabeza[1]-1].substring(cordsCabeza[0]-1, cordsCabeza[0]);
 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
 
-                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]-1].substring(cordsCabeza[0]);
+                    subCadenaCabeza3 = cordenadas[cordsCabeza[1]-1].substring(cordsCabeza[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCabeza[1]-1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas[cordsCabeza[1]-1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
                     cordsCabeza[1] -= 1;
                     break;
@@ -121,15 +98,15 @@ public class Snake {
                 case "A":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]].substring(0, cordsCabeza[0]-2);
-                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0]-2, cordsCabeza[0]-1);
+                    subCadenaCabeza1 = cordenadas[cordsCabeza[1]].substring(0, cordsCabeza[0]-2);
+                    subCadenaCabeza2 = cordenadas[cordsCabeza[1]].substring(cordsCabeza[0]-2, cordsCabeza[0]-1);
                 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
                                 
-                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0]-1);
+                    subCadenaCabeza3 = cordenadas[cordsCabeza[1]].substring(cordsCabeza[0]-1);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas[cordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
                                 
                     cordsCabeza[0] -= 1;
                     break;
@@ -137,15 +114,15 @@ public class Snake {
                 case "S":
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]+1].substring(0, cordsCabeza[0]-1);
-                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]+1].substring(cordsCabeza[0]-1, cordsCabeza[0]);
+                    subCadenaCabeza1 = cordenadas[cordsCabeza[1]+1].substring(0, cordsCabeza[0]-1);
+                    subCadenaCabeza2 = cordenadas[cordsCabeza[1]+1].substring(cordsCabeza[0]-1, cordsCabeza[0]);
                 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
 
-                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]+1].substring(cordsCabeza[0]);
+                    subCadenaCabeza3 = cordenadas[cordsCabeza[1]+1].substring(cordsCabeza[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCabeza[1]+1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas[cordsCabeza[1]+1] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
 
                     cordsCabeza[1] += 1;
                     break;
@@ -154,15 +131,15 @@ public class Snake {
 
                     /* ----- Parte de la cabeza ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cabeza mas adelaneta gracias a la posicion de la cadena
-                    subCadenaCabeza1 = cordenadas2[cordsCabeza[1]].substring(0, cordsCabeza[0]);
-                    subCadenaCabeza2 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0], cordsCabeza[0]+1);
+                    subCadenaCabeza1 = cordenadas[cordsCabeza[1]].substring(0, cordsCabeza[0]);
+                    subCadenaCabeza2 = cordenadas[cordsCabeza[1]].substring(cordsCabeza[0], cordsCabeza[0]+1);
 
                     /* ------------------------------ Aqui para saber si se ha chocado tendria q detectar si es un 1 lo q se quiere remplazar ------------------------------*/
                     subCadenaCabeza2 = subCadenaCabeza2.replace("0","1");
 
-                    subCadenaCabeza3 = cordenadas2[cordsCabeza[1]].substring(cordsCabeza[0]+1);
+                    subCadenaCabeza3 = cordenadas[cordsCabeza[1]].substring(cordsCabeza[0]+1);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
+                    cordenadas[cordsCabeza[1]] = subCadenaCabeza1 + subCadenaCabeza2 + subCadenaCabeza3;
                     
                     //Y le sumo 1 a la posicion 1 para q se actualiza
                     cordsCabeza[0] += 1;
@@ -181,14 +158,14 @@ public class Snake {
                 case 'W':
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0,cordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
+                    subCadenaCola1 = cordenadas[cordsCola[1]].substring(0,cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
+                    subCadenaCola3 = cordenadas[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordenadas[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
 
                     cordsCola[1] -= 1;
                     break;
@@ -196,14 +173,14 @@ public class Snake {
                 case 'A':
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0,cordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
+                    subCadenaCola1 = cordenadas[cordsCola[1]].substring(0,cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
+                    subCadenaCola3 = cordenadas[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordenadas[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
 
 
                     cordsCola[0] -= 1;
@@ -212,14 +189,14 @@ public class Snake {
                 case 'S':
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0, cordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
+                    subCadenaCola1 = cordenadas[cordsCola[1]].substring(0, cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
+                    subCadenaCola3 = cordenadas[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordenadas[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
                     
                     
                     cordsCola[1] += 1;
@@ -228,14 +205,14 @@ public class Snake {
                 case 'D':
                     /* ----- Parte de la cola ----- */
                     //Parto la cadena en 3 para sustituir un 0 en un 1, concretamente creo una nueva cola mas adelanete
-                    subCadenaCola1 = cordenadas2[cordsCola[1]].substring(0,cordsCola[0]-1);
-                    subCadenaCola2 = cordenadas2[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
+                    subCadenaCola1 = cordenadas[cordsCola[1]].substring(0,cordsCola[0]-1);
+                    subCadenaCola2 = cordenadas[cordsCola[1]].substring(cordsCola[0]-1, cordsCola[0]);
 
                     subCadenaCola2 = subCadenaCola2.replace("1","0");
 
-                    subCadenaCola3 = cordenadas2[cordsCola[1]].substring(cordsCola[0]);
+                    subCadenaCola3 = cordenadas[cordsCola[1]].substring(cordsCola[0]);
                     //Renuevo la cadena utilizando la particion
-                    cordenadas2[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
+                    cordenadas[cordsCola[1]] = subCadenaCola1 + subCadenaCola2 + subCadenaCola3;
 
                     //Y le sumo 1 a la posicion 1 para q se actualiza
                     cordsCola[0] += 1;
