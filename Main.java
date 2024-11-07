@@ -52,7 +52,11 @@ public class Main {
 
             sueloTecho(RESOLUCION_ANCHO);
             //Conversion de tipo de dato
-            option = Integer.parseInt(br.readLine());
+            try { //Este try impide que el usuario escriba una letra y pete el programa, como opcion es = 0, se ira al default en el switch
+                option = Integer.parseInt(br.readLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Porfavor, escriva una opcion valida");
+            }
             switch (option) {
                 case 1:
                     Snake.main(dimensionesTableroSnake);
