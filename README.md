@@ -46,11 +46,12 @@ El archivo `ControladorPrincipal.java` permite al jugador escribir instrucciones
 
 El archivo `ColoresConsola.java` se utiliza para aplicar colores al texto impreso en consola, con el fin de mejorar la visibilidad del juego. Actualmente, la serpiente se dibuja en color verde (`#`), y los mensajes importantes se muestran en rojo.
 
-## Cómo Jugar
-
-1. Compila el arrchivo `ColoresConsola.java`
-1. Ejecuta `Main.java` y `ControladorPrincipal.java` para iniciar el programa.
-2. Ingresa tu nombre cuando se te solicite.
-3. En el menú, selecciona la opción 1 para comenzar a jugar.
-4. Usa las teclas **W**, **A**, **S**, **D** para mover la serpiente por el tablero.
-5. Si la serpiente choca contra las paredes el juego terminará.
+## Compilacion y ejecucion con ejecutable
+1. Abre una terminal y escriba los siguientes comandos
+2. cd ruta al proyecto
+3. javac Main.java src/Snake.java src/coloresConsola.java
+4. jar cvfe MiProgramaSnake.jar Main Main.class src/Snake.class src/coloresConsola.class
+5. javac ControladorPrincipal.java
+6. jar cvfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class
+7. Ten abierta 2 terminales y ejecute un comando en cada una
+8. java `-jar MiProgramaSnake.jar` y `java -jar MiProgramaControlador.jar`
