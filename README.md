@@ -54,4 +54,4 @@ El archivo `ColoresConsola.java` se utiliza para aplicar colores al texto impres
 5. javac ControladorPrincipal.java
 6. jar cvfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class
 7. Ten abierta 2 terminales y ejecute un comando en cada una
-8. java `-jar MiProgramaSnake.jar` y `java -jar MiProgramaControlador.jar`
+8. `java -jar MiProgramaSnake.jar` y `java -jar MiProgramaControlador.jar`
