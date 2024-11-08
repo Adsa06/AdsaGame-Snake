@@ -1,52 +1,56 @@
-# Proyecto de Consola en Java
+# Juego de Snake en Consola
 
-## Descripción General
-
-Este proyecto en Java permite la interacción con el usuario a través de la consola, ofreciendo opciones para jugar o salir. La interfaz de usuario se maneja a través de líneas de texto organizadas y coloreadas, utilizando funciones para crear un diseño visual atractivo. El programa está estructurado en dos archivos principales: `Main.java` y `ColoresConsola.java`.
+Este es un proyecto de un juego de **Snake** en consola, desarrollado en **Java**. El juego permite al usuario jugar al clásico juego del Snake en un entorno de consola con controles simples y una representación visual en texto.
 
 ## Estructura del Proyecto
 
-- `Main.java`: Contiene la lógica principal del programa, incluyendo la interacción con el usuario.
-- `src/ColoresConsola.java`: Proporciona funciones para cambiar los colores del texto en la consola.
+El proyecto está dividido en varios archivos Java organizados en dos carpetas principales:
 
-## Funciones de Main.java
+1. **Archivos Principales**:
+   - `Main.java`: Archivo principal donde se gestiona el inicio del juego y las opciones del menú.
+   - `ControladorPrincipal.java`: Gestiona la entrada del usuario para escribir comandos y almacenar la información en un archivo de texto.
 
-### `public static void main(String[] args) throws IOException`
+2. **Carpeta `src`**:
+   - `Snake.java`: Contiene la lógica del juego de Snake, incluyendo el movimiento de la serpiente, la actualización de su posición y la detección de colisiones.
+   - `ColoresConsola.java`: Define métodos para aplicar colores en la consola, permitiendo que el juego se vea más atractivo visualmente.
 
-Función principal del programa. Aquí se gestiona la entrada y salida de datos desde la consola. Se inicializa un `BufferedReader` para leer el nombre del usuario y opciones de juego, y se establece un bucle para mantener la interacción hasta que el usuario decida salir.
+## Descripción de Funcionamiento
 
-### `public static void sueloTecho(int longitud)`
+### Fase 1: Menú Principal
 
-Imprime una línea horizontal en la consola. La longitud de la línea se determina por el parámetro `longitud`. Se utiliza para crear un diseño estructurado.
+1. **Inicio del Juego**:
+   Al iniciar el programa, el usuario es recibido con un mensaje que solicita su nombre y luego presenta un menú con las siguientes opciones:
+   - **1**: Jugar al juego de Snake.
+   - **2**: Opción vacía (actualmente no implementada).
+   - **3**: Salir del programa.
 
-### `public static void paredes(int anchura, int longitud, int fila, int espaciado, String frase)`
+2. **Elección del Jugador**:
+   El usuario elige la opción de jugar, lo que da paso a la fase de juego de Snake. Si elige salir, el programa termina.
 
-Dibuja un marco vertical con una frase centrada en la fila especificada. Acepta parámetros para la anchura y longitud del marco, la fila donde se mostrará la frase, el espaciado y la frase a imprimir. También maneja el centrado y el espaciado de la frase.
+### Fase 2: Juego de Snake
 
-### `public static void paredesMultiplesFrases(int anchura, int longitud, int fila, String[] frases)`
+1. **Tablero de Juego**:
+   El tablero de juego se genera como una matriz de dimensiones predefinidas (en este caso, 10x20), donde la serpiente se representa inicialmente en la parte superior izquierda.
 
-Similar a la función `paredes`, pero permite imprimir múltiples frases en la fila especificada. Cada frase se centra dentro del marco, y se ajusta según la longitud y anchura proporcionadas.
+2. **Movimiento de la Serpiente**:
+   El jugador puede moverse utilizando las teclas **W**, **A**, **S**, **D** para moverla arriba, izquierda, abajo y derecha, respectivamente.
 
-## Descripción de src/ColoresConsola.java
+3. **Representación en Consola**:
+   El tablero de juego se imprime en la consola en cada ciclo de movimiento. La serpiente se representa con el carácter `#` de color verde, mientras que el espacio vacío en el tablero está representado por el carácter `" "`.
 
-### `public class ColoresConsola`
+### Fase 3: Almacenamiento de Comandos
 
-Contiene métodos estáticos que devuelven códigos ANSI para cambiar el color del texto en la consola. Esto permite personalizar la salida de texto, mejorando la visibilidad y la estética del programa. Los métodos incluyen:
+El archivo `ControladorPrincipal.java` permite al jugador escribir instrucciones que se guardan en un archivo de texto (`./content.txt`). Este archivo es luego utilizado para controlar los movimientos de la serpiente, lo que simula un control manual del juego basado en los comandos ingresados.
 
-- `ANSI_RESET()`: Restablece el color del texto a su valor por defecto.
-- `ANSI_RED()`: Establece el texto en color rojo.
-- `ANSI_GREEN()`: Establece el texto en color verde.
-- `ANSI_YELLOW()`: Establece el texto en color amarillo.
-- `ANSI_BLUE()`: Establece el texto en color azul.
-- `ANSI_PURPLE()`: Establece el texto en color púrpura.
-- `ANSI_CYAN()`: Establece el texto en color cian.
-- `ANSI_WHITE()`: Establece el texto en color blanco.
-- `ANSI_BOLD()`: Establece el texto en negrita.
-- `ANSI_UNDERLINE()`: Establece el texto subrayado.
-- `ANSI_INVERT()`: Invierte los colores de fondo y texto.
+### Colores en Consola
 
-## Notas
+El archivo `ColoresConsola.java` se utiliza para aplicar colores al texto impreso en consola, con el fin de mejorar la visibilidad del juego. Actualmente, la serpiente se dibuja en color verde (`#`), y los mensajes importantes se muestran en rojo.
 
-- El código incluye comentarios que sugieren mejoras futuras, como unir funciones y agregar más colores.
-- Asegúrate de tener configurado un entorno que soporte ANSI para ver correctamente los colores en la consola.
+## Cómo Jugar
 
+1. Compila el arrchivo `ColoresConsola.java`
+1. Ejecuta `Main.java` y `ControladorPrincipal.java` para iniciar el programa.
+2. Ingresa tu nombre cuando se te solicite.
+3. En el menú, selecciona la opción 1 para comenzar a jugar.
+4. Usa las teclas **W**, **A**, **S**, **D** para mover la serpiente por el tablero.
+5. Si la serpiente choca contra las paredes el juego terminará.
