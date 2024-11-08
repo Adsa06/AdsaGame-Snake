@@ -76,9 +76,14 @@ public class Snake {
                  * 
                  *  Switch para crear la cabeza
                  *  En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo que haya por la cabeza y luego actualizo la posicion de ella
+                 *  Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la serpiente, si es asi muere
                  */
                 switch (direcion) {
                     case "W":
+                        if('1' == cordenadas[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) {
+                            alive = false;
+                        }
+
                         /* ----- Parte de la cabeza ----- */
                         cordenadas[cordsCabeza[1]-1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
 
@@ -86,6 +91,10 @@ public class Snake {
                         break;
                 
                     case "A":
+                        if('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0]-2)) {
+                            alive = false;
+                        }
+
                         /* ----- Parte de la cabeza ----- */
                         cordenadas[cordsCabeza[1]].replace(cordsCabeza[0]-2, cordsCabeza[0]-1, "1");
 
@@ -93,6 +102,10 @@ public class Snake {
                         break;
                 
                     case "S":
+                        if('1' == cordenadas[cordsCabeza[1]+1].charAt(cordsCabeza[0]-1)) {
+                            alive = false;
+                        }
+
                         /* ----- Parte de la cabeza ----- */
                         cordenadas[cordsCabeza[1]+1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
                 
@@ -100,9 +113,11 @@ public class Snake {
                         break;
                 
                     case "D":
+                        if('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
+                            alive = false;
+                        }
                         /* ----- Parte de la cabeza ----- */
                         cordenadas[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0]+1, "1");
-
                         cordsCabeza[0] += 1;
                         break;
                 
@@ -152,8 +167,8 @@ public class Snake {
         } catch (Exception e) { //Por si acaso que no me fio xD
             alive = false;
         }
-        br.close();
         }
+        br.close();
         System.out.println("Has perdido");
     }
     public static void separacion() {
