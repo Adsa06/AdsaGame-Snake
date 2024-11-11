@@ -31,6 +31,11 @@ public class Main {
             "2 = Confi",
             "3 = Salir"
         };
+        String[] explicacionJuego = {
+            "Paso 1, Muevete con " + ColoresConsola.ANSI_CYAN() + "\"W\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"A\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"S\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"D\"" + ColoresConsola.ANSI_RESET() + ", Arriba, izquierda, abajo y derecha respectivamente",
+            "Paso 2, Evita chocarte con las paredes y tu cuerpo",
+            "Paso 3, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar"
+        };
 
         final int RESOLUCION_ALTURA = 30;
         final int RESOLUCION_ANCHO = 120;
@@ -45,6 +50,8 @@ public class Main {
         //System.out.println("Buenos dias, ¿Como te puedo llamar?");
         sueloTecho(RESOLUCION_ANCHO);
         name = br.readLine();
+        // Actualizamos el contenido del array con el nombre correcto
+        pedirJugar[0] = "¿A que deseas jugar " + name + "?";
 
         while (!quit) {
             sueloTecho(RESOLUCION_ANCHO);
@@ -59,6 +66,10 @@ public class Main {
             }
             switch (option) {
                 case 1:
+                    for(String frases : explicacionJuego) {
+                        System.out.println(frases);
+                    }
+                    br.readLine();
                     Snake.main(dimensionesTableroSnake);
                     break;
                 case 2:
@@ -80,10 +91,6 @@ public class Main {
             System.out.print("-");
         }
         System.out.printf("%n");
-    }
-
-    public static void funcParedes(int anchura, int longitud, int fila, int espaciado, String[] frases) {
-
     }
 
     public static void paredes(int anchura, int longitud, int fila, int espaciado, String frase) {
@@ -155,7 +162,7 @@ public class Main {
                         System.out.print(" ");
                     }
                 
-                    System.out.print(ColoresConsola.ANSI_RED() + frases[k] +  ColoresConsola.ANSI_RESET());
+                    System.out.printf(ColoresConsola.ANSI_RED() + frases[k] +  ColoresConsola.ANSI_RESET());
                 
                     //Terminacion de la frase dependiendo si es impar o par
                     if (frases[k].length() % 2 == 0) {
@@ -181,6 +188,7 @@ public class Main {
             }
         }
     }
+
      
 }
 /*
