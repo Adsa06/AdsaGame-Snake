@@ -33,9 +33,10 @@ public class Main {
         };
         String[] explicacionJuego = {
             "Paso 1, Abra el Controlador del juego para poder escribir las direciones por consola",
-            "Paso 2, Muevete con " + ColoresConsola.ANSI_CYAN() + "\"W\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"A\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"S\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"D\"" + ColoresConsola.ANSI_RESET() + ", Arriba, izquierda, abajo y derecha respectivamente (Mayusculas)",
-            "Paso 3, Evita chocarte con las paredes y tu cuerpo",
-            "Paso 4, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar"
+            "Paso 2, Muevete con " + ColoresConsola.ANSI_CYAN() + "\"W\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"A\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"S\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"D\"" + ColoresConsola.ANSI_RESET() + ", Arriba, izquierda, abajo y derecha respectivamente",
+            "Las letras tendras q escribirlas en el programa controlador en " + ColoresConsola.ANSI_CYAN() + "mayusculas" + ColoresConsola.ANSI_RESET() + " y tendras que darle " + ColoresConsola.ANSI_CYAN() + "enter" + ColoresConsola.ANSI_RESET() + " para enviarlas, " + ColoresConsola.ANSI_CYAN() + "de una en una" + ColoresConsola.ANSI_RESET(),
+            "Paso 3, Evita chocarte con las paredes y tu cuerpo, a su vez evita ir a la direcion contraria a la que vas",
+            "Paso 4, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar",
         };
 
         final int RESOLUCION_ALTURA = 30;
