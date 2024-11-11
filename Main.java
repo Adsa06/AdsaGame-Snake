@@ -64,7 +64,7 @@ public class Main {
             try { //Este try impide que el usuario escriba una letra y pete el programa, como opcion es = 0, se ira al default en el switch
                 option = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
-                System.out.println("Porfavor, escriva una opcion valida");
+                System.out.println("Porfavor, escriba una opcion valida");
             }
             switch (option) {
                 case 1:
