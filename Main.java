@@ -32,9 +32,10 @@ public class Main {
             "3 = Salir"
         };
         String[] explicacionJuego = {
-            "Paso 1, Muevete con " + ColoresConsola.ANSI_CYAN() + "\"W\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"A\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"S\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"D\"" + ColoresConsola.ANSI_RESET() + ", Arriba, izquierda, abajo y derecha respectivamente",
-            "Paso 2, Evita chocarte con las paredes y tu cuerpo",
-            "Paso 3, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar"
+            "Paso 1, Abra el Controlador del juego para poder escribir las direciones por consola",
+            "Paso 2, Muevete con " + ColoresConsola.ANSI_CYAN() + "\"W\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"A\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"S\"" + ColoresConsola.ANSI_RESET() + "," + ColoresConsola.ANSI_CYAN() + "\"D\"" + ColoresConsola.ANSI_RESET() + ", Arriba, izquierda, abajo y derecha respectivamente",
+            "Paso 3, Evita chocarte con las paredes y tu cuerpo",
+            "Paso 4, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar"
         };
 
         final int RESOLUCION_ALTURA = 30;
