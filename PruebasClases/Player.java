@@ -20,6 +20,18 @@ public class Player {
         return name;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public int getStrengh() {
+        return strengh;
+    }
+
     /* ----- Parte del set ----- */
     public void setHealth(int vida) {
         this.health = vida;

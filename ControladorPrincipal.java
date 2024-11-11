@@ -13,16 +13,19 @@ public class ControladorPrincipal {
         BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
         
         String instrucion;
+        boolean quit = false;
         /* ----- Parte principal ----- */
-            while (true) {
-                //Pergunto y leo una linea por consola
-                System.out.printf("Escribe: ");
-                instrucion = br.readLine();
+        while (!quit) {
+            //Pergunto y leo una linea por consola
+            System.out.printf("Escribe: ");
+            instrucion = br.readLine();
+            //write escribe en el archivo
+            fr.write(instrucion + "\n");
+            //flush fuerza a escribir los fatos en el archivo
+            fr.flush();
+            //Ahora tiene una forma de salir
+            quit = instrucion.equals("Salir") ? true : false;
+        }
 
-                //write escribe en el archivo
-                fr.write(instrucion + "\n");
-                //flush fuerza a escribir los fatos en el archivo
-                fr.flush();
-            }
     }
 }

@@ -8,7 +8,7 @@ public class InstanciamientoClases {
 
         jugador.setHealth(4);
 
-        System.out.println(jugador.getName());
+        System.out.println(mostruo.getName());
 
     }
 }
