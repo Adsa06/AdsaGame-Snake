@@ -9,7 +9,8 @@ public class ControladorPrincipal {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         //Creo una variable BufferedWriter, y hago que sea un objeto de la clase FileWriter para que pueda escribir archivos por consola
-        BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt"));
+        //Al poner false el archivo se sobreescribira por completo
+        BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
         
         String instrucion;
         /* ----- Parte principal ----- */

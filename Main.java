@@ -68,6 +68,11 @@ public class Main {
             }
             switch (option) {
                 case 1:
+
+                    /* ----- Esta zona hara que se reinicie el archivo txt ----- */ //Estas lineas estan explicadas en el ControladorPrincipal.java
+                    BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
+                    fr.close();
+                    /* ----- */
                     for(String frases : explicacionJuego) {
                         System.out.println(frases);
                     }
