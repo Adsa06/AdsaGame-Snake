@@ -6,8 +6,9 @@
 
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
-import src.ColoresConsola;
-import src.Snake;
+
+import utils.ColoresConsola;
+import utils.Snake;
 
 public class Main {
 

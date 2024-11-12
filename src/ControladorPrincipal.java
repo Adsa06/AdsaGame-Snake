@@ -1,5 +1,6 @@
 import java.io.*;
-import src.ColoresConsola;
+
+import utils.ColoresConsola;
 
 public class ControladorPrincipal {
     public static void main(String[] args) throws IOException /* Capto las excepciones de la entrada de datos*/{
@@ -12,7 +13,7 @@ public class ControladorPrincipal {
         BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
         
         String instrucion;
-        boolean continuar = false;
+        boolean continuar = true;
         /* ----- Parte principal ----- */
         do {
             //Pergunto y leo una linea por consola
@@ -23,7 +24,7 @@ public class ControladorPrincipal {
             //flush fuerza a escribir los fatos en el archivo
             fr.flush();
             //Ahora tiene una forma de salir
-            continuar = instrucion.equals("Salir") ? true : false;
+            continuar = instrucion.equalsIgnoreCase("Salir") ? false : true;
         } while (continuar);
         fr.close();
 
