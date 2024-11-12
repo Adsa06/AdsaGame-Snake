@@ -27,6 +27,7 @@ public class ControladorPrincipal {
             //Ahora tiene una forma de salir
             quit = instrucion.equals("Salir") ? true : false;
         }
+        fr.close();
 
     }
 }
