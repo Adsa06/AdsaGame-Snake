@@ -61,7 +61,7 @@ public class Snake {
             }
 
             //Tiempo de espera con hilos
-            Thread.sleep(750);
+            Thread.sleep(250);
             separacion();
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo

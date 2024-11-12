@@ -37,6 +37,7 @@ public class Main {
             "Las letras tendras q escribirlas en el programa controlador en " + ColoresConsola.ANSI_CYAN() + "mayusculas" + ColoresConsola.ANSI_RESET() + " y tendras que darle " + ColoresConsola.ANSI_CYAN() + "enter" + ColoresConsola.ANSI_RESET() + " para enviarlas, " + ColoresConsola.ANSI_CYAN() + "de una en una" + ColoresConsola.ANSI_RESET(),
             "Paso 3, Evita chocarte con las paredes y tu cuerpo, a su vez evita ir a la direcion contraria a la que vas",
             "Paso 4, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar",
+            "Paso 5, Recuerda cerrar el controlador principal, para cerrarlo introduzca \"" + ColoresConsola.ANSI_UNDERLINE() + "Salir" + ColoresConsola.ANSI_RESET() + "\""
         };
 
         final int RESOLUCION_ALTURA = 30;

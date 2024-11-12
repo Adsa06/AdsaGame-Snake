@@ -1,6 +1,7 @@
 
 
 import java.io.*;
+import src.ColoresConsola;
 
 public class ControladorPrincipal {
     public static void main(String[] args) throws IOException /* Capto las excepciones de la entrada de datos*/{
@@ -17,7 +18,7 @@ public class ControladorPrincipal {
         /* ----- Parte principal ----- */
         while (!quit) {
             //Pergunto y leo una linea por consola
-            System.out.printf("Escribe: ");
+            System.out.printf("Escribe \"" + ColoresConsola.ANSI_CYAN() + "W" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "A" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "S" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "D" + ColoresConsola.ANSI_RESET() + "\": ");
             instrucion = br.readLine();
             //write escribe en el archivo
             fr.write(instrucion + "\n");
