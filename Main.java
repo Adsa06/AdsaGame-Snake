@@ -20,7 +20,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String name = "";
-        Boolean quit = false;
+        Boolean continuar = true;
         int option = 0;
 
         String[] pedirNombre = {"Buenos dias, ¿Como te puedo llamar?"};
@@ -56,7 +56,7 @@ public class Main {
         // Actualizamos el contenido del array con el nombre correcto
         pedirJugar[0] = "¿A que deseas jugar " + name + "?";
 
-        while (!quit) {
+        do {
             sueloTecho(RESOLUCION_ANCHO);
             paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 11, pedirJugar);
 
@@ -85,13 +85,13 @@ public class Main {
 
                     break;
                 case 3:
-                    quit = true;     
+                continuar = false;     
                     break;
                 default:
                     System.out.println("Opcion incorrecta");
                     break;
             }
-        }
+        } while (continuar);
         System.out.println("Hasta otra");
     }
 

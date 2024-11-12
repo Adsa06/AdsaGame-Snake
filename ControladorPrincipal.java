@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import src.ColoresConsola;
 
@@ -14,9 +12,9 @@ public class ControladorPrincipal {
         BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
         
         String instrucion;
-        boolean quit = false;
+        boolean continuar = false;
         /* ----- Parte principal ----- */
-        while (!quit) {
+        do {
             //Pergunto y leo una linea por consola
             System.out.printf("Escribe \"" + ColoresConsola.ANSI_CYAN() + "W" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "A" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "S" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "D" + ColoresConsola.ANSI_RESET() + "\": ");
             instrucion = br.readLine();
@@ -25,8 +23,8 @@ public class ControladorPrincipal {
             //flush fuerza a escribir los fatos en el archivo
             fr.flush();
             //Ahora tiene una forma de salir
-            quit = instrucion.equals("Salir") ? true : false;
-        }
+            continuar = instrucion.equals("Salir") ? true : false;
+        } while (continuar);
         fr.close();
 
     }

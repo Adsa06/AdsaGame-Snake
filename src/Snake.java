@@ -44,7 +44,7 @@ public class Snake {
         //Remplazo de la primera linea las 3 primeras letras para hacer la serpiente
         cordenadas[0].replace(0, 3, "111");
 
-        while (alive) {
+        do {
             
             //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
@@ -167,7 +167,7 @@ public class Snake {
         } catch (Exception e) { //Por si acaso que no me fio xD
             alive = false;
         }
-        }
+        } while (alive);
         br.close();
         System.out.println("Has perdido");
     }
