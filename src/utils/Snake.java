@@ -61,13 +61,13 @@ public class Snake {
             }
 
             //Tiempo de espera con hilos
-            Thread.sleep(250);
+            Thread.sleep(750);
             separacion();
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
             guardarDireccion = br.readLine();
             //1 condicion ternarias para validar si no es nulo y si es W, A, S o D
-            direcion = (guardarDireccion != null && "WASD".contains(guardarDireccion)) ? guardarDireccion : direcion;
+            direcion = (guardarDireccion != null && guardarDireccion != "" && "WASD".contains(guardarDireccion)) ? guardarDireccion : direcion;
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento para crear la cola
             movs = movs.concat(direcion);
 
