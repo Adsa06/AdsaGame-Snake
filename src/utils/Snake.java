@@ -17,7 +17,7 @@ public class Snake {
         String guardarDireccion;
         //El snake y si esta vivo
         boolean alive = true;
-        String[] snake = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
+        final String[] SNAKE = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
         
         //longitud de la serpiente
         //int snakeLongitud = 3; de momento inserbible
@@ -59,7 +59,7 @@ public class Snake {
                     
                     Character character = cordenadas[filas].charAt(columnas);
                    
-                    System.out.printf("%s", character.equals('0') ? " " : snake[0]);
+                    System.out.printf("%s", character.equals('0') ? " " : SNAKE[0]);
 
                 }
                 System.out.printf("=");
