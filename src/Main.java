@@ -49,12 +49,16 @@ public class Main {
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
-        
-        sueloTecho(RESOLUCION_ANCHO);
-        paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, pedirNombre);
-        //System.out.println("Buenos dias, ¿Como te puedo llamar?");
-        sueloTecho(RESOLUCION_ANCHO);
-        name = br.readLine();
+        //Evito el error que aparece al introducir un nombre demasiado largo repetiendo que me pida un nombre hasta que sea adecuado
+        do {
+            sueloTecho(RESOLUCION_ANCHO);
+            paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, pedirNombre);
+            //System.out.println("Buenos dias, ¿Como te puedo llamar?");
+            sueloTecho(RESOLUCION_ANCHO);
+            name = br.readLine();
+            //Este es un if que detecta si es mayor a cuarenta la longitud de la frase si es asi ejecuta el sigueinte linea de codigo
+            if(name.length() > 40) System.out.println("Introduzca un nombre menor a 40 caracteres");
+        } while (name.length() > 40);
         // Actualizamos el contenido del array con el nombre correcto
         pedirJugar[0] = "¿A que deseas jugar " + name + "?";
 
