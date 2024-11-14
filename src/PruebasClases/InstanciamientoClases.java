@@ -3,12 +3,12 @@ package PruebasClases;
 public class InstanciamientoClases {
     public static void main(String[] args) {
         /* ----- Creacion del persoinaje con la clase Player */
-        Player jugador = new Player("Adsa", 10, 2, 4);
-        Player mostruo = new Player("Barbaro", 1, 2, 4);
+        Player jugador = new Player("", 0);
 
-        jugador.setHealth(4);
+        jugador.setName("Adsa");
+        jugador.setScore(100);
 
-        System.out.println(mostruo.getName());
+        System.out.println(jugador.getName() + " tiene una puntuacion de " + jugador.getScore() + " puntos.");
 
     }
 }
