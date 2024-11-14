@@ -49,29 +49,19 @@ El archivo `ColoresConsola.java` se utiliza para aplicar colores al texto impres
 ## Compilacion y ejecucion con ejecutable
 1. Abre una terminal y escriba los siguientes comandos
 2. cd ruta al proyecto
-3. javac Main.java src/Snake.java src/coloresConsola.java
-4. jar cvfe MiProgramaSnake.jar Main Main.class src/Snake.class src/coloresConsola.class
-5. javac ControladorPrincipal.java
-6. jar cvfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class
+3. `javac Main.java src/Snake.java src/coloresConsola.java`
+4. `jar cvfe MiProgramaSnake.jar Main Main.class src/Snake.class src/coloresConsola.class`
+5. `javac ControladorPrincipal.java`
+6. `jar cvfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class`
 7. Ten abierta 2 terminales y ejecute un comando en cada una
 8. `java -jar MiProgramaSnake.jar` y `java -jar MiProgramaControlador.jar`
 
 
-## Getting Started
+## Estructura de carpetas
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+- `src`: Esta carpeta tiene los archivos del programa
+- `lib`: Esta carpeta tiene las dependencias del programa
 
-## Folder Structure
+Mientras tanto, los archivos de salida compilados se generarán en la carpeta `bin` de forma predeterminada.
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+> Si desea personalizar la estructura de carpetas, abra `.vscode/settings.json` y actualice las configuraciones relacionadas allí.
