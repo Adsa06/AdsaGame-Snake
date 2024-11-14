@@ -1,6 +1,7 @@
 /*
  * Autor: Aitor de Santos Amoros
  * Fecha: 17/10/2024
+ * Este archivo muestra el menu y llama a las distintas funciones
  * 
  */
 

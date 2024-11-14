@@ -1,3 +1,9 @@
+/*
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 17/10/2024
+ * Este archivo es el juego principal, que se ejecuta cuando se llama desde Main.java
+ * 
+ */
 package utils;
 
 import java.io.*;
