@@ -179,9 +179,12 @@ public class Snake {
         System.out.println("Has perdido");
     }
     public static void separacion() {
-        for(int i = 0; i < 30; i++) {
+        /*for(int i = 0; i < 30; i++) {
             System.out.println("\n");
-        }
+        }*/
+        //Esto hace que se borre
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
     public static void sueloTecho(int longitud) {
         System.out.printf("%n");
