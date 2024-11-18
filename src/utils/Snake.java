@@ -73,7 +73,8 @@ public class Snake {
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
             guardarDireccion = br.readLine();
             //1 condicion ternarias para validar si no es nulo y si es W, A, S o D
-            direcion = ((guardarDireccion != null && !guardarDireccion.equals("")) && "WASD".contains(guardarDireccion)) ? guardarDireccion : direcion;
+            direcion = ((guardarDireccion != null && !guardarDireccion.equals("")) && ("WASD".contains(guardarDireccion) || "wasd".contains(guardarDireccion))) ? guardarDireccion : direcion;
+            direcion = direcion.toUpperCase();
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento para crear la cola
             movs = movs.concat(direcion);
 
