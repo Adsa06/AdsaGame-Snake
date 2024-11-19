@@ -18,7 +18,8 @@ public class Snake {
         //El snake y si esta vivo
         boolean alive = true;
         final String[] SNAKE = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
-        boolean haComido = false;
+        boolean haComido = true;
+        int[] cordsComida =  {0,0};
         
         //longitud de la serpiente
         //int snakeLongitud = 3; de momento inserbible
@@ -52,7 +53,27 @@ public class Snake {
         cordenadas[0].replace(0, 3, "111");
 
         do {
-            
+            if(haComido) {
+                cordsComida[0] = (int) Math.random()*dimensiones[0];
+                cordsComida[1] = (int) Math.random()*dimensiones[1];
+                
+                Character comprobarPosiciontablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
+                while (comprobarPosiciontablero.equals('1')) {
+                    if(cordsComida[0] == cordenadas[0].length()) {
+                        cordsComida[0] = 0;
+                        if(cordsComida[1] == cordenadas.length) {
+                            cordsComida[1] = 0;
+                        } else {
+                            cordsComida[1] += 1;
+                        }
+                    } else {
+                        cordsComida[0] += 1;
+                    }
+                
+                    comprobarPosiciontablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
+                }
+                haComido = false;
+            }
             //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
                 System.out.printf("=");
@@ -199,10 +220,6 @@ public class Snake {
                     default:
                         break;
                 }
-
-                //Aqui reinicio la variable para que pueda volver a comer
-                haComido = false;
-                
             } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la pantalla, por lo tanto pasa de vivo a muerto 
                 alive = false;
             } catch (Exception e) { //Por si acaso que no me fio xD
