@@ -13,6 +13,14 @@ public class ColoresConsola {
         return "\u001B[32m";
     }
 
+    public static String ANSI_LIGHT_GREEN() {
+        return "\u001B[92m";
+    }
+    
+    public static String ANSI_DARK_GREEN() {
+        return "\u001B[32m";
+    }
+
     public static String ANSI_YELLOW() {
         return "\u001B[33m";
     }
@@ -44,5 +52,8 @@ public class ColoresConsola {
     public static String ANSI_INVERT() {
         return "\u001B[7m";
     }
-    
+    //Colores personalizado con rgb
+    public static String ANSI_RGB(int r, int g, int b) {
+        return "\u001B[38;2;" + r + ";" + g + ";" + b + "m";
+    }
 }

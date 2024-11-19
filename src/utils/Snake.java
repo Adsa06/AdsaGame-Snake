@@ -17,7 +17,7 @@ public class Snake {
         String guardarDireccion;
         //El snake y si esta vivo
         boolean alive = true;
-        final String[] SNAKE = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
+        final String[] SNAKE = { ColoresConsola.ANSI_RGB(116, 198, 157) + "*" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_RGB(45, 106, 79) + "O" + ColoresConsola.ANSI_RESET()};
         
         boolean haComido = true;
         int[] cordsComida =  {0,0};
@@ -84,7 +84,7 @@ public class Snake {
                     Character character = cordenadas[filas].charAt(columnas);
                     switch (character) {
                         case '1':
-                            System.out.printf("%s", SNAKE[0]);
+                            System.out.printf("%s", SNAKE[filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
                             break;
 
                         case '2':
