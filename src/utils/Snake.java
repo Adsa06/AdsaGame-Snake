@@ -18,6 +18,7 @@ public class Snake {
         //El snake y si esta vivo
         boolean alive = true;
         final String[] SNAKE = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
+        boolean haComido = false;
         
         //longitud de la serpiente
         //int snakeLongitud = 3; de momento inserbible
@@ -79,6 +80,73 @@ public class Snake {
             movs = movs.concat(direcion);
 
             try { //Este try lo que esta haciendo es para que en el switch de la cabeza me pille el error de que se ha salido del array
+                switch (direcion) {
+                    case "W":
+                        if('2' == cordenadas[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) {
+                            haComido = true;
+                        }
+                        break;
+                
+                    case "A":
+                        if('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0]-2)) {
+                            haComido = true;
+                        }
+                        break;
+                
+                    case "S":
+                        if('2' == cordenadas[cordsCabeza[1]+1].charAt(cordsCabeza[0]-1)) {
+                            haComido = true;
+                        }
+                        break;
+                
+                    case "D":
+                        if('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
+                            haComido = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                
+                
+                /*
+                 * 
+                 *  Parte para la eliminacion y actualizacion de la cola
+                 * 
+                 */
+                if(!haComido){
+                    //Elimino la cola
+                    cordenadas[cordsCola[1]].replace(cordsCola[0]-1, cordsCola[0], "0");
+                    
+                    //Puedo hacer con 2 dobles operadortes ternarios, pero creo que me decanto mas por el switch, q es mas facil de ver
+                    /*
+                    cordsCola[0] += (movs.charAt(0) == 'A' ? -1 : (movs.charAt(0) == 'D' ? 1 : 0));
+                    cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 : 0));
+                    */
+                    switch (movs.charAt(0)) {
+                        case 'W':
+                            cordsCola[1] -= 1;
+                            break;
+                    
+                        case 'A':
+                            cordsCola[0] -= 1;
+                            break;
+                    
+                        case 'S':
+                            cordsCola[1] += 1;
+                            break;
+                    
+                        case 'D':
+                            cordsCola[0] += 1;
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                }    
+                    //Elimina el primer movimiento ya que deberia ya haberse ejecutado
+                    movs = movs.substring(1);
+
                 /*
                  * 
                  *  Switch para crear la cabeza
@@ -131,49 +199,15 @@ public class Snake {
                     default:
                         break;
                 }
-            
-                /*
-                 * 
-                 *  Parte para la eliminacion y actualizacion de la cola
-                 * 
-                 */
-                //Elimino la cola
-                cordenadas[cordsCola[1]].replace(cordsCola[0]-1, cordsCola[0], "0");
-                
-                //Puedo hacer con 2 dobles operadortes ternarios, pero creo que me decanto mas por el switch, q es mas facil de ver
-                /*
-                cordsCola[0] += (movs.charAt(0) == 'A' ? -1 : (movs.charAt(0) == 'D' ? 1 : 0));
-                cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 : 0));
-                */
-                switch (movs.charAt(0)) {
-                    case 'W':
-                        cordsCola[1] -= 1;
-                        break;
-                
-                    case 'A':
-                        cordsCola[0] -= 1;
-                        break;
-                
-                    case 'S':
-                        cordsCola[1] += 1;
-                        break;
-                
-                    case 'D':
-                        cordsCola[0] += 1;
-                        break;
-                
-                    default:
-                        break;
-                }
 
-                //Elimina el primer movimiento ya que deberia ya haberse ejecutado
-                movs = movs.substring(1);
+                //Aqui reinicio la variable para que pueda volver a comer
+                haComido = false;
                 
-        } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la pantalla, por lo tanto pasa de vivo a muerto 
-            alive = false;
-        } catch (Exception e) { //Por si acaso que no me fio xD
-            alive = false;
-        }
+            } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la pantalla, por lo tanto pasa de vivo a muerto 
+                alive = false;
+            } catch (Exception e) { //Por si acaso que no me fio xD
+                alive = false;
+            }
         } while (alive);
         br.close();
         System.out.println("Has perdido");
@@ -185,12 +219,5 @@ public class Snake {
         //Esto hace que se borre
         System.out.print("\033[H\033[2J");
         System.out.flush();
-    }
-    public static void sueloTecho(int longitud) {
-        System.out.printf("%n");
-        for(int i = longitud; i > 0; i--) {
-            System.out.print("-");
-        }
-        System.out.printf("%n");
     }
 }
