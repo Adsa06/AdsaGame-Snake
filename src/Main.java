@@ -85,7 +85,7 @@ public class Main {
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    Snake.main(dimensionesTableroSnake);
+                    Snake.main(dimensionesTableroSnake, 250);
                     break;
                 case 2:
 

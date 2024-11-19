@@ -9,7 +9,7 @@ package utils;
 import java.io.*;
 
 public class Snake {
-    public static void main(int[] dimensiones) throws IOException, InterruptedException {
+    public static void main(int[] dimensiones, int tiempoMilisegundos) throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
@@ -103,7 +103,7 @@ public class Snake {
             }
 
             //Tiempo de espera con hilos
-            Thread.sleep(750);
+            Thread.sleep(tiempoMilisegundos);
             separacion();
             
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
