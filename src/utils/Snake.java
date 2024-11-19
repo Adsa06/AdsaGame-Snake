@@ -61,17 +61,16 @@ public class Snake {
                 
                 Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 while (comprobarPosicionTablero.equals('1')) {
-                    if(cordsComida[0] == cordenadas[0].length()-1) {
-                        cordsComida[0] = 0;
-                        if(cordsComida[1] == cordenadas.length) {
-                            cordsComida[1] = 0;
+                    if(cordsComida[1] == cordenadas[0].length()-1) {
+                        cordsComida[1] = 0;
+                        if(cordsComida[0] == cordenadas.length-1) {
+                            cordsComida[0] = 0;
                         } else {
-                            cordsComida[1] += 1;
+                            cordsComida[0] += 1;
                         }
                     } else {
-                        cordsComida[0] += 1;
+                        cordsComida[1] += 1;
                     }
-                
                     comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 }
                 haComido = false;
