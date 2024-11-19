@@ -51,13 +51,13 @@ public class Snake {
                 cordenadas[filas].append("0");
             }
         }
-        //Remplazo de la primera linea las 3 primeras letras para hacer la serpiente
+        //Remplazo de la primera linAea las 3 primeras letras para hacer la serpiente
         cordenadas[0].replace(0, 3, "111");
 
         do {
             if(haComido) {
-                cordsComida[0] = (int) Math.random()*dimensiones[0];
-                cordsComida[1] = (int) Math.random()*dimensiones[1];
+                cordsComida[0] = (int) (Math.random() * dimensiones[0]);
+                cordsComida[1] = (int) (Math.random() * dimensiones[1]);
                 
                 Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 while (comprobarPosicionTablero.equals('1')) {
@@ -75,7 +75,7 @@ public class Snake {
                     comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 }
                 haComido = false;
-                cordenadas[cordsComida[1]].replace(cordsComida[0]-1, cordsComida[0], "2");
+                cordenadas[cordsComida[0]].replace(cordsComida[1]-1, cordsComida[1], "2");
             }
             //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
@@ -92,12 +92,12 @@ public class Snake {
                             System.out.printf("%s",FRUTA[0]);
                             break;
 
-                        default:
+                        case '0':
                             System.out.printf("%s", " ");
                             break;
+                        default:
+                            break;
                     }
-                    System.out.printf("%s", character.equals('0') ? " " : SNAKE[0]);
-
                 }
                 System.out.printf("=");
                 System.out.printf("%n");
@@ -179,9 +179,10 @@ public class Snake {
                         default:
                             break;
                     }
-                }    
                     //Elimina el primer movimiento ya que deberia ya haberse ejecutado
                     movs = movs.substring(1);
+                }    
+                    
 
                 /*
                  * 
@@ -245,11 +246,11 @@ public class Snake {
         System.out.println("Has perdido");
     }
     public static void separacion() {
-        /*for(int i = 0; i < 30; i++) {
+        for(int i = 0; i < 30; i++) {
             System.out.println("\n");
-        }*/
+        }
         //Esto hace que se borre
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        //System.out.print("\033[H\033[2J");
+        //System.out.flush();
     }
 }
