@@ -18,9 +18,11 @@ public class Snake {
         //El snake y si esta vivo
         boolean alive = true;
         final String[] SNAKE = { ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET()};
+        
         boolean haComido = true;
         int[] cordsComida =  {0,0};
-        
+        final String[] FRUTA = { ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET()};
+
         //longitud de la serpiente
         //int snakeLongitud = 3; de momento inserbible
 
@@ -57,8 +59,8 @@ public class Snake {
                 cordsComida[0] = (int) Math.random()*dimensiones[0];
                 cordsComida[1] = (int) Math.random()*dimensiones[1];
                 
-                Character comprobarPosiciontablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
-                while (comprobarPosiciontablero.equals('1')) {
+                Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
+                while (comprobarPosicionTablero.equals('1')) {
                     if(cordsComida[0] == cordenadas[0].length()) {
                         cordsComida[0] = 0;
                         if(cordsComida[1] == cordenadas.length) {
@@ -70,9 +72,10 @@ public class Snake {
                         cordsComida[0] += 1;
                     }
                 
-                    comprobarPosiciontablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
+                    comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 }
                 haComido = false;
+                cordenadas[cordsComida[1]].replace(cordsComida[0]-1, cordsComida[0], "2");
             }
             //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
@@ -80,7 +83,19 @@ public class Snake {
                 for (int columnas = 0; columnas < cordenadas[filas].length(); columnas++) {
                     
                     Character character = cordenadas[filas].charAt(columnas);
-                   
+                    switch (character) {
+                        case '1':
+                            System.out.printf("%s", SNAKE[0]);
+                            break;
+
+                        case '2':
+                            System.out.printf("%s",FRUTA[0]);
+                            break;
+
+                        default:
+                            System.out.printf("%s", " ");
+                            break;
+                    }
                     System.out.printf("%s", character.equals('0') ? " " : SNAKE[0]);
 
                 }
