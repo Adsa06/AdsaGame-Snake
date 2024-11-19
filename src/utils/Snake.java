@@ -56,8 +56,8 @@ public class Snake {
 
         do {
             if(haComido) {
-                cordsComida[0] = (int) (Math.random() * dimensiones[0]);
-                cordsComida[1] = (int) (Math.random() * dimensiones[1]);
+                cordsComida[0] = (int) (Math.random() * (dimensiones[0]-1));
+                cordsComida[1] = (int) (Math.random() * (dimensiones[1]-1));
                 
                 Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 while (comprobarPosicionTablero.equals('1')) {
@@ -75,7 +75,7 @@ public class Snake {
                     comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 }
                 haComido = false;
-                cordenadas[cordsComida[0]].replace(cordsComida[1]-1, cordsComida[1], "2");
+                cordenadas[cordsComida[0]].replace(cordsComida[1], cordsComida[1]+1, "2");
             }
             //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
