@@ -55,6 +55,8 @@ public class Snake {
         cordenadas[0].replace(0, 3, "111");
 
         do {
+
+            //Generador de la manzana el cual lo genera en un lugar aleatorio y dospues lo mueve a la derecha si lo necesita
             if(haComido) {
                 cordsComida[0] = (int) (Math.random() * (dimensiones[0]-1));
                 cordsComida[1] = (int) (Math.random() * (dimensiones[1]-1));
@@ -245,11 +247,11 @@ public class Snake {
         System.out.println("Has perdido");
     }
     public static void separacion() {
-        for(int i = 0; i < 30; i++) {
+        /*for(int i = 0; i < 30; i++) {
             System.out.println("\n");
-        }
+        }*/
         //Esto hace que se borre
-        //System.out.print("\033[H\033[2J");
-        //System.out.flush();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

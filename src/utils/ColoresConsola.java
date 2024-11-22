@@ -1,4 +1,11 @@
-package utils;
+/*
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 17/10/2024
+ * Este archivo es el que da los colores a todos los demas archivos
+ * 
+ */
+
+ package utils;
 
 public class ColoresConsola {
 
