@@ -5,7 +5,7 @@
  * 
  */
 
- package utils;
+package utils;
 
 public class ColoresConsola {
 

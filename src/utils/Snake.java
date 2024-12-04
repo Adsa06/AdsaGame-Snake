@@ -13,7 +13,7 @@ public class Snake {
         
         /* ----- Parte declarativa ----- */
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
-        BufferedReader br = new BufferedReader(new FileReader("./content.txt"));
+        BufferedReader fr = new BufferedReader(new FileReader("./content.txt"));
         String guardarDireccion;
         //El snake y si esta vivo
         boolean alive = true;
@@ -24,7 +24,8 @@ public class Snake {
         final String[] FRUTA = { ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET()};
 
         //longitud de la serpiente
-        //int snakeLongitud = 3; de momento inserbible
+        int snakeLongitud = 3; //de momento inserbible
+        boolean win = false;
 
         //Literalmente el mapa
         //String[] cordenadas = new String[dimensiones[0]];
@@ -107,9 +108,9 @@ public class Snake {
             //Tiempo de espera con hilos
             Thread.sleep(tiempoMilisegundos);
             separacion();
-            
+
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
-            guardarDireccion = br.readLine();
+            guardarDireccion = fr.readLine();
             //1 condicion ternarias para validar si no es nulo y si es W, A, S o D
             direcion = ((guardarDireccion != null && !guardarDireccion.equals("")) && ("WASD".contains(guardarDireccion) || "wasd".contains(guardarDireccion))) ? guardarDireccion : direcion;
             direcion = direcion.toUpperCase();
@@ -121,31 +122,35 @@ public class Snake {
                     case "W":
                         if('2' == cordenadas[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) {
                             haComido = true;
+                            snakeLongitud++;
                         }
                         break;
                 
                     case "A":
                         if('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0]-2)) {
                             haComido = true;
+                            snakeLongitud++;
                         }
                         break;
                 
                     case "S":
                         if('2' == cordenadas[cordsCabeza[1]+1].charAt(cordsCabeza[0]-1)) {
                             haComido = true;
+                            snakeLongitud++;
                         }
                         break;
                 
                     case "D":
                         if('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
                             haComido = true;
+                            snakeLongitud++;
                         }
                         break;
                     default:
                         break;
                 }
-                
-                
+
+
                 /*
                  * 
                  *  Parte para la eliminacion y actualizacion de la cola
@@ -183,7 +188,7 @@ public class Snake {
                     //Elimina el primer movimiento ya que deberia ya haberse ejecutado
                     movs = movs.substring(1);
                 }    
-                    
+
 
                 /*
                  * 
@@ -242,9 +247,18 @@ public class Snake {
             } catch (Exception e) { //Por si acaso que no me fio xD
                 alive = false;
             }
-        } while (alive);
-        br.close();
-        System.out.println("Has perdido");
+
+            if(snakeLongitud == dimensiones[0]*dimensiones[1]) {
+                win = true;
+            }
+
+        } while (alive && !win);
+        if(alive) {
+            System.out.println("Enhorabuena, has ganado");
+        } else {
+            System.out.println("Has perdido");
+        }
+        fr.close();
     }
     public static void separacion() {
         /*for(int i = 0; i < 30; i++) {
