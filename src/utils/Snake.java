@@ -22,16 +22,16 @@ public class Snake {
         //El snake y si esta vivo
         boolean alive = true;
         final String[][] SNAKE = {
+            {"*", "#", "O"},
             {ColoresConsola.ANSI_RGB(116, 198, 157) + "*" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_RGB(45, 106, 79) + "O" + ColoresConsola.ANSI_RESET()},
-            {"*", "#", "O"}
         
         };
         
         boolean haComido = true;
         int[] cordsComida =  {0,0};
-        final String[][] FRUTA = { 
+        final String[][] FRUTA = {
+            {"@", "l"},
             {ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_YELLOW() + "l" + ColoresConsola.ANSI_RESET()},
-            {"@", "l"}
         };
 
         //longitud de la serpiente

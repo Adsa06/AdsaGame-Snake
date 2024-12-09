@@ -20,18 +20,50 @@ public class ControladorPrincipal {
         
         String instrucion;
         boolean continuar = true;
+
+        String quiereColores;
+        boolean colores = false;
         /* ----- Parte principal ----- */
+        System.out.println("Bienvenido, ¿Quieres habilitar los colores? (S o N)");
         do {
-            //Pergunto y leo una linea por consola
-            System.out.printf("Escribe \"" + ColoresConsola.ANSI_CYAN() + "W" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "A" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "S" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "D" + ColoresConsola.ANSI_RESET() + "\": ");
-            instrucion = br.readLine();
-            //write escribe en el archivo
-            fr.write(instrucion + "\n");
-            //flush fuerza a escribir los fatos en el archivo
-            fr.flush();
-            //Ahora tiene una forma de salir
-            continuar = instrucion.equalsIgnoreCase("Salir") ? false : true;
-        } while (continuar);
+            quiereColores = br.readLine();
+            if (quiereColores.equalsIgnoreCase("S")) {
+                colores = true;
+            } else if (quiereColores.equalsIgnoreCase("N")) {
+                colores = false;
+            } else {
+                System.out.println("Porfavor, escriba una opcion valida (\"S\" para poner colores, \"N\" para no poner colores)");
+            }
+        } while (!quiereColores.equalsIgnoreCase("S") && !quiereColores.equalsIgnoreCase("N"));
+
+        System.out.println("Para salir escribe \"Salir\", presiona enter para comenzar");
+        br.readLine();
+        if (colores) {
+            do {
+                //Pergunto y leo una linea por consola
+                System.out.printf("Escribe \"" + ColoresConsola.ANSI_CYAN() + "W" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "A" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "S" + ColoresConsola.ANSI_RESET() + "\",\"" + ColoresConsola.ANSI_CYAN() + "D" + ColoresConsola.ANSI_RESET() + "\": ");
+                instrucion = br.readLine();
+                //write escribe en el archivo
+                fr.write(instrucion + "\n");
+                //flush fuerza a escribir los fatos en el archivo
+                fr.flush();
+                //Ahora tiene una forma de salir
+                continuar = instrucion.equalsIgnoreCase("Salir") ? false : true;
+            } while (continuar);
+        } else {
+            do {
+                //Pergunto y leo una linea por consola
+                System.out.printf("Escribe \"" + "W" + "\",\"" + "A" + "\",\"" + "S" + "\",\"" + "D" + "\": ");
+                instrucion = br.readLine();
+                //write escribe en el archivo
+                fr.write(instrucion + "\n");
+                //flush fuerza a escribir los fatos en el archivo
+                fr.flush();
+                //Ahora tiene una forma de salir
+                continuar = instrucion.equalsIgnoreCase("Salir") ? false : true;
+            } while (continuar);
+        }
+        br.close();
         fr.close();
 
     }
