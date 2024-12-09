@@ -124,7 +124,7 @@ public class Main {
                     Snake.main(configuracionSnake);
                     break;
                 case 2:
-                    configuracionSnake = Configuracion.main();
+                    configuracionSnake = Configuracion.main(configuracionSnake);
                     break;
                 case 3:
                     continuar = false;     
@@ -137,8 +137,10 @@ public class Main {
         System.out.println("Hasta otra");
     }   
 }
-/*
- * Unir las 2 funciones de paredes
- * Agregar colores con una nueva lista xD
+/* Ideas:
+ *
+ * Snake 3D, con varias pantallas para ver todas las capas de la 3ª dimension a la vez
+ * Snake que atraviese las paredes
+ * 
  * 
  */
