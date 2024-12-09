@@ -26,14 +26,35 @@ public class Main {
         Boolean continuar = true;
         int option = 0;
 
-        String[] pedirNombre = {"Buenos dias, ¿Como te puedo llamar?"};
-        String[] pedirJugar = {
-            "¿A que deseas jugar " + name + "?",
-            "",
-            "1 = Jugar",
-            "2 = Confi",
-            "3 = Salir"
-        };
+        String pedirNombre = "\r\n" + //
+                        "  ___                                _  _                 _   ___                    _                              _        _  _                         ___ \r\n" + //
+                        " | _ ) _  _  ___  _ _   ___  ___  __| |(_) __ _  ___     (_) / __| ___  _ __   ___  | |_  ___   _ __  _  _  ___  __| | ___  | || | __ _  _ __   __ _  _ _|__ \\\r\n" + //
+                        " | _ \\| || |/ -_)| ' \\ / _ \\(_-< / _` || |/ _` |(_-< _  / /_| (__ / _ \\| '  \\ / _ \\ |  _|/ -_) | '_ \\| || |/ -_)/ _` |/ _ \\ | || |/ _` || '  \\ / _` || '_| /_/\r\n" + //
+                        " |___/ \\_,_|\\___||_||_|\\___//__/ \\__,_||_|\\__,_|/__/( ) \\___|\\___|\\___/|_|_|_|\\___/  \\__|\\___| | .__/ \\_,_|\\___|\\__,_|\\___/ |_||_|\\__,_||_|_|_|\\__,_||_|  (_) \r\n" + //
+                        "                                                    |/                                         |_|                                                            \r\n" + //
+                        "";
+        String pedirJugar = "\r\n" + //
+                        "   _    _                        _                        _                   ___ \r\n" + //
+                        "  (_)  /_\\    __ _ _  _ ___   __| |___ ______ __ _ ___   (_)_  _ __ _ __ _ _ |__ \\\r\n" + //
+                        " / /_ / _ \\  / _` | || / -_) / _` / -_(_-/ -_/ _` (_-<   | | || / _` / _` | '_|/_/\r\n" + //
+                        " \\___/_/ \\_\\ \\__, |\\_,_\\___| \\__,_\\___/__\\___\\__,_/__/  _/ |\\_,_\\__, \\__,_|_| (_) \r\n" + //
+                        "                |_|                                    |__/     |___/             \r\n" + //
+                        "  _            _                                                                  \r\n" + //
+                        " / |  ___   _ | |_  _ __ _ __ _ _ _                                               \r\n" + //
+                        " | | |___| | || | || / _` / _` | '_|                                              \r\n" + //
+                        " |_| |___|  \\__/ \\_,_\\__, \\__,_|_|                                                \r\n" + //
+                        "                     |___/                                                        \r\n" + //
+                        "  _ _          ___           __ _                                                 \r\n" + //
+                        " |_  )  ___   / __|___ _ _  / _(_)                                                \r\n" + //
+                        "  / /  |___| | (__/ _ | ' \\|  _| |                                                \r\n" + //
+                        " /___| |___|  \\___\\___|_||_|_| |_|                                                \r\n" + //
+                        "                                                                               \r\n" + //
+                        "  _ __        ___      _ _                                                        \r\n" + //
+                        " |__ /  ___  / __|__ _| (_)_ _                                                    \r\n" + //
+                        "  |_ \\ |___| \\__ / _` | | | '_|                                                   \r\n" + //
+                        " |___/ |___| |___\\__,_|_|_|_|                                                     \r\n" + //
+                        "                                                                                  \r\n" + //
+                        "";
         String[][] explicacionJuego = {
             {
                 "Paso 1, Abra el Controlador del juego para poder escribir las direciones por consola, si desea salir del controlador pon \"Salir\"",
@@ -41,7 +62,8 @@ public class Main {
                 "Las letras tendras q escribirlas en el programa controlador y tendras que darle " + ColoresConsola.ANSI_CYAN() + "Enter/Intro" + ColoresConsola.ANSI_RESET() + " para enviarlas, " + ColoresConsola.ANSI_CYAN() + "de una en una" + ColoresConsola.ANSI_RESET(),
                 "Paso 3, Evita chocarte con las paredes y tu cuerpo, a su vez evita ir a la direcion contraria a la que vas",
                 "Paso 4, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar",
-                "Recuerda cerrar el controlador principal al acabar de jugar, para cerrarlo introduzca \"" + ColoresConsola.ANSI_UNDERLINE() + "Salir" + ColoresConsola.ANSI_RESET() + "\""
+                "Recuerda cerrar el controlador principal al acabar de jugar, para cerrarlo introduzca \"" + ColoresConsola.ANSI_UNDERLINE() + "Salir" + ColoresConsola.ANSI_RESET() + "\"",
+                "¿Estas preparado " + name + "?"
             },
             {
                 "Paso 1, Abra el Controlador del juego para poder escribir las direciones por consola, si desea salir del controlador pon \"Salir\"",
@@ -49,12 +71,10 @@ public class Main {
                 "Las letras tendras q escribirlas en el programa controlador y tendras que darle Enter/Intro para enviarlas, de una en una",
                 "Paso 3, Evita chocarte con las paredes y tu cuerpo, a su vez evita ir a la direcion contraria a la que vas",
                 "Paso 4, Presiona la tecla enter para empezar a jugar",
-                "Recuerda cerrar el controlador principal al acabar de jugar, para cerrarlo introduzca \"Salir\""
+                "Recuerda cerrar el controlador principal al acabar de jugar, para cerrarlo introduzca \"Salir\"",
+                "¿Estas preparado " + name + "?"
             },
         };
-
-        final int RESOLUCION_ALTURA = 30;
-        final int RESOLUCION_ANCHO = 120;
 
         //Array de configuracuin
         /*
@@ -72,22 +92,17 @@ public class Main {
         //Aqui faltaria limpiar la pantalla por consola
         //Evito el error que aparece al introducir un nombre demasiado largo repetiendo que me pida un nombre hasta que sea adecuado
         do {
-            sueloTecho(RESOLUCION_ANCHO);
-            paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 14, pedirNombre);
-            //System.out.println("Buenos dias, ¿Como te puedo llamar?");
-            sueloTecho(RESOLUCION_ANCHO);
+            System.out.println(pedirNombre);
             name = br.readLine();
             //Este es un if que detecta si es mayor a cuarenta la longitud de la frase si es asi ejecuta el sigueinte linea de codigo
             if(name.length() > 40) System.out.println("Introduzca un nombre menor a 40 caracteres");
         } while (name.length() > 40);
         // Actualizamos el contenido del array con el nombre correcto
-        pedirJugar[0] = "¿A que deseas jugar " + name + "?";
+        explicacionJuego[0][6] = "¿Estas preparado " + name + "?";
+        explicacionJuego[1][6] = "¿Estas preparado " + name + "?";
 
         do {
-            sueloTecho(RESOLUCION_ANCHO);
-            paredesMultiplesFrases(RESOLUCION_ANCHO, RESOLUCION_ALTURA, 11, pedirJugar);
-
-            sueloTecho(RESOLUCION_ANCHO);
+            System.out.println(pedirJugar);
             //Conversion de tipo de dato
             try { //Este try impide que el usuario escriba una letra y pete el programa, como opcion es = 0, se ira al default en el switch
                 option = Integer.parseInt(br.readLine());
@@ -120,112 +135,7 @@ public class Main {
             }
         } while (continuar);
         System.out.println("Hasta otra");
-    }
-
-    public static void sueloTecho(int longitud) {
-        for(int i = longitud; i > 0; i--) {
-            System.out.print("-");
-        }
-        System.out.printf("%n");
-    }
-
-    public static void paredes(int anchura, int longitud, int fila, int espaciado, String frase) {
-
-        //Hay que tener en cuenta el espaciado y el numero de frases
-
-        //Bucle
-        for(int i = 0; i != (longitud-3); i++) {
-
-            System.out.printf("=");
-
-            //Si ha llegado a la fila entra dentro
-            if(i == fila) {
-
-                //Depende si la fila tiene que estar centrada 
-                if (espaciado <= -1){
-
-                        for(int j = 0; j != (((anchura-2) - frase.length()) / 2); j++) {
-                            System.out.print(" ");
-                        }
-    
-                        System.out.println(ColoresConsola.ANSI_RED() + frase);
-    
-                        //Terminacion de la frase dependiendo si es impar o par
-                        if (frase.length() % 2 == 0) {
-                            for(int j = 0; j != (((anchura-2) - frase.length()) / 2); j++) {
-                                System.out.print(" ");
-                            }
-                        } else { //Si la frase es impar se le sumara 1 para que no se joda
-                            for(int j = 0; j != (((anchura-2) - frase.length()) / 2 + 1); j++) {
-                                System.out.print(" ");
-                            }
-                        }
-
-                } else { //Si no tiene que estar centrada
-                    //Imprimira el espaciado y luego la frase 
-                    
-                    for(int j = 0; j != (espaciado); j++) {
-                        System.out.print(" ");
-                    }
-                    
-                    System.out.print(frase);
-
-                    //Imprime el resto de la linea
-                    for(int j = 0; j != ((anchura-2) - frase.length() - espaciado); j++) {
-                        System.out.print(" ");
-                    }
-                }
-
-
-            } else { //Imprime espacios
-
-                for(int j = 0; j != (anchura-2); j++) {
-                    System.out.print(" ");
-                }
-
-            }
-            System.out.print("=");
-            }
-    }
-    public static void paredesMultiplesFrases(int anchura, int longitud, int fila, String[] frases) {
-        for(int i = 0; i != (longitud-3 -(frases.length - 1)); i++) {
-
-            //Si ha llegado a la fila entra dentro
-            if(i == fila) {
-                for(int k = 0; k < frases.length; k++) {
-                    System.out.printf("=");
-                    for(int j = 0; j != (((anchura-2) - frases[k].length()) / 2); j++) {
-                        System.out.print(" ");
-                    }
-                
-                    System.out.printf(ColoresConsola.ANSI_RED() + frases[k] +  ColoresConsola.ANSI_RESET());
-                
-                    //Terminacion de la frase dependiendo si es impar o par
-                    if (frases[k].length() % 2 == 0) {
-                        for(int j = 0; j != (((anchura-2) - frases[k].length()) / 2); j++) {
-                            System.out.print(" ");
-                        }
-                    } else { //Si la frase es impar se le sumara 1 para que no se joda
-                        for(int j = 0; j != (((anchura-2) - frases[k].length()) / 2 + 1); j++) {
-                            System.out.print(" ");
-                        }
-                    }
-                    System.out.printf("=%n");
-
-                }
-                
-            } else { //Imprime espacios
-                
-                System.out.printf("=");
-                for(int j = 0; j != (anchura-2); j++) {
-                    System.out.print(" ");
-                }
-                System.out.printf("=%n");
-            }
-        }
-    }
-
-     
+    }   
 }
 /*
  * Unir las 2 funciones de paredes
