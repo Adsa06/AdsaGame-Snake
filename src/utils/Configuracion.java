@@ -23,6 +23,11 @@ public class Configuracion {
         
         /* ----- Parte principal ----- */
         do {
+            System.out.println("Apartado de configuracion, escriba la opcion que desee:");
+            System.out.println("1. Cambiar dimensiones, los valores actuales son: " + dimensiones[0] + " filas y " + dimensiones[1] + " columnas");
+            System.out.println("2. Cambiar velocidad del juego, el valor actual es: " + tiempoMilisegundos + " milisegundos");
+            System.out.println("3. Habilitar colores, el valor actual es: " + (admiteColores == 1 ? "Si" : "No") + " admite colores");
+            System.out.println("4. Salir");
             try { //Este try impide que el usuario escriba una letra y pete el programa, como opcion es = 0, se ira al default en el switch
                 option = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
@@ -30,13 +35,14 @@ public class Configuracion {
             }
             switch (option) {
                 case 1:
-                    dimensiones = cambioDimensiones();
+                    dimensiones = cambioDimensiones(dimensiones);
                     break;
                 case 2:
                     tiempoMilisegundos = cambioTiempo();
                     break;
                 case 3:
                     admiteColores = cambioColores();
+                    break;
                 case 4:
                     continuar = false;     
                     break;
@@ -45,24 +51,55 @@ public class Configuracion {
                     break;
             }
         } while (continuar);
-        
         /* ----- Envio de datos ----- */
         int[] array = {dimensiones[0], dimensiones[1], tiempoMilisegundos, admiteColores};
         return array;
     }
 
-    public static int[] cambioDimensiones(){
+    public static int[] cambioDimensiones(int[] valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int[] dimensiones = new int[2];
+        int[] nuevasDimensiones = valoresAnteriores;
 
+        String opcion;
+        boolean continuar = true;
         /* ----- Parte principal ----- */
+        System.out.println("Los valores actuales son: " + valoresAnteriores[0] + " filas y " + valoresAnteriores[1] + " columnas");
+        System.out.println("¿Quieres cambiarlos? (S o N)");
 
+        do {
+            opcion = br.readLine();
+            continuar = opcion.equalsIgnoreCase("S") ? true : false;
+        } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
+
+        while (continuar) {
+            System.out.println("Escribe el nuevo numero de filas: ");
+            do {
+                System.out.println("Escriba un numero mayor o igual a 3");
+                try {
+                    nuevasDimensiones[0] = Integer.parseInt(br.readLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Porfavor, escriba un numero");
+                }
+            } while (nuevasDimensiones[0] < 3);
+    
+            System.out.println("Escribe el nuevo numero de columnas: ");
+            do {
+                System.out.println("Escriba un numero mayor o igual a 3");
+                try {
+                    nuevasDimensiones[1] = Integer.parseInt(br.readLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Porfavor, escriba un numero");
+                }
+            } while (nuevasDimensiones[1] < 3);
+
+            continuar = false;
+        }
         /* ----- Envio de datos ----- */
-        return dimensiones;
+        return nuevasDimensiones;
     }
 
-    public static int cambioTiempo(){
+    public static int cambioTiempo() throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int nivelDificultad;
@@ -70,19 +107,17 @@ public class Configuracion {
         /* ----- Parte principal ----- */
         nivelDificultad = 375;
 
-
         /* ----- Envio de datos ----- */
         return nivelDificultad;
     }
 
-    public static int cambioColores(){
+    public static int cambioColores() throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int admiteColores;
 
         /* ----- Parte principal ----- */
         admiteColores = 0;
-
         /* ----- Envio de datos ----- */
         return admiteColores;
     }
