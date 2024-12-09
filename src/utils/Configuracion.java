@@ -23,11 +23,12 @@ public class Configuracion {
         
         /* ----- Parte principal ----- */
         do {
+            System.out.println("\n\n\n");
             System.out.println("Apartado de configuracion, escriba la opcion que desee:");
             System.out.println("1. Cambiar dimensiones, los valores actuales son: " + dimensiones[0] + " filas y " + dimensiones[1] + " columnas");
             System.out.println("2. Cambiar velocidad del juego, el valor actual es: " + tiempoMilisegundos + " milisegundos");
             System.out.println("3. Habilitar colores, el valor actual es: " + (admiteColores == 1 ? "Si" : "No") + " admite colores");
-            System.out.println("4. Salir");
+            System.out.println("4. Salir al menu principal");
             try { //Este try impide que el usuario escriba una letra y pete el programa, como opcion es = 0, se ira al default en el switch
                 option = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
@@ -38,10 +39,10 @@ public class Configuracion {
                     dimensiones = cambioDimensiones(dimensiones);
                     break;
                 case 2:
-                    tiempoMilisegundos = cambioTiempo();
+                    tiempoMilisegundos = cambioTiempo(tiempoMilisegundos);
                     break;
                 case 3:
-                    admiteColores = cambioColores();
+                    admiteColores = cambioColores(admiteColores);
                     break;
                 case 4:
                     continuar = false;     
@@ -64,6 +65,7 @@ public class Configuracion {
         String opcion;
         boolean continuar = true;
         /* ----- Parte principal ----- */
+        System.out.println("\n\n\n");
         System.out.println("Los valores actuales son: " + valoresAnteriores[0] + " filas y " + valoresAnteriores[1] + " columnas");
         System.out.println("¿Quieres cambiarlos? (S o N)");
 
@@ -71,6 +73,8 @@ public class Configuracion {
             opcion = br.readLine();
             continuar = opcion.equalsIgnoreCase("S") ? true : false;
         } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
+        
+        if (!continuar) System.out.println("No se ha cambiado el valor");
 
         while (continuar) {
             System.out.println("Escribe el nuevo numero de filas: ");
@@ -94,12 +98,15 @@ public class Configuracion {
             } while (nuevasDimensiones[1] < 3);
 
             continuar = false;
+            System.out.println("Los nuevos valores son: " + nuevasDimensiones[0] + " filas y " + nuevasDimensiones[1] + " columnas");
         }
+        System.out.println("Presiona enter para continuar");
+        br.readLine();
         /* ----- Envio de datos ----- */
         return nuevasDimensiones;
     }
 
-    public static int cambioTiempo() throws IOException{
+    public static int cambioTiempo(int valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int nivelDificultad;
@@ -111,13 +118,29 @@ public class Configuracion {
         return nivelDificultad;
     }
 
-    public static int cambioColores() throws IOException{
+    public static int cambioColores(int valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int admiteColores;
+        int admiteColores = valoresAnteriores;
 
+        String opcion;
         /* ----- Parte principal ----- */
-        admiteColores = 0;
+        System.out.println("\n\n\n");
+        System.out.println("El valor actual es: " + (valoresAnteriores == 1 ? "Si" : "No") + " admite colores");
+        System.out.println("¿Quieres cambiarlos? (S o N)");
+        
+        do {
+            opcion = br.readLine();
+            if (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N")) System.out.println("Porfavor, escriba una opcion valida (\"S\" para cambiar el valor, \"N\" para no cambiar el valor): ");
+
+            if (opcion.equalsIgnoreCase("S")) {
+                admiteColores = admiteColores == 1 ? 0 : 1;
+            } 
+        } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
+
+        System.out.println(opcion.equalsIgnoreCase("S") ? admiteColores == 1 ? "Colores habilitados" : "Colores deshabilitados" : "No se ha cambiado el valor");
+        System.out.println("Presiona enter para continuar");
+        br.readLine();
         /* ----- Envio de datos ----- */
         return admiteColores;
     }
