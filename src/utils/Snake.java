@@ -9,7 +9,7 @@ package utils;
 import java.io.*;
 
 public class Snake {
-    public static void main(int[] dimensiones, int tiempoMilisegundos) throws IOException, InterruptedException {
+    public static void main(int[] dimensiones, int tiempoMilisegundos, int admiteColores) throws IOException, InterruptedException {
         
         /* ----- Parte declarativa ----- */
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
@@ -17,11 +17,18 @@ public class Snake {
         String guardarDireccion;
         //El snake y si esta vivo
         boolean alive = true;
-        final String[] SNAKE = { ColoresConsola.ANSI_RGB(116, 198, 157) + "*" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_RGB(45, 106, 79) + "O" + ColoresConsola.ANSI_RESET()};
+        final String[][] SNAKE = {
+            {ColoresConsola.ANSI_RGB(116, 198, 157) + "*" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_RGB(45, 106, 79) + "O" + ColoresConsola.ANSI_RESET()},
+            {"*", "#", "O"}
+        
+        };
         
         boolean haComido = true;
         int[] cordsComida =  {0,0};
-        final String[] FRUTA = { ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET()};
+        final String[][] FRUTA = { 
+            {ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_YELLOW() + "l" + ColoresConsola.ANSI_RESET()},
+            {"@", "l"}
+        };
 
         //longitud de la serpiente
         int snakeLongitud = 3; //de momento inserbible
@@ -87,11 +94,11 @@ public class Snake {
                     Character character = cordenadas[filas].charAt(columnas);
                     switch (character) {
                         case '1':
-                            System.out.printf("%s", SNAKE[filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
+                            System.out.printf("%s", SNAKE[admiteColores][filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
                             break;
 
                         case '2':
-                            System.out.printf("%s",FRUTA[0]);
+                            System.out.printf("%s",FRUTA[admiteColores][0]);
                             break;
 
                         case '0':

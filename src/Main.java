@@ -46,6 +46,8 @@ public class Main {
         final int RESOLUCION_ANCHO = 120;
 
         int[] dimensionesTableroSnake = {10, 20};
+        int tiempoMilisegundosSnake = 375;
+        int admiteColores = 0;
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
@@ -85,7 +87,7 @@ public class Main {
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    Snake.main(dimensionesTableroSnake, 375);
+                    Snake.main(dimensionesTableroSnake, tiempoMilisegundosSnake, admiteColores);
                     break;
                 case 2:
 
