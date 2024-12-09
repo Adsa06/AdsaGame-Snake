@@ -71,28 +71,32 @@ public class Configuracion {
 
         do {
             opcion = br.readLine();
+            if (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N")) System.out.println("Porfavor, escriba una opcion valida (\"S\" para cambiar el valor, \"N\" para no cambiar el valor): ");
+            
             continuar = opcion.equalsIgnoreCase("S") ? true : false;
         } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
         
         if (!continuar) System.out.println("No se ha cambiado el valor");
 
         while (continuar) {
-            System.out.println("Escribe el nuevo numero de filas: ");
             do {
+                System.out.println("Escribe el nuevo numero de filas: ");
                 System.out.println("Escriba un numero mayor o igual a 3");
                 try {
                     nuevasDimensiones[0] = Integer.parseInt(br.readLine());
                 } catch (NumberFormatException e) {
+                    nuevasDimensiones[0] = 0;
                     System.out.println("Porfavor, escriba un numero");
                 }
             } while (nuevasDimensiones[0] < 3);
     
-            System.out.println("Escribe el nuevo numero de columnas: ");
             do {
+                System.out.println("Escribe el nuevo numero de columnas: ");
                 System.out.println("Escriba un numero mayor o igual a 3");
                 try {
                     nuevasDimensiones[1] = Integer.parseInt(br.readLine());
                 } catch (NumberFormatException e) {
+                    nuevasDimensiones[1] = 0;
                     System.out.println("Porfavor, escriba un numero");
                 }
             } while (nuevasDimensiones[1] < 3);
@@ -109,11 +113,41 @@ public class Configuracion {
     public static int cambioTiempo(int valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int nivelDificultad;
+        int nivelDificultad = valoresAnteriores;
 
+        String opcion;
         /* ----- Parte principal ----- */
-        nivelDificultad = 375;
+        System.out.println("\n\n\n");
+        System.out.println("El valor actual es: " + valoresAnteriores + " milisegundos");
+        System.out.println("¿Quieres cambiarlo? (S o N)");
 
+        do {
+            opcion = br.readLine();
+            if(!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N")) System.out.println("Porfavor, escriba una opcion valida (\"S\" para cambiar el valor, \"N\" para no cambiar el valor): ");
+        } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
+
+        if (opcion.equalsIgnoreCase("S")) {
+            do {
+                System.out.println("Escribe el nuevo valor: ");
+                System.out.println("Escriba un numero mayor o igual a 375");
+
+                System.out.println("375 milisegundos es la dificultad extrema");
+                System.out.println("500 milisegundos es la dificultad dificil");
+                System.out.println("750 milisegundos es la dificultad normal");
+                System.out.println("1000 milisegundos es la dificultad facil");
+
+                try {
+                    nivelDificultad = Integer.parseInt(br.readLine());
+                } catch (NumberFormatException e) {
+                    nivelDificultad = 0;
+                    System.out.println("Porfavor, escriba un numero");
+                }
+            } while (nivelDificultad < 375);
+            
+            System.out.println("El nuevo valor es: " + nivelDificultad + " milisegundos");
+        }
+        System.out.println("Presiona enter para continuar");
+        br.readLine();
         /* ----- Envio de datos ----- */
         return nivelDificultad;
     }
