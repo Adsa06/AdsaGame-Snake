@@ -10,6 +10,7 @@ import java.io.*;
 
 import utils.ColoresConsola;
 import utils.Snake;
+import utils.Configuracion;
 
 public class Main {
 
@@ -55,9 +56,17 @@ public class Main {
         final int RESOLUCION_ALTURA = 30;
         final int RESOLUCION_ANCHO = 120;
 
-        int[] dimensionesTableroSnake = {10, 20};
-        int tiempoMilisegundosSnake = 375;
-        int admiteColores = 0;
+        //Array de configuracuin
+        /*
+         * El primer dato es el numero de filas que hay en el tablero
+         * El segundo dato es el numero de columnas que hay en el tablero
+         * 
+         * El tercero es el tiempo de descanso que hay entre cada actualizacion del tablero
+         * 
+         * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
+         * 
+         */
+        int[] configuracionSnake = { 10, 20, 375, 0};
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
@@ -92,18 +101,18 @@ public class Main {
                     BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
                     fr.close();
                     /* ----- */
-                    for(String frases : explicacionJuego[admiteColores]) {
+                    for(String frases : explicacionJuego[configuracionSnake[3]]) {
                         System.out.println(frases);
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    Snake.main(dimensionesTableroSnake, tiempoMilisegundosSnake, admiteColores);
+                    Snake.main(configuracionSnake);
                     break;
                 case 2:
-
+                    configuracionSnake = Configuracion.main();
                     break;
                 case 3:
-                continuar = false;     
+                    continuar = false;     
                     break;
                 default:
                     System.out.println("Opcion incorrecta");

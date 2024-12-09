@@ -9,9 +9,13 @@ package utils;
 import java.io.*;
 
 public class Snake {
-    public static void main(int[] dimensiones, int tiempoMilisegundos, int admiteColores) throws IOException, InterruptedException {
-        
+    public static void main(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
+        //Desempaqueto el array de configuracion
+        final int[] DIMENSIONES = {configuracionSnake[0], configuracionSnake[1]};
+        final int TIEMPOMILISEGUNDOS = configuracionSnake[2];
+        final int ADMITECOLORES = configuracionSnake[3];
+
         //Creo una variable BufferedReader para leer datos y hago que sea un objeto de la clase FileReader para leer el archivo
         BufferedReader fr = new BufferedReader(new FileReader("./content.txt"));
         String guardarDireccion;
@@ -37,7 +41,7 @@ public class Snake {
         //Literalmente el mapa
         //String[] cordenadas = new String[dimensiones[0]];
         //Tengo que actualizar el programa para sustituir las cordenadas anteriores por esta, cambios en el switch
-        StringBuilder[] cordenadas = new StringBuilder[dimensiones[0]];
+        StringBuilder[] cordenadas = new StringBuilder[DIMENSIONES[0]];
 
         //Cordenadas de la cabeza y de la cola
         //Primera cordenada la "x", posicion de una frase (empieza en 1) 
@@ -52,10 +56,10 @@ public class Snake {
         /* ----- Parte principal ----- */
         
         //Creacion del mapa segun las variables de dimensiones
-        for (int filas = 0; filas < dimensiones[0]; filas++) {
+        for (int filas = 0; filas < DIMENSIONES[0]; filas++) {
             //Como comienza con el valor "null" tengo que crearlo vacio
             cordenadas[filas] = new StringBuilder("");
-            for(int columnas = 0; columnas < dimensiones[1]; columnas++) {
+            for(int columnas = 0; columnas < DIMENSIONES[1]; columnas++) {
                 cordenadas[filas].append("0");
             }
         }
@@ -66,8 +70,8 @@ public class Snake {
 
             //Generador de la manzana el cual lo genera en un lugar aleatorio y dospues lo mueve a la derecha si lo necesita
             if(haComido) {
-                cordsComida[0] = (int) (Math.random() * (dimensiones[0]-1));
-                cordsComida[1] = (int) (Math.random() * (dimensiones[1]-1));
+                cordsComida[0] = (int) (Math.random() * (DIMENSIONES[0]-1));
+                cordsComida[1] = (int) (Math.random() * (DIMENSIONES[1]-1));
                 
                 Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
                 while (comprobarPosicionTablero.equals('1')) {
@@ -94,11 +98,11 @@ public class Snake {
                     Character character = cordenadas[filas].charAt(columnas);
                     switch (character) {
                         case '1':
-                            System.out.printf("%s", SNAKE[admiteColores][filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
+                            System.out.printf("%s", SNAKE[ADMITECOLORES][filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
                             break;
 
                         case '2':
-                            System.out.printf("%s",FRUTA[admiteColores][0]);
+                            System.out.printf("%s",FRUTA[ADMITECOLORES][0]);
                             break;
 
                         case '0':
@@ -113,7 +117,7 @@ public class Snake {
             }
 
             //Tiempo de espera con hilos
-            Thread.sleep(tiempoMilisegundos);
+            Thread.sleep(TIEMPOMILISEGUNDOS);
             separacion();
 
             //Esto se tendra que hacer despues para que un espacio en blanco no de fallo
@@ -255,7 +259,7 @@ public class Snake {
                 alive = false;
             }
 
-            if(snakeLongitud == dimensiones[0]*dimensiones[1]) {
+            if(snakeLongitud == DIMENSIONES[0]*DIMENSIONES[1]) {
                 win = true;
             }
 
