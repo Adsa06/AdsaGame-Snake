@@ -81,25 +81,25 @@ public class Configuracion {
         while (continuar) {
             do {
                 System.out.println("Escribe el nuevo numero de filas: ");
-                System.out.println("Escriba un numero mayor o igual a 3");
+                System.out.println("Escriba un numero entre 3 y 40");
                 try {
                     nuevasDimensiones[0] = Integer.parseInt(br.readLine());
                 } catch (NumberFormatException e) {
                     nuevasDimensiones[0] = 0;
-                    System.out.println("Porfavor, escriba un numero");
+                    System.out.println("Porfavor, escriba un numero entre 3 y 40");
                 }
-            } while (nuevasDimensiones[0] < 3);
+            } while (nuevasDimensiones[0] < 3 || nuevasDimensiones[0] > 40);
     
             do {
                 System.out.println("Escribe el nuevo numero de columnas: ");
-                System.out.println("Escriba un numero mayor o igual a 3");
+                System.out.println("Escriba un numero entre 3 y 80");
                 try {
                     nuevasDimensiones[1] = Integer.parseInt(br.readLine());
                 } catch (NumberFormatException e) {
                     nuevasDimensiones[1] = 0;
-                    System.out.println("Porfavor, escriba un numero");
+                    System.out.println("Porfavor, escriba un numero entre 3 y 80");
                 }
-            } while (nuevasDimensiones[1] < 3);
+            } while (nuevasDimensiones[1] < 3 || nuevasDimensiones[1] > 80);
 
             continuar = false;
             System.out.println("Los nuevos valores son: " + nuevasDimensiones[0] + " filas y " + nuevasDimensiones[1] + " columnas");
