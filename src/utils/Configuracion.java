@@ -129,20 +129,20 @@ public class Configuracion {
         if (opcion.equalsIgnoreCase("S")) {
             do {
                 System.out.println("Escribe el nuevo valor: ");
-                System.out.println("Escriba un numero mayor o igual a 375");
+                System.out.println("Escriba un numero entre 375 y 5000 milisegundos");
 
                 System.out.println("375 milisegundos es la dificultad extrema");
                 System.out.println("500 milisegundos es la dificultad dificil");
                 System.out.println("750 milisegundos es la dificultad normal");
                 System.out.println("1000 milisegundos es la dificultad facil");
-
+                System.out.println("5000 milisegundos es el tiempo maximo");
                 try {
                     nivelDificultad = Integer.parseInt(br.readLine());
                 } catch (NumberFormatException e) {
                     nivelDificultad = 0;
                     System.out.println("Porfavor, escriba un numero");
                 }
-            } while (nivelDificultad < 375);
+            } while (nivelDificultad < 375 || nivelDificultad > 5000);
             
             System.out.println("El nuevo valor es: " + nivelDificultad + " milisegundos");
         }

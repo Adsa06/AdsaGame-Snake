@@ -108,6 +108,7 @@ public class Main {
                 option = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
                 System.out.println("Porfavor, escriba una opcion valida");
+                option = 0;
             }
             switch (option) {
                 case 1:

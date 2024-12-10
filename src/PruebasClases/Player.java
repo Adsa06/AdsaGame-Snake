@@ -5,7 +5,13 @@ public class Player {
     private String name;
     private int score;
     private int[] configuration = new int[4];
-    
+    /*
+     * Un sistema de logros, con diccionarios
+     * -Poner un numero en concreto en el contador
+     * -Codigo kunami en movs
+     * 
+     * 
+     */
     /* ----- Creacion del personaje ----- */
     public Player(String nombre, int puntuacion, int[] configPersonalizada) {
         this.name = nombre;
