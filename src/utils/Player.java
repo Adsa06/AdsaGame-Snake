@@ -1,4 +1,4 @@
-package PruebasClases;
+package utils;
 
 public class Player {
     //Variables privadas ya que no deberian hacederse de forma general si no de funciones
@@ -13,6 +13,20 @@ public class Player {
      * 
      */
     /* ----- Metodos constructores ----- */
+    public Player(){
+        //Array de configuracuin
+        /*
+         * El primer dato es el numero de filas que hay en el tablero
+         * El segundo dato es el numero de columnas que hay en el tablero
+         * 
+         * El tercero es el tiempo de descanso que hay entre cada actualizacion del tablero
+         * 
+         * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
+         * 
+         */
+        configuration = new int[] {10, 20, 375, 0};
+    }
+    
     public Player(String nombre, int puntuacion, int[] configPersonalizada) {
         this.name = nombre;
         this.score = puntuacion;

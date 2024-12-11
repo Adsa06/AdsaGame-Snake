@@ -11,6 +11,7 @@ import java.io.*;
 import utils.ColoresConsola;
 import utils.Snake;
 import utils.Configuracion;
+import utils.Player;
 
 public class Main {
 
@@ -22,7 +23,8 @@ public class Main {
         //Declaro el BufferedReader para leer datos por consola
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String name = "";
+        Player player = new Player();
+
         Boolean continuar = true;
         int option = 0;
 
@@ -63,7 +65,7 @@ public class Main {
                 "Paso 3, Evita chocarte con las paredes y tu cuerpo, a su vez evita ir a la direcion contraria a la que vas",
                 "Paso 4, Presiona la tecla enter para empezar a jugar",
                 "Recuerda cerrar el controlador principal al acabar de jugar, para cerrarlo introduzca \"Salir\"",
-                "¿Estas preparado " + name + "?"
+                "¿Estas preparado " + player.getName() + "?"
             },
             {
                 "Paso 1, Abra el Controlador del juego para poder escribir las direciones por consola, si desea salir del controlador pon \"Salir\"",
@@ -72,34 +74,23 @@ public class Main {
                 "Paso 3, Evita chocarte con las paredes y tu cuerpo, a su vez evita ir a la direcion contraria a la que vas",
                 "Paso 4, Presiona la tecla " + ColoresConsola.ANSI_UNDERLINE() + "enter" + ColoresConsola.ANSI_RESET() + " para empezar a jugar",
                 "Recuerda cerrar el controlador principal al acabar de jugar, para cerrarlo introduzca \"" + ColoresConsola.ANSI_UNDERLINE() + "Salir" + ColoresConsola.ANSI_RESET() + "\"",
-                "¿Estas preparado " + name + "?"
+                "¿Estas preparado " + player.getName() + "?"
             },
         };
 
-        //Array de configuracuin
-        /*
-         * El primer dato es el numero de filas que hay en el tablero
-         * El segundo dato es el numero de columnas que hay en el tablero
-         * 
-         * El tercero es el tiempo de descanso que hay entre cada actualizacion del tablero
-         * 
-         * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
-         * 
-         */
-        int[] configuracionSnake = { 10, 20, 375, 0};
         /* ----- Parte principal ----- */
 
         //Aqui faltaria limpiar la pantalla por consola
         //Evito el error que aparece al introducir un nombre demasiado largo repetiendo que me pida un nombre hasta que sea adecuado
         do {
             System.out.println(pedirNombre);
-            name = br.readLine();
+            player.setName(br.readLine());
             //Este es un if que detecta si es mayor a cuarenta la longitud de la frase si es asi ejecuta el sigueinte linea de codigo
-            if(name.length() > 40) System.out.println("Introduzca un nombre menor a 40 caracteres");
-        } while (name.length() > 40);
+            if(player.getName().length() > 40) System.out.println("Introduzca un nombre menor a 40 caracteres");
+        } while (player.getName().length() > 40);
         // Actualizamos el contenido del array con el nombre correcto
-        explicacionJuego[0][6] = "¿Estas preparado " + name + "?";
-        explicacionJuego[1][6] = "¿Estas preparado " + name + "?";
+        explicacionJuego[0][6] = "¿Estas preparado " + player.getName() + "?";
+        explicacionJuego[1][6] = "¿Estas preparado " + player.getName() + "?";
 
         do {
             System.out.println(pedirJugar);
@@ -117,15 +108,15 @@ public class Main {
                     BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
                     fr.close();
                     /* ----- */
-                    for(String frases : explicacionJuego[configuracionSnake[3]]) {
+                    for(String frases : explicacionJuego[player.getCongiguration()[3]]) {
                         System.out.println(frases);
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    Snake.main(configuracionSnake);
+                    Snake.main(player.getCongiguration());
                     break;
                 case 2:
-                    configuracionSnake = Configuracion.main(configuracionSnake);
+                    player.setCongiguration(Configuracion.main(player.getCongiguration()));
                     break;
                 case 3:
                     continuar = false;     

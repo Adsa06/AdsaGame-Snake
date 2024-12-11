@@ -13,6 +13,16 @@ import java.io.InputStreamReader;
 public class Configuracion {
     public static int[] main(int[] valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
+        //Array de configuracuin
+        /*
+         * El primer dato es el numero de filas que hay en el tablero
+         * El segundo dato es el numero de columnas que hay en el tablero
+         * 
+         * El tercero es el tiempo de descanso que hay entre cada actualizacion del tablero
+         * 
+         * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
+         * 
+         */
         int[] dimensiones = {valoresAnteriores[0], valoresAnteriores[1]};
         int tiempoMilisegundos = valoresAnteriores[2];
         int admiteColores = valoresAnteriores[3];
