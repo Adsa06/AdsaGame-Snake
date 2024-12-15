@@ -170,6 +170,8 @@ public class Configuracion {
         String opcion;
         /* ----- Parte principal ----- */
         System.out.println("\n\n\n");
+        System.out.println("Si tu consola admite colores a continuacion se tendria que ver la letra \"R\" en rojo: " + ColoresConsola.ANSI_RED() + "R" + ColoresConsola.ANSI_RESET());
+        System.out.println("Si no es asi, tu consola no admite colores");
         System.out.println("El valor actual es: " + (valoresAnteriores == 1 ? "Si" : "No") + " admite colores");
         System.out.println("¿Quieres cambiarlos? (S o N)");
         
