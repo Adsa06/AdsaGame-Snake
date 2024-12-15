@@ -49,8 +49,8 @@ El archivo `ColoresConsola.java` se utiliza para aplicar colores al texto impres
 ## Compilacion y ejecucion con ejecutable
 1. Abre una terminal y escriba los siguientes comandos
 2. cd ruta al proyecto en el src
-3. `javac Main.java utils/Snake.java utils/ColoresConsola.java`
-4. `jar cfe MiProgramaSnake.jar Main Main.class utils/Snake.class utils/ColoresConsola.class`
+3. `javac Main.java utils/Snake.java utils/ColoresConsola.java utils/Configuracion.java utils/Player.java`
+4. `jar cfe MiProgramaSnake.jar Main Main.class utils/Snake.class utils/ColoresConsola.class utils/Configuracion.class utils/Player.class`
 5. `javac ControladorPrincipal.java utils/ColoresConsola.java`
 6. `jar cfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class utils/ColoresConsola.class`
 7. Ten abierta 2 terminales y ejecute un comando en cada una
