@@ -1,4 +1,4 @@
-package PruebasClases;
+package PruebasAlocadas.PruebasClases;
 
 public class InstanciamientoClases {
     public static void main(String[] args) {
@@ -18,5 +18,14 @@ public class InstanciamientoClases {
         jugador.getCongiguration()[1] = 5;
 
         System.out.println("La configuracion es: " + jugador.getCongiguration()[0] + " " + jugador.getCongiguration()[1] + " " + jugador.getCongiguration()[2] + " " + jugador.getCongiguration()[3]);
+    
+        System.out.println("---------------- Prueba de inmutabilidad ---------------");
+        System.out.println("Antes de la prueba: " + jugador.getScore());
+        PruebaInmutabilidad(jugador);
+        System.out.println("Despues de la prueba: " + jugador.getScore());
+    }
+
+    public static void PruebaInmutabilidad(Player player) {
+        player.setScore(player.getScore() + 1);
     }
 }

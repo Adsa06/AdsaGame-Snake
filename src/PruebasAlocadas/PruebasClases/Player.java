@@ -1,4 +1,4 @@
-package PruebasClases;
+package PruebasAlocadas.PruebasClases;
 
 public class Player {
     //Variables privadas ya que no deberian hacederse de forma general si no de funciones
