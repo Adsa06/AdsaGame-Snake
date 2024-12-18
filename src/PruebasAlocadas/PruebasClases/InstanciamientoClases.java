@@ -4,6 +4,7 @@ public class InstanciamientoClases {
     public static void main(String[] args) {
         /* ----- Creacion del persoinaje con la clase Player */
         Player jugador = new Player("", 0, null);
+        Player jugadoe2 = new Player("Adsa", 500, null);
 
         jugador.setName("Adsa");
         jugador.setScore(100);
@@ -18,11 +19,27 @@ public class InstanciamientoClases {
         jugador.getCongiguration()[1] = 5;
 
         System.out.println("La configuracion es: " + jugador.getCongiguration()[0] + " " + jugador.getCongiguration()[1] + " " + jugador.getCongiguration()[2] + " " + jugador.getCongiguration()[3]);
-    
+      
+
+        /*------------------------------------------------------------------------------------------ */
+        System.out.println("----------------------------Prueba de Static-----------------------------------");
+        
+        System.out.println(jugadoe2.getPruebaStaticAtrivuto());
+        jugador.setPruebaStaticAtrivuto(4);
+        System.out.println(jugadoe2.getPruebaStaticAtrivuto());
+
+        System.out.println(Player.comparar2Numeros(5, 1));
+
+        /* ------------------------------------------------------------------------------------------ */
+        System.out.println(jugador.toString());
+
+        /*------------------------------------------------------------------------------------------ */
         System.out.println("---------------- Prueba de inmutabilidad ---------------");
         System.out.println("Antes de la prueba: " + jugador.getScore());
         PruebaInmutabilidad(jugador);
         System.out.println("Despues de la prueba: " + jugador.getScore());
+
+
     }
 
     public static void PruebaInmutabilidad(Player player) {
