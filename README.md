@@ -13,6 +13,8 @@ El proyecto está dividido en varios archivos Java organizados en dos carpetas p
 2. **Carpeta `src`**:
    - `Snake.java`: Contiene la lógica del juego de Snake, incluyendo el movimiento de la serpiente, la actualización de su posición y la detección de colisiones.
    - `ColoresConsola.java`: Define métodos para aplicar colores en la consola, permitiendo que el juego se vea más atractivo visualmente.
+   - `Configuracion.java`: Define la configuración del juego, como el tamaño del tablero y la velocidad de movimiento de la serpiente.
+   - `Player.java`: Define la estructura del jugador, incluyendo su nombre y puntuación.
 
 ## Descripción de Funcionamiento
 
