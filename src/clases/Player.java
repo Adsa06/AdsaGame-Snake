@@ -4,7 +4,9 @@
  * Este archivo es la clase del jugador, en esta se almacena toda la informacion del jugador
  * 
  */
-package utils;
+package clases;
+
+import java.util.Arrays;
 
 public class Player {
     //Variables privadas ya que no deberian hacederse de forma general si no de funciones
@@ -66,4 +68,8 @@ public class Player {
     }
 
     /* ----- Metodos de comportamiento -----  */
+    @Override
+    public String toString() {
+        return "Player [Nombre: " + name + ", Puntuacion: " + score + ", Configuracion: " + Arrays.toString(configuration) + "]";
+    }
 }

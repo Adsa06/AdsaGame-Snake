@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Configuracion {
-    public static int[] main(int[] valoresAnteriores) throws IOException{
+    public static int[] cambiarConfiguracion(int[] valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         //Array de configuracuin
         /*
@@ -43,6 +43,7 @@ public class Configuracion {
                 option = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
                 System.out.println("Porfavor, escriba una opcion valida");
+                option = 0;
             }
             switch (option) {
                 case 1:

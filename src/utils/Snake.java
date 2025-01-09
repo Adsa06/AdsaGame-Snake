@@ -9,7 +9,7 @@ package utils;
 import java.io.*;
 
 public class Snake {
-    public static void main(int[] configuracionSnake) throws IOException, InterruptedException {
+    public static void juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
         //Desempaqueto el array de configuracion
         final int[] DIMENSIONES = {configuracionSnake[0], configuracionSnake[1]};
