@@ -11,6 +11,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Configuracion {
+
+    /**
+     * @param valoresAnteriores Es el array de configuracion anterior
+     * @return Devuelve el array de configuracion
+     * @throws IOException
+     */
     public static int[] cambiarConfiguracion(int[] valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         //Array de configuracuin
@@ -68,6 +74,11 @@ public class Configuracion {
         return array;
     }
 
+    /**
+     * @param valoresAnteriores Es el array de dimensiones anterior
+     * @return Devuelve el nuevo array de dimensiones
+     * @throws IOException
+     */
     public static int[] cambioDimensiones(int[] valoresAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -121,15 +132,20 @@ public class Configuracion {
         return nuevasDimensiones;
     }
 
-    public static int cambioTiempo(int valoresAnteriores) throws IOException{
+    /**
+     * @param valorAnteriores Es el valor de tiempo anterior
+     * @return Es el nuevo valor de Tiempo
+     * @throws IOException
+     */
+    public static int cambioTiempo(int valorAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int nivelDificultad = valoresAnteriores;
+        int nivelDificultad = valorAnteriores;
 
         String opcion;
         /* ----- Parte principal ----- */
         System.out.println("\n\n\n");
-        System.out.println("El valor actual es: " + valoresAnteriores + " milisegundos");
+        System.out.println("El valor actual es: " + valorAnteriores + " milisegundos");
         System.out.println("¿Quieres cambiarlo? (S o N)");
 
         do {
@@ -163,17 +179,22 @@ public class Configuracion {
         return nivelDificultad;
     }
 
-    public static int cambioColores(int valoresAnteriores) throws IOException{
+    /**
+     * @param valorAnteriores Es el valor anterior de si admite o no colores
+     * @return Devuelve el nuevo valor para saber si admite colores
+     * @throws IOException
+     */
+    public static int cambioColores(int valorAnteriores) throws IOException{
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int admiteColores = valoresAnteriores;
+        int admiteColores = valorAnteriores;
 
         String opcion;
         /* ----- Parte principal ----- */
         System.out.println("\n\n\n");
         System.out.println("Si tu consola admite colores a continuacion se tendria que ver la letra \"R\" en rojo: " + ColoresConsola.ANSI_RED() + "R" + ColoresConsola.ANSI_RESET());
         System.out.println("Si no es asi, tu consola no admite colores");
-        System.out.println("El valor actual es: " + (valoresAnteriores == 1 ? "Si" : "No") + " admite colores");
+        System.out.println("El valor actual es: " + (valorAnteriores == 1 ? "Si" : "No") + " admite colores");
         System.out.println("¿Quieres cambiarlos? (S o N)");
         
         do {
