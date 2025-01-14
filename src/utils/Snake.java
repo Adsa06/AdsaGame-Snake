@@ -10,6 +10,15 @@ import java.io.*;
 
 public class Snake {
 
+    public static void separacion() {
+        for(int i = 0; i < 30; i++) {
+            System.out.println("\n");
+        }
+        //Esto hace que se borre, pero no funciona en todas las consolas
+        //System.out.print("\033[H\033[2J");
+        //System.out.flush();
+    }
+
     /**
      * 
      * @param tablero Es la variable que genera el tablero
@@ -314,7 +323,7 @@ public class Snake {
                 }    
 
                 alive = crearCabeza(cordenadas, cordsCabeza, direcion);
-                
+
             } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la pantalla, por lo tanto pasa de vivo a muerto 
                 alive = false;
             } catch (Exception e) { //Por si acaso que no me fio xD
@@ -327,13 +336,5 @@ public class Snake {
 
         System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
         fr.close();
-    }
-    public static void separacion() {
-        for(int i = 0; i < 30; i++) {
-            System.out.println("\n");
-        }
-        //Esto hace que se borre, pero no funciona en todas las consolas
-        //System.out.print("\033[H\033[2J");
-        //System.out.flush();
     }
 }
