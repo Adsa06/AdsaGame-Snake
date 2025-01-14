@@ -58,6 +58,53 @@ public class Snake {
 
     }
 
+    /**
+     * 
+     * @param tablero Es la variable en la que genera la serpiente
+     * @param cordsCabeza Son las cordenadas de la cabeza de la serpiente
+     * @param cordsCola Son las cordenadas de la cola de la serpiente
+     * @param admiteColores Es la variable que almacena si admite o no colores
+     */
+    public static void mostrarTablero(StringBuilder[] tablero, int[] cordsCabeza, int[] cordsCola, int admiteColores) {
+        final String[][] FRUTA = {
+            {"@", "l"},
+            {ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_YELLOW() + "l" + ColoresConsola.ANSI_RESET()},
+        };
+
+        final String[][] SNAKE = {
+            {"*", "#", "O"},
+            {ColoresConsola.ANSI_RGB(116, 198, 157) + "*" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_RGB(45, 106, 79) + "O" + ColoresConsola.ANSI_RESET()},
+        
+        };
+
+        //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
+        for (int filas = 0; filas < tablero.length; filas++) {
+            System.out.printf("=");
+            for (int columnas = 0; columnas < tablero[filas].length(); columnas++) {
+                
+                Character character = tablero[filas].charAt(columnas);
+                switch (character) {
+                    case '1':
+                        System.out.printf("%s", SNAKE[admiteColores][filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
+                        break;
+
+                    case '2':
+                        System.out.printf("%s",FRUTA[admiteColores][0]);
+                        break;
+
+                    case '0':
+                        System.out.printf("%s", " ");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            System.out.printf("=");
+            System.out.printf("%n");
+        }
+
+    }
+
     public static void juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
         //Desempaqueto el array de configuracion
@@ -70,17 +117,10 @@ public class Snake {
         String guardarDireccion;
         //El snake y si esta vivo
         boolean alive = true;
-        final String[][] SNAKE = {
-            {"*", "#", "O"},
-            {ColoresConsola.ANSI_RGB(116, 198, 157) + "*" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_GREEN() + "#" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_RGB(45, 106, 79) + "O" + ColoresConsola.ANSI_RESET()},
-        
-        };
+
         
         boolean haComido = true;
-        final String[][] FRUTA = {
-            {"@", "l"},
-            {ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_YELLOW() + "l" + ColoresConsola.ANSI_RESET()},
-        };
+
 
         //longitud de la serpiente
         int snakeLongitud = 3; //de momento inserbible
@@ -112,31 +152,9 @@ public class Snake {
                 generarFruta(cordenadas, DIMENSIONES);
                 haComido = false;
             }
-            //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
-            for (int filas = 0; filas < cordenadas.length; filas++) {
-                System.out.printf("=");
-                for (int columnas = 0; columnas < cordenadas[filas].length(); columnas++) {
-                    
-                    Character character = cordenadas[filas].charAt(columnas);
-                    switch (character) {
-                        case '1':
-                            System.out.printf("%s", SNAKE[ADMITECOLORES][filas == cordsCabeza[1] && columnas == cordsCabeza[0]-1 ? 2 : filas == cordsCola[1] && columnas == cordsCola[0]-1 ? 0 : 1]);
-                            break;
 
-                        case '2':
-                            System.out.printf("%s",FRUTA[ADMITECOLORES][0]);
-                            break;
-
-                        case '0':
-                            System.out.printf("%s", " ");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                System.out.printf("=");
-                System.out.printf("%n");
-            }
+            // Funcione que muestra el tablero
+            mostrarTablero(cordenadas, cordsCabeza, cordsCola, ADMITECOLORES);
 
             //Tiempo de espera con hilos
             Thread.sleep(TIEMPOMILISEGUNDOS);
