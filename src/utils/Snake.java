@@ -105,6 +105,102 @@ public class Snake {
 
     }
 
+    /**
+     * 
+     * @param tablero Es la variable en la que elimina la cola
+     * @param cordsCola Es la posicion de la cola actual
+     * @param movs Es la lista de movimientos
+     */
+    public static void eliminarCola(StringBuilder[] tablero, int[] cordsCola, String movs) {
+        //Elimino la cola
+        tablero[cordsCola[1]].replace(cordsCola[0]-1, cordsCola[0], "0");
+        
+        //Puedo hacer con 2 dobles operadortes ternarios, pero creo que me decanto mas por el switch, q es mas facil de ver
+        /*
+        cordsCola[0] += (movs.charAt(0) == 'A' ? -1 : (movs.charAt(0) == 'D' ? 1 : 0));
+        cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 : 0));
+        */
+    
+        switch (movs.charAt(0)) {
+            case 'W':
+                cordsCola[1] -= 1;
+                break;
+        
+            case 'A':
+                cordsCola[0] -= 1;
+                break;
+        
+            case 'S':
+                cordsCola[1] += 1;
+                break;
+        
+            case 'D':
+                cordsCola[0] += 1;
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 
+     * @param tablero Es la variable en la que genera la cabeza
+     * @param cordsCabeza Es la posicion de la cabeza
+     * @param direcion Es la direccion de la cabeza
+     * @return Devuelve un booleano que dice si esta vivo o muerto
+     */
+    public static boolean crearCabeza(StringBuilder[] tablero, int[] cordsCabeza, String direcion) {
+        /*
+         * 
+         *  Switch para crear la cabeza
+         *  En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo que haya por la cabeza y luego actualizo la posicion de ella
+         *  Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la serpiente, si es asi muere
+         */
+        boolean alive = true;
+        switch (direcion) {
+            case "W":
+                if('1' == tablero[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) alive = false;
+
+                /* ----- Parte de la cabeza ----- */
+                tablero[cordsCabeza[1]-1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
+
+                cordsCabeza[1] -= 1;
+                break;
+        
+            case "A":
+                if('1' == tablero[cordsCabeza[1]].charAt(cordsCabeza[0]-2)) alive = false;
+
+                /* ----- Parte de la cabeza ----- */
+                tablero[cordsCabeza[1]].replace(cordsCabeza[0]-2, cordsCabeza[0]-1, "1");
+
+                cordsCabeza[0] -= 1;
+                break;
+        
+            case "S":
+                if('1' == tablero[cordsCabeza[1]+1].charAt(cordsCabeza[0]-1)) alive = false;
+
+                /* ----- Parte de la cabeza ----- */
+                tablero[cordsCabeza[1]+1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
+        
+                cordsCabeza[1] += 1;
+                break;
+        
+            case "D":
+                if('1' == tablero[cordsCabeza[1]].charAt(cordsCabeza[0])) alive = false;
+                
+                /* ----- Parte de la cabeza ----- */
+                tablero[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0]+1, "1");
+                cordsCabeza[0] += 1;
+                break;
+        
+            default:
+                break;
+        }
+
+        return alive;
+    }
+
     public static void juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
         //Desempaqueto el array de configuracion
@@ -136,7 +232,7 @@ public class Snake {
         //la segunda cordenada es una "y" la que indica que frase es (empieze en 0)
         int[] cordsCabeza = {3,0};
         int[] cordsCola = {1,0};
-        String movs = "DD"; //Se cuencia de movimientos para saber la continuacion de la cola
+        String movs = "DD"; //Secuencia de movimientos para saber la continuacion de la cola
 
         //Direccion
         String direcion = "D";
@@ -166,9 +262,10 @@ public class Snake {
             direcion = ((guardarDireccion != null && !guardarDireccion.equals("")) && ("WASD".contains(guardarDireccion) || "wasd".contains(guardarDireccion))) ? guardarDireccion : direcion;
             direcion = direcion.toUpperCase();
             //Detecta si es un movimiento valido con una condicion ternaria y guarda el movimiento para crear la cola
-            movs = movs.concat(direcion);
 
             try { //Este try lo que esta haciendo es para que en el switch de la cabeza me pille el error de que se ha salido del array
+                
+                
                 switch (direcion) {
                     case "W":
                         if('2' == cordenadas[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) {
@@ -207,108 +304,28 @@ public class Snake {
                  *  Parte para la eliminacion y actualizacion de la cola
                  * 
                  */
+                movs = movs.concat(direcion);
                 if(!haComido){
-                    //Elimino la cola
-                    cordenadas[cordsCola[1]].replace(cordsCola[0]-1, cordsCola[0], "0");
-                    
-                    //Puedo hacer con 2 dobles operadortes ternarios, pero creo que me decanto mas por el switch, q es mas facil de ver
-                    /*
-                    cordsCola[0] += (movs.charAt(0) == 'A' ? -1 : (movs.charAt(0) == 'D' ? 1 : 0));
-                    cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 : 0));
-                    */
-                    switch (movs.charAt(0)) {
-                        case 'W':
-                            cordsCola[1] -= 1;
-                            break;
-                    
-                        case 'A':
-                            cordsCola[0] -= 1;
-                            break;
-                    
-                        case 'S':
-                            cordsCola[1] += 1;
-                            break;
-                    
-                        case 'D':
-                            cordsCola[0] += 1;
-                            break;
-                    
-                        default:
-                            break;
-                    }
+
+                    eliminarCola(cordenadas, cordsCola, movs);
+
                     //Elimina el primer movimiento ya que deberia ya haberse ejecutado
                     movs = movs.substring(1);
                 }    
 
-
-                /*
-                 * 
-                 *  Switch para crear la cabeza
-                 *  En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo que haya por la cabeza y luego actualizo la posicion de ella
-                 *  Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la serpiente, si es asi muere
-                 */
-                switch (direcion) {
-                    case "W":
-                        if('1' == cordenadas[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) {
-                            alive = false;
-                        }
-
-                        /* ----- Parte de la cabeza ----- */
-                        cordenadas[cordsCabeza[1]-1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
-
-                        cordsCabeza[1] -= 1;
-                        break;
+                alive = crearCabeza(cordenadas, cordsCabeza, direcion);
                 
-                    case "A":
-                        if('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0]-2)) {
-                            alive = false;
-                        }
-
-                        /* ----- Parte de la cabeza ----- */
-                        cordenadas[cordsCabeza[1]].replace(cordsCabeza[0]-2, cordsCabeza[0]-1, "1");
-
-                        cordsCabeza[0] -= 1;
-                        break;
-                
-                    case "S":
-                        if('1' == cordenadas[cordsCabeza[1]+1].charAt(cordsCabeza[0]-1)) {
-                            alive = false;
-                        }
-
-                        /* ----- Parte de la cabeza ----- */
-                        cordenadas[cordsCabeza[1]+1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
-                
-                        cordsCabeza[1] += 1;
-                        break;
-                
-                    case "D":
-                        if('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
-                            alive = false;
-                        }
-                        /* ----- Parte de la cabeza ----- */
-                        cordenadas[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0]+1, "1");
-                        cordsCabeza[0] += 1;
-                        break;
-                
-                    default:
-                        break;
-                }
             } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la pantalla, por lo tanto pasa de vivo a muerto 
                 alive = false;
             } catch (Exception e) { //Por si acaso que no me fio xD
                 alive = false;
             }
 
-            if(snakeLongitud == DIMENSIONES[0]*DIMENSIONES[1]) {
-                win = true;
-            }
+            if(snakeLongitud == DIMENSIONES[0]*DIMENSIONES[1]) win = true;
 
         } while (alive && !win);
-        if(alive) {
-            System.out.println("Enhorabuena, has ganado");
-        } else {
-            System.out.println("Has perdido");
-        }
+
+        System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
         fr.close();
     }
     public static void separacion() {
