@@ -9,6 +9,55 @@ package utils;
 import java.io.*;
 
 public class Snake {
+
+    /**
+     * 
+     * @param tablero Es la variable que genera el tablero
+     * @param dimensiones Son las dimensiones que debe tener el tablero
+     */
+    public static void inicializarTablero(StringBuilder[] tablero, int[] dimensiones) {
+        
+        //Creacion del mapa segun las variables de dimensiones
+        for (int filas = 0; filas < dimensiones[0]; filas++) {
+            //Como comienza con el valor "null" tengo que crearlo vacio
+            tablero[filas] = new StringBuilder("");
+            for(int columnas = 0; columnas < dimensiones[1]; columnas++) {
+                tablero[filas].append("0");
+            }
+        }
+        //Remplazo de la primera linAea las 3 primeras letras para hacer la serpiente
+        tablero[0].replace(0, 3, "111");
+    }
+
+    /**
+     * 
+     * @param tablero Es la variable que genera el tablero
+     * @param dimensiones Son las dimensiones que debe tener el tablero
+     */
+    public static void generarFruta(StringBuilder[] tablero, int[] dimensiones) {
+        int[] cordsComida =  {0,0};
+
+        cordsComida[0] = (int) (Math.random() * (dimensiones[0]-1));
+        cordsComida[1] = (int) (Math.random() * (dimensiones[1]-1));
+        
+        Character comprobarPosicionTablero = tablero[cordsComida[0]].charAt(cordsComida[1]);
+        while (comprobarPosicionTablero.equals('1')) {
+            if(cordsComida[1] == tablero[0].length()-1) {
+                cordsComida[1] = 0;
+                if(cordsComida[0] == tablero.length-1) {
+                    cordsComida[0] = 0;
+                } else {
+                    cordsComida[0] += 1;
+                }
+            } else {
+                cordsComida[1] += 1;
+            }
+            comprobarPosicionTablero = tablero[cordsComida[0]].charAt(cordsComida[1]);
+        }
+        tablero[cordsComida[0]].replace(cordsComida[1], cordsComida[1]+1, "2");
+
+    }
+
     public static void juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
         //Desempaqueto el array de configuracion
@@ -28,7 +77,6 @@ public class Snake {
         };
         
         boolean haComido = true;
-        int[] cordsComida =  {0,0};
         final String[][] FRUTA = {
             {"@", "l"},
             {ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET(), ColoresConsola.ANSI_YELLOW() + "l" + ColoresConsola.ANSI_RESET()},
@@ -55,40 +103,14 @@ public class Snake {
 
         /* ----- Parte principal ----- */
         
-        //Creacion del mapa segun las variables de dimensiones
-        for (int filas = 0; filas < DIMENSIONES[0]; filas++) {
-            //Como comienza con el valor "null" tengo que crearlo vacio
-            cordenadas[filas] = new StringBuilder("");
-            for(int columnas = 0; columnas < DIMENSIONES[1]; columnas++) {
-                cordenadas[filas].append("0");
-            }
-        }
-        //Remplazo de la primera linAea las 3 primeras letras para hacer la serpiente
-        cordenadas[0].replace(0, 3, "111");
+        // Gracias a que los arrays se pasan por referencia no tengo que igualarlo, simplemente poner la funcion
+        inicializarTablero(cordenadas, DIMENSIONES);
 
         do {
-
             //Generador de la manzana el cual lo genera en un lugar aleatorio y dospues lo mueve a la derecha si lo necesita
             if(haComido) {
-                cordsComida[0] = (int) (Math.random() * (DIMENSIONES[0]-1));
-                cordsComida[1] = (int) (Math.random() * (DIMENSIONES[1]-1));
-                
-                Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
-                while (comprobarPosicionTablero.equals('1')) {
-                    if(cordsComida[1] == cordenadas[0].length()-1) {
-                        cordsComida[1] = 0;
-                        if(cordsComida[0] == cordenadas.length-1) {
-                            cordsComida[0] = 0;
-                        } else {
-                            cordsComida[0] += 1;
-                        }
-                    } else {
-                        cordsComida[1] += 1;
-                    }
-                    comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
-                }
+                generarFruta(cordenadas, DIMENSIONES);
                 haComido = false;
-                cordenadas[cordsComida[0]].replace(cordsComida[1], cordsComida[1]+1, "2");
             }
             //Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1 por 1
             for (int filas = 0; filas < cordenadas.length; filas++) {
