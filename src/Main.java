@@ -8,10 +8,10 @@
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
 
+import clases.Player;
 import utils.ColoresConsola;
 import utils.Snake;
 import utils.Configuracion;
-import utils.Player;
 
 public class Main {
 
@@ -113,10 +113,10 @@ public class Main {
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    Snake.main(player.getCongiguration());
+                    Snake.juegoPrincipal(player.getCongiguration());
                     break;
                 case 2:
-                    player.setCongiguration(Configuracion.main(player.getCongiguration()));
+                    player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));
                     break;
                 case 3:
                     continuar = false;     
