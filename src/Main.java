@@ -128,7 +128,9 @@ public class Main {
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));
                     break;
                 case 3:
-                    player.mostrarPerfil();     
+                    player.mostrarPerfil(); 
+                    System.out.println("Presiona enter para salir");
+                    br.readLine();    
                     break;
                 case 4:
                     continuar = false;     
