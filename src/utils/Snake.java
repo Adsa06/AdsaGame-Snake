@@ -210,7 +210,30 @@ public class Snake {
         return alive;
     }
 
-    public static void juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
+    /**
+     * 
+     * @param longitudSerpiente La longitud de la serpiente en cuadros. Este valor representa la cantidad de casillas ocupadas por la serpiente en el tablero.
+     * @param filasTablero La cantidad de filas del tablero del juego.
+     * @param columnasTablero La cantidad de columnas del tablero del juego.
+     * @param velocidadLa velocidad de actualización del juego en milisegundos.
+     * 
+     * @return El puntaje calculado en base a la longitud de la serpiente, las dimensiones del tablero y la velocidad del juego.
+     *        
+     */
+    public static int calcularPuntaje(int longitudSerpiente, int filasTablero, int columnasTablero, int velocidad) {
+        // Normalizar las dimensiones del tablero: cuantas más celdas tenga el tablero, más puntos se pueden ganar
+        int totalCeldas = filasTablero * columnasTablero;
+
+        // Ajustar el puntaje según la velocidad (la velocidad más baja tiene un puntaje más alto)
+        double velocidadFactor = 1.0 / (velocidad / 1000.0); // Hacer que la velocidad más alta sea más baja en el cálculo
+        
+        // Calcular el puntaje final con un ponderado de cada aspecto
+        int puntaje = (int) (longitudSerpiente * 10 * velocidadFactor * (longitudSerpiente / totalCeldas * 10));
+
+        return puntaje;
+    }
+
+    public static int juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
         //Desempaqueto el array de configuracion
         final int[] DIMENSIONES = {configuracionSnake[0], configuracionSnake[1]};
@@ -336,5 +359,7 @@ public class Snake {
 
         System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
         fr.close();
+
+        return calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
     }
 }

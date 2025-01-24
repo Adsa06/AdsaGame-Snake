@@ -113,7 +113,7 @@ public class Main {
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    Snake.juegoPrincipal(player.getCongiguration());
+                    player.setScore(Snake.juegoPrincipal(player.getCongiguration()));
                     break;
                 case 2:
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));
