@@ -68,6 +68,12 @@ public class Player {
     }
 
     /* ----- Metodos de comportamiento -----  */
+
+    public void mostrarPerfil() {
+        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + ( score != 0 ? score : "Todavia no has conseguido una puntuacion"));
+    }
+
+
     @Override
     public String toString() {
         return "Player [Nombre: " + name + ", Puntuacion: " + score + ", Configuracion: " + Arrays.toString(configuration) + "]";
