@@ -358,6 +358,7 @@ public class Snake {
         } while (alive && !win);
 
         System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
+        System.out.println(calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS));
         fr.close();
 
         return calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);

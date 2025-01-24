@@ -32,6 +32,7 @@ public class Player {
          * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
          * 
          */
+        score = 0;
         configuration = new int[] {10, 20, 375, 0};
     }
     
@@ -70,7 +71,7 @@ public class Player {
     /* ----- Metodos de comportamiento -----  */
 
     public void mostrarPerfil() {
-        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + ( score != 0 ? score : "Todavia no has conseguido una puntuacion"));
+        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + score);
     }
 
 
