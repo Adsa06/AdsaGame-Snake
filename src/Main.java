@@ -121,7 +121,7 @@ public class Main {
                     }
                     //Esto hace q no continue el programa sin que presione el enter
                     br.readLine();
-                    int ScoreProvisional = Snake.juegoPrincipal(player.getCongiguration());
+                    double ScoreProvisional = Snake.juegoPrincipal(player.getCongiguration());
                     if(ScoreProvisional > player.getScore()) player.setScore(ScoreProvisional);
                     break;
                 case 2:

@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Player {
     //Variables privadas ya que no deberian hacederse de forma general si no de funciones
     private String name;
-    private int score;
+    private double score;
     private int[] configuration = new int[4];
     /*
      * Un sistema de logros, con diccionarios
@@ -47,7 +47,7 @@ public class Player {
         return name;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
@@ -60,7 +60,7 @@ public class Player {
         this.name = nombre;
     }
 
-    public void setScore(int puntuacion) {
+    public void setScore(double puntuacion) {
         this.score = puntuacion;
     }
 

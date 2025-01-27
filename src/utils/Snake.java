@@ -220,20 +220,26 @@ public class Snake {
      * @return El puntaje calculado en base a la longitud de la serpiente, las dimensiones del tablero y la velocidad del juego.
      *        
      */
-    public static int calcularPuntaje(int longitudSerpiente, int filasTablero, int columnasTablero, int velocidad) {
+    public static double calcularPuntaje(int longitudSerpiente, int filasTablero, int columnasTablero, int velocidad) {
         // Normalizar las dimensiones del tablero: cuantas más celdas tenga el tablero, más puntos se pueden ganar
+        System.out.println("El tablero tiene " + filasTablero + " filas y " + columnasTablero + " columnas.");
         int totalCeldas = filasTablero * columnasTablero;
+        System.out.println("El tablero tiene " + totalCeldas + " celdas.");
 
         // Ajustar el puntaje según la velocidad (la velocidad más baja tiene un puntaje más alto)
+        System.out.println("La velocidad del juego es de " + velocidad + " milisegundos.");
         double velocidadFactor = 1.0 / (velocidad / 1000.0); // Hacer que la velocidad más alta sea más baja en el cálculo
+        System.out.println("El factor de velocidad es de " + velocidadFactor);
         
         // Calcular el puntaje final con un ponderado de cada aspecto
-        int puntaje = (int) (longitudSerpiente * 10 * velocidadFactor * (longitudSerpiente / totalCeldas * 10));
+        System.out.println("La longitud de la serpiente es de " + longitudSerpiente);
+        double puntaje = (longitudSerpiente * velocidadFactor * ((double) ((longitudSerpiente * 100) / totalCeldas)));
+        System.out.println("El puntaje final es de " + puntaje);
 
         return puntaje;
     }
 
-    public static int juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
+    public static double juegoPrincipal(int[] configuracionSnake) throws IOException, InterruptedException {
         /* ----- Parte declarativa ----- */
         //Desempaqueto el array de configuracion
         final int[] DIMENSIONES = {configuracionSnake[0], configuracionSnake[1]};
