@@ -20,16 +20,16 @@ public class ModoNormal extends JuegoBase {
 
       BufferedReader fr = new BufferedReader(new FileReader("./content.txt"));
 
-      super.inicializarTablero(super.getCordenadas(), DIMENSIONES);
+      super.inicializarTablero(DIMENSIONES);
 
       do {
 
          if (super.isHaComido()) {
-            super.generarFruta(super.getCordenadas(), DIMENSIONES);
+            super.generarFruta(DIMENSIONES);
             super.setHaComido(false);
          }
 
-         mostrarTablero(super.getCordenadas(), super.getCordsCabeza(), super.getCordsCola(), ADMITECOLORES);
+         mostrarTablero(ADMITECOLORES);
 
          // Tiempo de espera con hilos
          Thread.sleep(TIEMPOMILISEGUNDOS);
@@ -91,13 +91,13 @@ public class ModoNormal extends JuegoBase {
 
             if (!super.isHaComido()) {
 
-               eliminarCola(super.getCordenadas(), super.getCordsCola(), super.getMovs());
+               eliminarCola();
 
                // Elimina el primer movimiento ya que deberia ya haberse ejecutado
                super.setMovs(super.getMovs().substring(1));
             }
 
-            super.setAlive(crearCabeza(super.getCordenadas(), super.getCordsCabeza(), super.getDirecion()));
+            crearCabeza();
 
          } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la
                                                       // pantalla, por lo tanto pasa de vivo a muerto
