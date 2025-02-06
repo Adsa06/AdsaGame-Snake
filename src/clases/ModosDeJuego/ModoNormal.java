@@ -12,6 +12,36 @@ public class ModoNormal extends JuegoBase {
    public ModoNormal() {
    }
 
+   /**
+    * Reinicia las variables del juego a sus valores predeterminados.
+    * Establece que el jugador esta vivo, que no ha comido, que no ha ganado,
+    * la longitud de la serpiente en 3, los movimientos en "DD" y la
+    * direccion en "D".
+    */
+   @Override
+   public void resetearVariables() {
+      super.setAlive(true);
+      super.setHaComido(true);
+      super.setWin(false);
+      super.setSnakeLongitud(3);
+      super.setMovs("DD");
+      super.setDirecion("D");
+   }
+
+   /**
+    * Inicia el juego de Snake en modo normal. Configura el tablero, las
+    * dimensiones
+    * y las condiciones del juego, y ejecuta el ciclo principal del juego.
+    * 
+    * @param configuracionSnake Un array que contiene la configuración inicial del
+    *                           juego: [ancho, alto, tiempo de espera en
+    *                           milisegundos, admite colores].
+    * @return El puntaje final calculado al final del juego.
+    * @throws IOException          Si ocurre un error durante la lectura del
+    *                              archivo de comandos.
+    * @throws InterruptedException Si el hilo de ejecución es interrumpido durante
+    *                              el tiempo de espera.
+    */
    @Override
    public double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException {
       final int[] DIMENSIONES = { configuracionSnake[0], configuracionSnake[1] };
@@ -19,6 +49,7 @@ public class ModoNormal extends JuegoBase {
       final int ADMITECOLORES = configuracionSnake[3];
 
       BufferedReader fr = new BufferedReader(new FileReader("./content.txt"));
+      resetearVariables();
 
       super.inicializarTablero(DIMENSIONES);
 

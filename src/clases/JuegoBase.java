@@ -92,6 +92,8 @@ public abstract class JuegoBase {
    /* ----- Metodos abstractos ----- */
    public abstract double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException;
 
+   public abstract void resetearVariables();
+
    /* ----- Metodos ----- */
    /**
     * 
