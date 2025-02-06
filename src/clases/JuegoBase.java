@@ -99,8 +99,8 @@ public abstract class JuegoBase {
     * @param dimensiones Son las dimensiones que debe tener el tablero
     */
    public static void inicializarTablero(int[] dimensiones) {
-      cordsCola = new int[]{ 1, 0 };
-      cordsCabeza = new int[]{ 3, 0 };
+      cordsCola = new int[] { 1, 0 };
+      cordsCabeza = new int[] { 3, 0 };
       cordenadas = new StringBuilder[dimensiones[0]];
 
       // Creacion del mapa segun las variables de dimensiones

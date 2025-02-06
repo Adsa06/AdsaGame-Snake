@@ -10,6 +10,7 @@ public class ModoAtrabesarParedes extends JuegoBase {
    /* ----- Metodo constructor ----- */
    public ModoAtrabesarParedes() {
    }
+
    /**
     * Reinicia las variables del juego a sus valores predeterminados.
     * Establece que el jugador esta vivo, que no ha comido, que no ha ganado,
@@ -145,6 +146,5 @@ public class ModoAtrabesarParedes extends JuegoBase {
       fr.close();
 
       return calcularPuntaje(super.getSnakeLongitud(), DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
- 
    }
 }
