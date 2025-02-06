@@ -9,8 +9,8 @@
 import java.io.*;
 
 import clases.Player;
+import utils.ControladorJuego;
 import utils.ColoresConsola;
-import utils.Snake;
 import utils.Configuracion;
 
 public class Main {

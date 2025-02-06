@@ -4,11 +4,13 @@
  * Este archivo es el juego principal, que se ejecuta cuando se llama desde Main.java
  * 
  */
-package utils;
+package clases;
 
 import java.io.*;
 
-public class Snake {
+import utils.ColoresConsola;
+
+public abstract class TodoElJuego {
 
     public static void separacion() {
         for(int i = 0; i < 30; i++) {
@@ -252,7 +254,7 @@ public class Snake {
         //El snake y si esta vivo
         boolean alive = true;
 
-        
+
         boolean haComido = true;
 
 
