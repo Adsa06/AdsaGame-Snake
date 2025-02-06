@@ -48,6 +48,7 @@ public abstract class JuegoBase {
    public String getMovs() {
       return movs;
    }
+
    public boolean isAlive() {
       return alive;
    }
@@ -194,62 +195,109 @@ public abstract class JuegoBase {
    }
 
    /**
-     * 
-     * @param tablero Es la variable en la que genera la cabeza
-     * @param cordsCabeza Es la posicion de la cabeza
-     * @param direcion Es la direccion de la cabeza
-     * @return Devuelve un booleano que dice si esta vivo o muerto
-     */
-    public static boolean crearCabeza(StringBuilder[] tablero, int[] cordsCabeza, String direcion) {
+    * 
+    * @param tablero     Es la variable en la que genera la cabeza
+    * @param cordsCabeza Es la posicion de la cabeza
+    * @param direcion    Es la direccion de la cabeza
+    * @return Devuelve un booleano que dice si esta vivo o muerto
+    */
+   public static boolean crearCabeza(StringBuilder[] tablero, int[] cordsCabeza, String direcion) {
       /*
        * 
-       *  Switch para crear la cabeza
-       *  En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo que haya por la cabeza y luego actualizo la posicion de ella
-       *  Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la serpiente, si es asi muere
+       * Switch para crear la cabeza
+       * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
+       * que haya por la cabeza y luego actualizo la posicion de ella
+       * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
+       * serpiente, si es asi muere
        */
       boolean alive = true;
       switch (direcion) {
-          case "W":
-              if('1' == tablero[cordsCabeza[1]-1].charAt(cordsCabeza[0]-1)) alive = false;
+         case "W":
+            if ('1' == tablero[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1))
+               alive = false;
 
-              /* ----- Parte de la cabeza ----- */
-              tablero[cordsCabeza[1]-1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
+            /* ----- Parte de la cabeza ----- */
+            tablero[cordsCabeza[1] - 1].replace(cordsCabeza[0] - 1, cordsCabeza[0], "1");
 
-              cordsCabeza[1] -= 1;
-              break;
-      
-          case "A":
-              if('1' == tablero[cordsCabeza[1]].charAt(cordsCabeza[0]-2)) alive = false;
+            cordsCabeza[1] -= 1;
+            break;
 
-              /* ----- Parte de la cabeza ----- */
-              tablero[cordsCabeza[1]].replace(cordsCabeza[0]-2, cordsCabeza[0]-1, "1");
+         case "A":
+            if ('1' == tablero[cordsCabeza[1]].charAt(cordsCabeza[0] - 2))
+               alive = false;
 
-              cordsCabeza[0] -= 1;
-              break;
-      
-          case "S":
-              if('1' == tablero[cordsCabeza[1]+1].charAt(cordsCabeza[0]-1)) alive = false;
+            /* ----- Parte de la cabeza ----- */
+            tablero[cordsCabeza[1]].replace(cordsCabeza[0] - 2, cordsCabeza[0] - 1, "1");
 
-              /* ----- Parte de la cabeza ----- */
-              tablero[cordsCabeza[1]+1].replace(cordsCabeza[0]-1, cordsCabeza[0], "1");
-      
-              cordsCabeza[1] += 1;
-              break;
-      
-          case "D":
-              if('1' == tablero[cordsCabeza[1]].charAt(cordsCabeza[0])) alive = false;
-              
-              /* ----- Parte de la cabeza ----- */
-              tablero[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0]+1, "1");
-              cordsCabeza[0] += 1;
-              break;
-      
-          default:
-              break;
+            cordsCabeza[0] -= 1;
+            break;
+
+         case "S":
+            if ('1' == tablero[cordsCabeza[1] + 1].charAt(cordsCabeza[0] - 1))
+               alive = false;
+
+            /* ----- Parte de la cabeza ----- */
+            tablero[cordsCabeza[1] + 1].replace(cordsCabeza[0] - 1, cordsCabeza[0], "1");
+
+            cordsCabeza[1] += 1;
+            break;
+
+         case "D":
+            if ('1' == tablero[cordsCabeza[1]].charAt(cordsCabeza[0]))
+               alive = false;
+
+            /* ----- Parte de la cabeza ----- */
+            tablero[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0] + 1, "1");
+            cordsCabeza[0] += 1;
+            break;
+
+         default:
+            break;
       }
 
       return alive;
-  }
+   }
+
+   /**
+    * 
+    * @param tablero   Es la variable en la que elimina la cola
+    * @param cordsCola Es la posicion de la cola actual
+    * @param movs      Es la lista de movimientos
+    */
+   public static void eliminarCola(StringBuilder[] tablero, int[] cordsCola, String movs) {
+      // Elimino la cola
+      tablero[cordsCola[1]].replace(cordsCola[0] - 1, cordsCola[0], "0");
+
+      // Puedo hacer con 2 dobles operadortes ternarios, pero creo que me decanto mas
+      // por el switch, q es mas facil de ver
+      /*
+       * cordsCola[0] += (movs.charAt(0) == 'A' ? -1 : (movs.charAt(0) == 'D' ? 1 :
+       * 0));
+       * cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 :
+       * 0));
+       */
+
+      switch (movs.charAt(0)) {
+         case 'W':
+            cordsCola[1] -= 1;
+            break;
+
+         case 'A':
+            cordsCola[0] -= 1;
+            break;
+
+         case 'S':
+            cordsCola[1] += 1;
+            break;
+
+         case 'D':
+            cordsCola[0] += 1;
+            break;
+
+         default:
+            break;
+      }
+   }
 
    /**
     * 
