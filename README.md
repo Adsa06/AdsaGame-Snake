@@ -5,8 +5,8 @@ Este es un proyecto de un juego de **Snake** en consola, desarrollado en **Java*
 | Detalle              | Información       |
 |----------------------|-------------------|
 | **Autor**            | Aitor de Santos   |
-| **Fecha de inicio**  | 23/01/2025        |
-| **Última revisión**  | v1 23/01/2025     |
+| **Fecha de inicio**  | 17/10/2024        |
+| **Última revisión**  | v3 24/01/2025     |
 
 ## Estructura del Proyecto
 

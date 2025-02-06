@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Player {
     //Variables privadas ya que no deberian hacederse de forma general si no de funciones
     private String name;
-    private int score;
+    private double score;
     private int[] configuration = new int[4];
     /*
      * Un sistema de logros, con diccionarios
@@ -32,6 +32,7 @@ public class Player {
          * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
          * 
          */
+        score = 0;
         configuration = new int[] {10, 20, 375, 0};
     }
     
@@ -46,7 +47,7 @@ public class Player {
         return name;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
@@ -59,7 +60,7 @@ public class Player {
         this.name = nombre;
     }
 
-    public void setScore(int puntuacion) {
+    public void setScore(double puntuacion) {
         this.score = puntuacion;
     }
 
@@ -68,6 +69,12 @@ public class Player {
     }
 
     /* ----- Metodos de comportamiento -----  */
+
+    public void mostrarPerfil() {
+        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + score);
+    }
+
+
     @Override
     public String toString() {
         return "Player [Nombre: " + name + ", Puntuacion: " + score + ", Configuracion: " + Arrays.toString(configuration) + "]";
