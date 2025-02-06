@@ -1,5 +1,5 @@
-/*
- * Autor: Aitor de Santos Amoros
+/**
+ * @author Aitor de Santos Amoros
  * Fecha: 17/10/2024
  * Este archivo muestra el menu y llama a las distintas funciones
  * 
@@ -10,7 +10,6 @@ import java.io.*;
 
 import clases.Player;
 import utils.ControladorJuego;
-import utils.ColoresConsola;
 import utils.Configuracion;
 
 public class Main {
@@ -28,7 +27,7 @@ public class Main {
         Boolean continuar = true;
         int option = 0;
 
-        String pedirNombre = "\r\n" + //
+        String mensajeSaludo = "\r\n" + //
                         "  ___                                _  _                 _   ___                    _                              _        _  _                         ___ \r\n" + //
                         " | _ ) _  _  ___  _ _   ___  ___  __| |(_) __ _  ___     (_) / __| ___  _ __   ___  | |_  ___   _ __  _  _  ___  __| | ___  | || | __ _  _ __   __ _  _ _|__ \\\r\n" + //
                         " | _ \\| || |/ -_)| ' \\ / _ \\(_-< / _` || |/ _` |(_-< _  / /_| (__ / _ \\| '  \\ / _ \\ |  _|/ -_) | '_ \\| || |/ -_)/ _` |/ _ \\ | || |/ _` || '  \\ / _` || '_| /_/\r\n" + //
@@ -37,7 +36,7 @@ public class Main {
                         "";
         // https://patorjk.com/software/taag/
         // Font: small, default y default
-        String pedirJugar = "\r\n" + //
+        String mensajeMenu = "\r\n" + //
                         "   _    _                        _                         _                   ___ \r\n" + //
                         "  (_)  /_\\    __ _ _  _ ___   __| |___ ___ ___ __ _ ___   (_)_  _ __ _ __ _ _ |__ \\\r\n" + //
                         " / /_ / _ \\  / _` | || / -_) / _` / -_|_-</ -_) _` (_-<   | | || / _` / _` | '_|/_/\r\n" + //
@@ -71,7 +70,7 @@ public class Main {
         //Aqui faltaria limpiar la pantalla por consola
         //Evito el error que aparece al introducir un nombre demasiado largo repetiendo que me pida un nombre hasta que sea adecuado
         do {
-            System.out.println(pedirNombre);
+            System.out.println(mensajeSaludo);
             player.setName(br.readLine());
             //Este es un if que detecta si es mayor a cuarenta la longitud de la frase si es asi ejecuta el sigueinte linea de codigo
             if(player.getName().length() > 40) System.out.println("Introduzca un nombre menor a 40 caracteres");
@@ -79,7 +78,7 @@ public class Main {
         // Actualizamos el contenido del array con el nombre correcto
 
         do {
-            System.out.println(pedirJugar);
+            System.out.println(mensajeMenu);
             //Conversion de tipo de dato
             try { //Este try impide que el usuario escriba una letra y pete el programa, como opcion es = 0, se ira al default en el switch
                 option = Integer.parseInt(br.readLine());
@@ -94,8 +93,8 @@ public class Main {
                     BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
                     fr.close();
                     /* ----- */
-                    double ScoreProvisional = ControladorJuego.iniciarJuego(player.getCongiguration(), player);
-                    if(ScoreProvisional > player.getScore()) player.setScore(ScoreProvisional);
+                    double scoreProvisional = ControladorJuego.iniciarJuego(player.getCongiguration(), player);
+                    if(scoreProvisional > player.getScore()) player.setScore(scoreProvisional);
                     break;
                 case 2:
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));
@@ -116,10 +115,3 @@ public class Main {
         System.out.println("Hasta otra");
     }   
 }
-/* Ideas:
- *
- * Snake 3D, con varias pantallas para ver todas las capas de la 3ª dimension a la vez
- * Snake que atraviese las paredes
- * 
- * 
- */
