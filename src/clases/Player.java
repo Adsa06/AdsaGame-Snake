@@ -9,10 +9,12 @@ package clases;
 import java.util.Arrays;
 
 public class Player {
-    //Variables privadas ya que no deberian hacederse de forma general si no de funciones
+    // Variables privadas ya que no deberian hacederse de forma general si no de
+    // funciones
     private String name;
     private double score;
     private int[] configuration = new int[4];
+
     /*
      * Un sistema de logros, con diccionarios
      * -Poner un numero en concreto en el contador
@@ -21,21 +23,23 @@ public class Player {
      * 
      */
     /* ----- Metodos constructores ----- */
-    public Player(){
-        //Array de configuracuin
+    public Player() {
+        // Array de configuracuin
         /*
          * El primer dato es el numero de filas que hay en el tablero
          * El segundo dato es el numero de columnas que hay en el tablero
          * 
-         * El tercero es el tiempo de descanso que hay entre cada actualizacion del tablero
+         * El tercero es el tiempo de descanso que hay entre cada actualizacion del
+         * tablero
          * 
-         * El cuarto dato es si admite o no colores la consola que estas utilizando (un 0 es que admite, un 1 no admite)
+         * El cuarto dato es si admite o no colores la consola que estas utilizando (un
+         * 0 es que admite, un 1 no admite)
          * 
          */
         score = 0;
-        configuration = new int[] {10, 20, 375, 0};
+        configuration = new int[] { 10, 20, 375, 0 };
     }
-    
+
     public Player(String nombre, int puntuacion, int[] configPersonalizada) {
         this.name = nombre;
         this.score = puntuacion;
@@ -68,15 +72,15 @@ public class Player {
         this.configuration = configPersonalizada;
     }
 
-    /* ----- Metodos de comportamiento -----  */
+    /* ----- Metodos de comportamiento ----- */
 
     public void mostrarPerfil() {
         System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + score);
     }
 
-
     @Override
     public String toString() {
-        return "Player [Nombre: " + name + ", Puntuacion: " + score + ", Configuracion: " + Arrays.toString(configuration) + "]";
+        return "Player [Nombre: " + name + ", Puntuacion: " + score + ", Configuracion: "
+                + Arrays.toString(configuration) + "]";
     }
 }
