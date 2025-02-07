@@ -79,39 +79,7 @@ public class ModoNormal extends JuegoBase {
          try { // Este try lo que esta haciendo es para que en el switch de la cabeza me pille
                // el error de que se ha salido del array
 
-            switch (super.getDirecion()) {
-               case "W":
-                  if ('2' == super.getCordenadas()[super.getCordsCabeza()[1] - 1]
-                        .charAt(super.getCordsCabeza()[0] - 1)) {
-                     super.setHaComido(true);
-                     super.setSnakeLongitud(super.getSnakeLongitud() + 1);
-                  }
-                  break;
-
-               case "A":
-                  if ('2' == super.getCordenadas()[super.getCordsCabeza()[1]].charAt(super.getCordsCabeza()[0] - 2)) {
-                     super.setHaComido(true);
-                     super.setSnakeLongitud(super.getSnakeLongitud() + 1);
-                  }
-                  break;
-
-               case "S":
-                  if ('2' == super.getCordenadas()[super.getCordsCabeza()[1] + 1]
-                        .charAt(super.getCordsCabeza()[0] - 1)) {
-                     super.setHaComido(true);
-                     super.setSnakeLongitud(super.getSnakeLongitud() + 1);
-                  }
-                  break;
-
-               case "D":
-                  if ('2' == super.getCordenadas()[super.getCordsCabeza()[1]].charAt(super.getCordsCabeza()[0])) {
-                     super.setHaComido(true);
-                     super.setSnakeLongitud(super.getSnakeLongitud() + 1);
-                  }
-                  break;
-               default:
-                  break;
-            }
+            super.detectarFruta();
 
             /*
              * 

@@ -196,6 +196,40 @@ public abstract class JuegoBase {
 
    }
 
+   public static void detectarFruta() {
+      switch (direcion) {
+         case "W":
+            if ('2' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1)) {
+               haComido = true;
+               snakeLongitud++;
+            }
+            break;
+
+         case "A":
+            if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0] - 2)) {
+               haComido = true;
+               snakeLongitud++;
+            }
+            break;
+
+         case "S":
+            if ('2' == cordenadas[cordsCabeza[1] + 1].charAt(cordsCabeza[0] - 1)) {
+               haComido = true;
+               snakeLongitud++;
+            }
+            break;
+
+         case "D":
+            if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
+               haComido = true;
+               snakeLongitud++;
+            }
+            break;
+         default:
+            break;
+      }
+   }
+
    /**
     * 
     * @param tablero     Es la variable en la que genera la cabeza
