@@ -96,7 +96,7 @@ public class ModoAtrabesarParedes extends JuegoBase {
       switch (getMovs().charAt(0)) {
          case 'W':
             if (getCordsCola()[1] == 0)
-               setCordsCola(getCordsCola()[0], getCordenadas()[0].length());
+               setCordsCola(getCordsCola()[0], getCordenadas().length - 1);
             else
                setCordsCola(getCordsCola()[0], getCordsCola()[1] - 1);
             break;
@@ -109,7 +109,10 @@ public class ModoAtrabesarParedes extends JuegoBase {
             break;
 
          case 'S':
-            setCordsCola(getCordsCola()[0], getCordsCola()[1] + 1);
+            if(getCordsCola()[1] == (getCordenadas().length - 1))
+               setCordsCola(getCordsCola()[0], 0);
+            else
+               setCordsCola(getCordsCola()[0], getCordsCola()[1] + 1);
             break;
 
          case 'D':
@@ -235,11 +238,11 @@ public class ModoAtrabesarParedes extends JuegoBase {
    public void crearCabezaDetras() {
       switch (getDirecion()) {
          case "W":
-            setCordsCabeza(getCordsCabeza()[0], getCordenadas().length - 1);
+            setCordsCabeza(getCordsCabeza()[0], (getCordenadas().length - 1));
             if ('1' == getCordenadas()[getCordsCabeza()[1] - 1].charAt(getCordsCabeza()[0] - 1))
                setAlive(false);
 
-            reemplazarCasilla(getCordenadas().length, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
+            reemplazarCasilla((getCordenadas().length - 1), getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
             break;
 
          case "A":
