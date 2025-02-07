@@ -14,69 +14,6 @@ public class ModoNormal extends JuegoBase {
 
    /**
     * 
-    * @param tablero     Es la variable en la que genera la cabeza
-    * @param cordsCabeza Es la posicion de la cabeza
-    * @param direcion    Es la direccion de la cabeza
-    * @return Devuelve un booleano que dice si esta vivo o muerto
-    */
-   @Override
-   public void crearCabeza() {
-      /*
-       * 
-       * Switch para crear la cabeza
-       * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
-       * que haya por la cabeza y luego actualizo la posicion de ella
-       * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
-       * serpiente, si es asi muere
-       */
-      switch (getDirecion()) {
-         case "W":
-            if ('1' == getCordenadas()[getCordsCabeza()[1] - 1].charAt(getCordsCabeza()[0] - 1))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1] - 1, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
-
-            setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] - 1);
-            break;
-
-         case "A":
-            if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0] - 2))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0] - 2, getCordsCabeza()[0] - 1, "1");
-
-            setCordsCabeza(getCordsCabeza()[0] - 1, getCordsCabeza()[1]);
-            break;
-
-         case "S":
-            if ('1' == getCordenadas()[getCordsCabeza()[1] + 1].charAt(getCordsCabeza()[0] - 1))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1] + 1, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
-
-            setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] + 1);
-            break;
-
-         case "D":
-            if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0]))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0], getCordsCabeza()[0] + 1, "1");
-
-            setCordsCabeza(getCordsCabeza()[0] + 1, getCordsCabeza()[1]);
-            break;
-
-         default:
-            break;
-      }
-   }
-
-   /**
-    * 
     * @param tablero   Es la variable en la que elimina la cola
     * @param cordsCola Es la posicion de la cola actual
     * @param movs      Es la lista de movimientos
@@ -168,7 +105,7 @@ public class ModoNormal extends JuegoBase {
          try { // Este try lo que esta haciendo es para que en el switch de la cabeza me pille
                // el error de que se ha salido del array
 
-            super.detectarFruta();
+            detectarFruta();
 
             /*
              * 

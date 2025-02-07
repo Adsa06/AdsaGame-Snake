@@ -99,13 +99,13 @@ public abstract class JuegoBase {
 
    /* ----- Metodos abstractos ----- */
    public abstract double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException;
-   public abstract void crearCabeza();
+
    public abstract void eliminarCola();
+
    /* ----- Metodos ----- */
    public static void reemplazarCasilla(int fila, int inicioColumna, int finalColumna, String nuevoCaracter) {
       cordenadas[fila].replace(inicioColumna, finalColumna, nuevoCaracter);
    }
-
 
    /**
     * Reinicia las variables del juego a sus valores predeterminados.
@@ -225,7 +225,7 @@ public abstract class JuegoBase {
 
    }
 
-   public static void detectarFruta() {/* 
+   public static void detectarFruta() {
       switch (direcion) {
          case "W":
             if ('2' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1)) {
@@ -249,7 +249,6 @@ public abstract class JuegoBase {
             break;
 
          case "D":
-         
             if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
                haComido = true;
                snakeLongitud++;
@@ -257,7 +256,62 @@ public abstract class JuegoBase {
             break;
          default:
             break;
-      }*/
+      }
+   }
+
+   public static void crearCabeza() {
+      /*
+       * 
+       * Switch para crear la cabeza
+       * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
+       * que haya por la cabeza y luego actualizo la posicion de ella
+       * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
+       * serpiente, si es asi muere
+       */
+      switch (direcion) {
+         case "W":
+            if ('1' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1))
+               alive = false;
+
+            /* ----- Parte de la cabeza ----- */
+            cordenadas[cordsCabeza[1] - 1].replace(cordsCabeza[0] - 1, cordsCabeza[0], "1");
+
+            cordsCabeza[1] -= 1;
+            break;
+
+         case "A":
+            if ('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0] - 2))
+               alive = false;
+
+            /* ----- Parte de la cabeza ----- */
+            cordenadas[cordsCabeza[1]].replace(cordsCabeza[0] - 2, cordsCabeza[0] - 1, "1");
+
+            cordsCabeza[0] -= 1;
+            break;
+
+         case "S":
+            if ('1' == cordenadas[cordsCabeza[1] + 1].charAt(cordsCabeza[0] - 1))
+               alive = false;
+
+            /* ----- Parte de la cabeza ----- */
+            cordenadas[cordsCabeza[1] + 1].replace(cordsCabeza[0] - 1, cordsCabeza[0], "1");
+
+            cordsCabeza[1] += 1;
+            break;
+
+         case "D":
+            if ('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0]))
+               alive = false;
+
+            /* ----- Parte de la cabeza ----- */
+            cordenadas[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0] + 1, "1");
+            cordsCabeza[0] += 1;
+            break;
+
+         default:
+            break;
+      }
+
    }
 
    /**

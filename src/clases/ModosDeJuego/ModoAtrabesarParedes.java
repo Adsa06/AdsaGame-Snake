@@ -13,69 +13,6 @@ public class ModoAtrabesarParedes extends JuegoBase {
 
    /**
     * 
-    * @param tablero     Es la variable en la que genera la cabeza
-    * @param cordsCabeza Es la posicion de la cabeza
-    * @param direcion    Es la direccion de la cabeza
-    * @return Devuelve un booleano que dice si esta vivo o muerto
-    */
-   @Override
-   public void crearCabeza() {
-      /*
-       * 
-       * Switch para crear la cabeza
-       * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
-       * que haya por la cabeza y luego actualizo la posicion de ella
-       * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
-       * serpiente, si es asi muere
-       */
-      switch (getDirecion()) {
-         case "W":
-            if ('1' == getCordenadas()[getCordsCabeza()[1] - 1].charAt(getCordsCabeza()[0] - 1))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1] - 1, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
-
-            setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] - 1);
-            break;
-
-         case "A":
-            if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0] - 2))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0] - 2, getCordsCabeza()[0] - 1, "1");
-
-            setCordsCabeza(getCordsCabeza()[0] - 1, getCordsCabeza()[1]);
-            break;
-
-         case "S":
-            if ('1' == getCordenadas()[getCordsCabeza()[1] + 1].charAt(getCordsCabeza()[0] - 1))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1] + 1, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
-
-            setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] + 1);
-            break;
-
-         case "D":
-            if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0]))
-               setAlive(false);
-
-            /* ----- Parte de la cabeza ----- */
-            reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0], getCordsCabeza()[0] + 1, "1");
-
-            setCordsCabeza(getCordsCabeza()[0] + 1, getCordsCabeza()[1]);
-            break;
-
-         default:
-            break;
-      }
-   }
-
-   /**
-    * 
     * @param tablero   Es la variable en la que elimina la cola
     * @param cordsCola Es la posicion de la cola actual
     * @param movs      Es la lista de movimientos
@@ -102,21 +39,21 @@ public class ModoAtrabesarParedes extends JuegoBase {
             break;
 
          case 'A':
-            if(getCordsCola()[0] == 1)
+            if (getCordsCola()[0] == 1)
                setCordsCola(getCordenadas()[getCordsCola()[0]].length(), getCordsCola()[1]);
             else
                setCordsCola(getCordsCola()[0] - 1, getCordsCola()[1]);
             break;
 
          case 'S':
-            if(getCordsCola()[1] == (getCordenadas().length - 1))
+            if (getCordsCola()[1] == (getCordenadas().length - 1))
                setCordsCola(getCordsCola()[0], 0);
             else
                setCordsCola(getCordsCola()[0], getCordsCola()[1] + 1);
             break;
 
          case 'D':
-            if(getCordsCola()[0] == (getCordenadas()[getCordsCola()[1]].length()))
+            if (getCordsCola()[0] == (getCordenadas()[getCordsCola()[1]].length()))
                setCordsCola(1, getCordsCola()[1]);
             else
                setCordsCola(getCordsCola()[0] + 1, getCordsCola()[1]);
@@ -178,8 +115,10 @@ public class ModoAtrabesarParedes extends JuegoBase {
          try { // Este try lo que esta haciendo es para que en el switch de la cabeza me pille
                // el error de que se ha salido del array
 
-            super.detectarFruta();
-
+            if (comprobarColision())
+               detectarFrutaDetras();
+            else
+               detectarFruta();
             /*
              * 
              * Parte para la eliminacion y actualizacion de la cola
@@ -224,11 +163,11 @@ public class ModoAtrabesarParedes extends JuegoBase {
       boolean estaAlBorde = false;
       if (getCordsCabeza()[1] == 0 && getDirecion().equals("W")) {
          estaAlBorde = true;
-      }else if (getCordsCabeza()[1] == (getCordenadas().length - 1) && getDirecion().equals("S")) {
+      } else if (getCordsCabeza()[1] == (getCordenadas().length - 1) && getDirecion().equals("S")) {
          estaAlBorde = true;
       } else if (getCordsCabeza()[0] == 1 && getDirecion().equals("A")) {
          estaAlBorde = true;
-      } else if(getCordsCabeza()[0] == (getCordenadas()[0].length()) && getDirecion().equals("D")) {
+      } else if (getCordsCabeza()[0] == (getCordenadas()[0].length()) && getDirecion().equals("D")) {
          estaAlBorde = true;
       }
 
@@ -272,71 +211,37 @@ public class ModoAtrabesarParedes extends JuegoBase {
       }
    }
 
-}
+   public void detectarFrutaDetras() {
+      switch (getDirecion()) {
+         case "W":
+            if ('2' == getCordenadas()[getCordenadas().length - 2].charAt(getCordsCabeza()[0] - 1)) {
+               setHaComido(true);
+               setSnakeLongitud(getSnakeLongitud() + 1);
+            }
+            break;
 
-/*
- * switch (getDirecion()) {
- * case "W":
- * if ('1' == getCordenadas()[getCordsCabeza()[1] -
- * 1].charAt(getCordsCabeza()[0] - 1)) {
- * 
- * reemplazarCasilla(getCordenadas().length, getCordsCabeza()[0] - 1,
- * getCordsCabeza()[0], "1");
- * setCordsCabeza(getCordsCabeza()[0], getCordenadas().length);
- * } else {
- * 
- * reemplazarCasilla(getCordsCabeza()[1] - 1, getCordsCabeza()[0] - 1,
- * getCordsCabeza()[0], "1");
- * setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] - 1);
- * }
- * break;
- * 
- * case "A":
- * if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0] -
- * 2)) {
- * 
- * reemplazarCasilla(getCordsCabeza()[1], getCordenadas()[1].length(),
- * getCordenadas()[1].length() - 1, "1");
- * setCordsCabeza(getCordsCabeza()[0] - 1, getCordenadas()[1].length());
- * 
- * } else {
- * 
- * reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0] - 2,
- * getCordsCabeza()[0] - 1, "1");
- * setCordsCabeza(getCordsCabeza()[0] - 1, getCordsCabeza()[1]);
- * }
- * break;
- * 
- * case "S":
- * if ('1' == getCordenadas()[getCordsCabeza()[1] +
- * 1].charAt(getCordsCabeza()[0] - 1)) {
- * 
- * reemplazarCasilla(0, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
- * setCordsCabeza(getCordsCabeza()[0], 0);
- * } else {
- * 
- * reemplazarCasilla(getCordsCabeza()[1] + 1, getCordsCabeza()[0] - 1,
- * getCordsCabeza()[0], "1");
- * setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] + 1);
- * }
- * break;
- * 
- * case "D":
- * if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0]))
- * {
- * 
- * reemplazarCasilla(getCordsCabeza()[1], 0, 1, "1");
- * setCordsCabeza(0, getCordsCabeza()[1]);
- * } else {
- * 
- * reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0],
- * getCordsCabeza()[0] + 1, "1");
- * setCordsCabeza(getCordsCabeza()[0] + 1, getCordsCabeza()[1]);
- * }
- * 
- * break;
- * 
- * default:
- * break;
- * }
- */
+         case "A":
+            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordenadas()[getCordsCabeza()[1]].length() - 2)) {
+               setHaComido(true);
+               setSnakeLongitud(getSnakeLongitud() + 1);
+            }
+            break;
+
+         case "S":
+            if ('2' == getCordenadas()[0].charAt(getCordsCabeza()[0] - 1)) {
+               setHaComido(true);
+               setSnakeLongitud(getSnakeLongitud() + 1);
+            }
+            break;
+
+         case "D":
+            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(1)) {
+               setHaComido(true);
+               setSnakeLongitud(getSnakeLongitud() + 1);
+            }
+            break;
+         default:
+            break;
+      }
+   }
+}
