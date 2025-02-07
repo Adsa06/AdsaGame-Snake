@@ -225,7 +225,7 @@ public abstract class JuegoBase {
 
    }
 
-   public static void detectarFruta() {
+   public static void detectarFruta() {/* 
       switch (direcion) {
          case "W":
             if ('2' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1)) {
@@ -249,6 +249,7 @@ public abstract class JuegoBase {
             break;
 
          case "D":
+         
             if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
                haComido = true;
                snakeLongitud++;
@@ -256,7 +257,7 @@ public abstract class JuegoBase {
             break;
          default:
             break;
-      }
+      }*/
    }
 
    /**

@@ -93,10 +93,12 @@ public class ModoAtrabesarParedes extends JuegoBase {
        * cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 :
        * 0));
        */
-
       switch (getMovs().charAt(0)) {
          case 'W':
-            setCordsCola(getCordsCola()[0], getCordsCola()[1] - 1);
+            if (getCordsCola()[1] == 0)
+               setCordsCola(getCordsCola()[0], getCordenadas()[0].length());
+            else
+               setCordsCola(getCordsCola()[0], getCordsCola()[1] - 1);
             break;
 
          case 'A':
@@ -108,7 +110,10 @@ public class ModoAtrabesarParedes extends JuegoBase {
             break;
 
          case 'D':
-            setCordsCola(getCordsCola()[0] + 1, getCordsCola()[1]);
+            if(getCordsCola()[0] == (getCordenadas()[getCordsCola()[1]].length()))
+               setCordsCola(1, getCordsCola()[1]);
+            else
+               setCordsCola(getCordsCola()[0] + 1, getCordsCola()[1]);
             break;
 
          default:
@@ -184,11 +189,15 @@ public class ModoAtrabesarParedes extends JuegoBase {
                super.setMovs(super.getMovs().substring(1));
             }
 
-            crearCabeza();
+            if (comprobarColision())
+               crearCabezaDetras();
+            else
+               crearCabeza();
 
          } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la
                                                       // pantalla, por lo tanto pasa de vivo a muerto
             super.setAlive(false);
+            System.out.println("Ha petado");
          } catch (Exception e) { // Por si acaso que no me fio xD
             super.setAlive(false);
          }
@@ -203,4 +212,126 @@ public class ModoAtrabesarParedes extends JuegoBase {
 
       return calcularPuntaje(super.getSnakeLongitud(), DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
    }
+
+   public boolean comprobarColision() {
+
+      boolean estaAlBorde = false;
+      if (getCordsCabeza()[1] == 0 && getDirecion().equals("W")) {
+         estaAlBorde = true;
+      }else if (getCordsCabeza()[1] == (getCordenadas().length - 1) && getDirecion().equals("S")) {
+         estaAlBorde = true;
+      } else if (getCordsCabeza()[0] == 0 && getDirecion().equals("A")) {
+         estaAlBorde = true;
+      } else if(getCordsCabeza()[0] == (getCordenadas()[0].length()) && getDirecion().equals("D")) {
+         estaAlBorde = true;
+      }
+
+      return estaAlBorde;
+   }
+
+   public void crearCabezaDetras() {
+      switch (getDirecion()) {
+         case "W":
+            setCordsCabeza(getCordsCabeza()[0], getCordenadas().length - 1);
+            if ('1' == getCordenadas()[getCordsCabeza()[1] - 1].charAt(getCordsCabeza()[0] - 1))
+               setAlive(false);
+
+            reemplazarCasilla(getCordenadas().length, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
+            break;
+
+         case "A":
+            setCordsCabeza(getCordsCabeza()[0] - 1, getCordenadas()[1].length());
+            if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0] - 2))
+               setAlive(false);
+
+            reemplazarCasilla(getCordsCabeza()[1], getCordenadas()[1].length(), getCordenadas()[1].length() - 1, "1");
+            break;
+
+         case "S":
+            setCordsCabeza(getCordsCabeza()[0], 0);
+            if ('1' == getCordenadas()[getCordsCabeza()[1] + 1].charAt(getCordsCabeza()[0] - 1))
+               setAlive(false);
+
+            reemplazarCasilla(0, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
+            break;
+
+         case "D":
+            setCordsCabeza(1, getCordsCabeza()[1]);
+            if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0]))
+               setAlive(false);
+            reemplazarCasilla(getCordsCabeza()[1], 0, 1, "1");
+            break;
+
+         default:
+            break;
+      }
+   }
+
 }
+
+/*
+ * switch (getDirecion()) {
+ * case "W":
+ * if ('1' == getCordenadas()[getCordsCabeza()[1] -
+ * 1].charAt(getCordsCabeza()[0] - 1)) {
+ * 
+ * reemplazarCasilla(getCordenadas().length, getCordsCabeza()[0] - 1,
+ * getCordsCabeza()[0], "1");
+ * setCordsCabeza(getCordsCabeza()[0], getCordenadas().length);
+ * } else {
+ * 
+ * reemplazarCasilla(getCordsCabeza()[1] - 1, getCordsCabeza()[0] - 1,
+ * getCordsCabeza()[0], "1");
+ * setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] - 1);
+ * }
+ * break;
+ * 
+ * case "A":
+ * if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0] -
+ * 2)) {
+ * 
+ * reemplazarCasilla(getCordsCabeza()[1], getCordenadas()[1].length(),
+ * getCordenadas()[1].length() - 1, "1");
+ * setCordsCabeza(getCordsCabeza()[0] - 1, getCordenadas()[1].length());
+ * 
+ * } else {
+ * 
+ * reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0] - 2,
+ * getCordsCabeza()[0] - 1, "1");
+ * setCordsCabeza(getCordsCabeza()[0] - 1, getCordsCabeza()[1]);
+ * }
+ * break;
+ * 
+ * case "S":
+ * if ('1' == getCordenadas()[getCordsCabeza()[1] +
+ * 1].charAt(getCordsCabeza()[0] - 1)) {
+ * 
+ * reemplazarCasilla(0, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
+ * setCordsCabeza(getCordsCabeza()[0], 0);
+ * } else {
+ * 
+ * reemplazarCasilla(getCordsCabeza()[1] + 1, getCordsCabeza()[0] - 1,
+ * getCordsCabeza()[0], "1");
+ * setCordsCabeza(getCordsCabeza()[0], getCordsCabeza()[1] + 1);
+ * }
+ * break;
+ * 
+ * case "D":
+ * if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0]))
+ * {
+ * 
+ * reemplazarCasilla(getCordsCabeza()[1], 0, 1, "1");
+ * setCordsCabeza(0, getCordsCabeza()[1]);
+ * } else {
+ * 
+ * reemplazarCasilla(getCordsCabeza()[1], getCordsCabeza()[0],
+ * getCordsCabeza()[0] + 1, "1");
+ * setCordsCabeza(getCordsCabeza()[0] + 1, getCordsCabeza()[1]);
+ * }
+ * 
+ * break;
+ * 
+ * default:
+ * break;
+ * }
+ */
