@@ -181,6 +181,9 @@ public abstract class JuegoBase {
       JuegoBase.cordsCabeza[1] = segundaCords;
    }
 
+   public static void setCordsCabeza(int[] cordsCabeza) {
+      JuegoBase.cordsCabeza = cordsCabeza;
+   }
    /**
     * Establece las cordenadas de la cola de la serpiente.
     * 
@@ -192,6 +195,9 @@ public abstract class JuegoBase {
       JuegoBase.cordsCola[1] = segundaCords;
    }
 
+   public static void setCordsCola(int[] cordsCola) {
+      JuegoBase.cordsCola = cordsCola;
+   }
    /* ----- Metodos abstractos ----- */
    public abstract double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException;
 
