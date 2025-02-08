@@ -15,27 +15,8 @@ public class Player {
     private double score;
     private int[] configuration = new int[4];
 
-    /*
-     * Un sistema de logros, con diccionarios
-     * -Poner un numero en concreto en el contador
-     * -Codigo kunami en movs
-     * 
-     * 
-     */
     /* ----- Metodos constructores ----- */
     public Player() {
-        // Array de configuracuin
-        /*
-         * El primer dato es el numero de filas que hay en el tablero
-         * El segundo dato es el numero de columnas que hay en el tablero
-         * 
-         * El tercero es el tiempo de descanso que hay entre cada actualizacion del
-         * tablero
-         * 
-         * El cuarto dato es si admite o no colores la consola que estas utilizando (un
-         * 0 es que admite, un 1 no admite)
-         * 
-         */
         score = 0;
         configuration = new int[] { 10, 20, 375, 0 };
     }
@@ -47,36 +28,85 @@ public class Player {
     }
 
     /* ----- Parte del getter ----- */
+
+    /**
+     * Obtiene el nombre del jugador.
+     * 
+     * @return El nombre del jugador.
+     */
+
     public String getName() {
         return name;
     }
 
+    /**
+     * Obtiene el puntaje del jugador.
+     * 
+     * @return El puntaje del jugador.
+     */
     public double getScore() {
         return score;
     }
+
+    /**
+     * Obtiene la configuración del jugador.
+     * 
+     * @return Un array de enteros que representa la configuración actual del
+     *         jugador.
+     */
 
     public int[] getCongiguration() {
         return configuration;
     }
 
     /* ----- Parte del setter ----- */
+
+    /**
+     * Establece el nombre del jugador.
+     * 
+     * @param nombre El nuevo nombre del jugador.
+     */
     public void setName(String nombre) {
         this.name = nombre;
     }
 
+    /**
+     * Establece el puntaje del jugador.
+     * 
+     * @param puntuacion El nuevo puntaje del jugador.
+     */
     public void setScore(double puntuacion) {
         this.score = puntuacion;
     }
 
+    /**
+     * Establece la configuración personalizada del jugador.
+     * 
+     * Es un array de enteros que tiene la siguiente estructura:
+     * [ancho del tablero, alto del tablero, tiempo de espera en milisegundos,
+     * admite colores]
+     * 
+     * @param configPersonalizada La configuración personalizada del jugador.
+     */
     public void setCongiguration(int[] configPersonalizada) {
         this.configuration = configPersonalizada;
     }
 
     /* ----- Metodos de comportamiento ----- */
 
+    /**
+     * Muestra el perfil del jugador, incluyendo el nombre y la puntuacion.
+     */
     public void mostrarPerfil() {
         System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + score);
     }
+
+    /**
+     * Returns a string representation of the Player object, including the
+     * player's name, score, and configuration settings.
+     * 
+     * @return A string containing the player's name, score, and configuration.
+     */
 
     @Override
     public String toString() {

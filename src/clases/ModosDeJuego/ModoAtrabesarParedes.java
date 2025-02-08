@@ -158,6 +158,11 @@ public class ModoAtrabesarParedes extends JuegoBase {
       return calcularPuntaje(super.getSnakeLongitud(), DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
    }
 
+   /**
+    * Comprueba si el snake ha llegado al borde de la pantalla.
+    * 
+    * @return Un boolean que indica si el snake ha llegado al borde de la pantalla.
+    */
    public boolean comprobarColision() {
 
       boolean estaAlBorde = false;
@@ -174,6 +179,14 @@ public class ModoAtrabesarParedes extends JuegoBase {
       return estaAlBorde;
    }
 
+   /**
+    * 
+    * Metodo para crear la cabeza en la pared opuesta a la que se iba a chocar
+    * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
+    * que haya por la cabeza y luego actualizo la posicion de ella
+    * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
+    * serpiente, si es asi muere
+    */
    public void crearCabezaDetras() {
       switch (getDirecion()) {
          case "W":
@@ -211,6 +224,13 @@ public class ModoAtrabesarParedes extends JuegoBase {
       }
    }
 
+   /**
+    * Detecta si la serpiente ha comido una fruta. Segun la direccion en la que
+    * se esta moviendo la serpiente, se evalua la casilla que esta en la pared
+    * opuesta
+    * para ver si es una fruta. Si es una fruta se marca que ha comido y se
+    * incrementa la longitud de la serpiente en 1.
+    */
    public void detectarFrutaDetras() {
       switch (getDirecion()) {
          case "W":

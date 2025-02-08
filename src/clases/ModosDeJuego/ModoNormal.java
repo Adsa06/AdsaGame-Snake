@@ -107,11 +107,6 @@ public class ModoNormal extends JuegoBase {
 
             detectarFruta();
 
-            /*
-             * 
-             * Parte para la eliminacion y actualizacion de la cola
-             * 
-             */
             super.setMovs(super.getMovs().concat(getDirecion()));
 
             if (!super.isHaComido()) {

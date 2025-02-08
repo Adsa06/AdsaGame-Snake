@@ -19,79 +19,174 @@ public abstract class JuegoBase {
    private static String direcion = "D";
 
    /* ----- GETTERS Y SETTERS ----- */
+
+   /**
+    * @return Un array de StringBuilder que representa el tablero del juego. Cada
+    *         StringBuilder es una fila del tablero.
+    */
    public StringBuilder[] getCordenadas() {
       return cordenadas;
    }
 
+   /**
+    * @return La longitud de la serpiente
+    */
    public int getSnakeLongitud() {
       return snakeLongitud;
    }
 
+   /**
+    * @return Un array con dos enteros que representan las coordenadas x e y de la
+    *         cabeza de la serpiente en el tablero.
+    */
    public int[] getCordsCabeza() {
       return cordsCabeza;
    }
 
+   /**
+    * @return Un array con dos enteros que representan las coordenadas x e y de la
+    *         cola de la serpiente en el tablero.
+    */
    public int[] getCordsCola() {
       return cordsCola;
    }
 
+   /**
+    * @return La ultima direccion guardada por el usuario. Sirve para
+    *         controlar la serpiente en el juego.
+    */
    public String getGuardarDireccion() {
       return guardarDireccion;
    }
 
+   /**
+    * @return La ultima direccion guardada por el usuario. Sirve para
+    *         controlar la serpiente en el juego.
+    */
    public String getDirecion() {
       return direcion;
    }
+
+   /**
+    * @return La secuencia de movimientos que representa la continuación de la cola
+    *         de la serpiente en el juego.
+    */
 
    public String getMovs() {
       return movs;
    }
 
+   /**
+    * @return Un boolean que representa si el juego esta en curso o no. Si el
+    *         jugador ha perdido, este valor sera false.
+    */
    public boolean isAlive() {
       return alive;
    }
 
+   /**
+    * @return Un boolean que representa si la serpiente ha comido una fruta en el
+    *         juego. Si el jugador ha comido una fruta, este valor sera true.
+    */
    public boolean isHaComido() {
       return haComido;
    }
 
+   /**
+    * @return Un boolean que representa si el jugador ha ganado el juego o no.
+    *         Si el jugador ha ganado, este valor sera true.
+    */
    public boolean isWin() {
       return win;
    }
 
+   /**
+    * Establece si la serpiente ha comido una fruta en el juego o no.
+    * 
+    * @param haComido Un boolean que representa si la serpiente ha comido una
+    *                 fruta.
+    */
    public void setHaComido(boolean haComido) {
       JuegoBase.haComido = haComido;
    }
 
+   /**
+    * Establece la ultima direccion guardada por el usuario. Esta variable es
+    * utilizada para controlar la serpiente en el juego.
+    * 
+    * @param guardarDireccion La ultima direccion guardada por el usuario.
+    */
    public void setGuardarDireccion(String guardarDireccion) {
       JuegoBase.guardarDireccion = guardarDireccion;
    }
+
+   /**
+    * Establece la dirección actual de la serpiente en el juego.
+    * 
+    * @param direcion La nueva dirección de la serpiente. Debe ser uno de los
+    *                 valores válidos que representan las direcciones del juego.
+    */
 
    public void setDirecion(String direcion) {
       JuegoBase.direcion = direcion;
    }
 
+   /**
+    * Establece si el jugador ha ganado el juego o no.
+    * 
+    * @param win Un boolean que representa si el jugador ha ganado el juego.
+    */
    public void setWin(boolean win) {
       JuegoBase.win = win;
    }
 
+   /**
+    * Establece si el jugador esta vivo o no.
+    * 
+    * @param alive Un boolean que representa si el jugador esta vivo o no.
+    */
    public void setAlive(boolean alive) {
       JuegoBase.alive = alive;
    }
+
+   /**
+    * Establece la longitud de la serpiente en el juego.
+    * 
+    * @param snakeLongitud La nueva longitud de la serpiente.
+    */
 
    public void setSnakeLongitud(int snakeLongitud) {
       JuegoBase.snakeLongitud = snakeLongitud;
    }
 
+   /**
+    * Establece la lista de movimientos en el juego. La lista de movimientos
+    * es un String que representa los movimientos que se van a realizar en el
+    * juego.
+    * 
+    * @param movs La lista de movimientos que se van a realizar en el juego.
+    */
    public void setMovs(String movs) {
       JuegoBase.movs = movs;
    }
 
+   /**
+    * Establece las cordenadas de la cabeza de la serpiente.
+    * 
+    * @param primeraCords La primera cordenada de la cabeza de la serpiente.
+    * @param segundaCords La segunda cordenada de la cabeza de la serpiente.
+    */
    public static void setCordsCabeza(int primeraCords, int segundaCords) {
       JuegoBase.cordsCabeza[0] = primeraCords;
       JuegoBase.cordsCabeza[1] = segundaCords;
    }
 
+   /**
+    * Establece las cordenadas de la cola de la serpiente.
+    * 
+    * @param primeraCords La primera cordenada de la cola de la serpiente.
+    * @param segundaCords La segunda cordenada de la cola de la serpiente.
+    */
    public static void setCordsCola(int primeraCords, int segundaCords) {
       JuegoBase.cordsCola[0] = primeraCords;
       JuegoBase.cordsCola[1] = segundaCords;
@@ -103,6 +198,19 @@ public abstract class JuegoBase {
    public abstract void eliminarCola();
 
    /* ----- Metodos ----- */
+
+   /**
+    * Reemplaza una serie de caracteres en una fila del tablero por un nuevo
+    * caracter.
+    * 
+    * @param fila          La fila del tablero en la que se va a reemplazar.
+    * @param inicioColumna La columna inicial de la seccion que se va a
+    *                      reemplazar.
+    * @param finalColumna  La columna final de la seccion que se va a
+    *                      reemplazar.
+    * @param nuevoCaracter El nuevo caracter que se va a reemplazar en la seccion
+    *                      del tablero.
+    */
    public static void reemplazarCasilla(int fila, int inicioColumna, int finalColumna, String nuevoCaracter) {
       cordenadas[fila].replace(inicioColumna, finalColumna, nuevoCaracter);
    }
@@ -225,6 +333,12 @@ public abstract class JuegoBase {
 
    }
 
+   /**
+    * Detecta si la serpiente ha comido una fruta. Segun la direccion en la que
+    * se esta moviendo la serpiente, se evalua la casilla que esta en frente
+    * para ver si es una fruta. Si es una fruta se marca que ha comido y se
+    * incrementa la longitud de la serpiente en 1.
+    */
    public static void detectarFruta() {
       switch (direcion) {
          case "W":
@@ -259,15 +373,15 @@ public abstract class JuegoBase {
       }
    }
 
+   /**
+    * 
+    * Switch para crear la cabeza
+    * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
+    * que haya por la cabeza y luego actualizo la posicion de ella
+    * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
+    * serpiente, si es asi muere
+    */
    public static void crearCabeza() {
-      /*
-       * 
-       * Switch para crear la cabeza
-       * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
-       * que haya por la cabeza y luego actualizo la posicion de ella
-       * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
-       * serpiente, si es asi muere
-       */
       switch (direcion) {
          case "W":
             if ('1' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1))
