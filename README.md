@@ -6,7 +6,7 @@ Este es un proyecto de un juego de **Snake** en consola, desarrollado en **Java*
 |----------------------|-------------------|
 | **Autor**            | Aitor de Santos   |
 | **Fecha de inicio**  | 17/10/2024        |
-| **Última revisión**  | v3 24/01/2025     |
+| **Última revisión**  | v4 08/02/2025     |
 
 ## Estructura del Proyecto
 
@@ -22,8 +22,8 @@ VideojuegoFundamentos_project/
       bin/                       # Carpeta con el codigo compilado del src/
       src/                       # Carpeta con el código fuente
          clases/                 # Carpeta donde guardo todas las clases del programa
-         utils/                  # Carpeta donde se encuentra la mayor parte del contenido del programa
-         PruebasAlocadas/        # Carpeta donde se guardan archivos no implementados al proyecto para hacer pruebas
+            ModosDeJuego/        # Carpeta donde guardo las clases de los modos de juego
+         utils/                  # Carpeta donde se encuentra los archivos del menu y controladores
       Main.java                  # Archivo principal del programa
       ControladorPrincipal.java  # Archivo para controlar la serpiente
       content.txt                # Archivo utilizado para conectar los 2 archivos anteriores
@@ -38,8 +38,8 @@ VideojuegoFundamentos_project/
 
 1. Abre una terminal y escriba los siguientes comandos
 2. cd ruta al proyecto en el src
-3. `javac Main.java utils/Snake.java utils/ColoresConsola.java utils/Configuracion.java clases/Player.java`
-4. `jar cfe MiProgramaSnake.jar Main Main.class utils/Snake.class utils/ColoresConsola.class utils/Configuracion.class clases/Player.class`
+3. `javac Main.java utils/ControladorJuego.java utils/ColoresConsola.java utils/Configuracion.java clases/Player.java clases/JuegoBase.java clases/ModosDeJuego/ModoNormal.java clases/ModosDeJuego/ModoAtrabesarParedes.java`
+4. `jar cfe MiProgramaSnake.jar Main Main.class utils/ControladorJuego.class utils/ColoresConsola.class utils/Configuracion.class clases/Player.class clases/JuegoBase.class clases/ModosDeJuego/ModoNormal.class clases/ModosDeJuego/ModoAtrabesarParedes.class`
 5. `javac ControladorPrincipal.java utils/ColoresConsola.java`
 6. `jar cfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class utils/ColoresConsola.class`
 7. Ten abierta 2 terminales y ejecute un comando en cada una
@@ -65,8 +65,9 @@ VideojuegoFundamentos_project/
 2. **Elección del Jugador**:
    El usuario selecciona una opción del menú principal. 
    - Si elige 1, el programa lo lleva directamente a la fase de juego de Snake. 
-   - Si elige 2, el sistema muestra las opciones de configuración disponibles, como la velocidad o el tamaño. 
-   - Si elige 3, el programa termina. 
+   - Si elige 2, el sistema muestra las opciones de configuración disponibles, como la velocidad o el tamaño.
+   - Si elige 3, muestra el perfil del usuario. 
+   - Si elige 4, el programa termina. 
    
    En caso de seleccionar una opción no válida, se muestra un mensaje de error y se vuelve a presentar el menú principal.
 
