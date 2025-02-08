@@ -14,8 +14,13 @@ import utils.Configuracion;
 
 public class Main {
 
-    // Creo la funcion princiapl con un throws IOException para capturar mensajes
-    // por consola
+    /**
+     * Muestra el menu principal del juego Snake y llama a las distintas funciones
+     * 
+     * @param args argumentos que se pasan al programa al ejecutarlo
+     * @throws IOException          si hay un error de lectura o escritura
+     * @throws InterruptedException si se interrumpe el thread principal
+     */
     public static void main(String[] args) throws IOException, InterruptedException {
 
         /* ----- Parte declarativa ----- */

@@ -13,24 +13,23 @@ import java.io.InputStreamReader;
 public class Configuracion {
 
     /**
+     * Metodo que enseña una interfaz y llama a las distintas funciones para cambiar
+     * la configuracion
+     * 
+     * Array de configuracion:
+     * El primer dato es el numero de filas que hay en el tablero
+     * El segundo dato es el numero de columnas que hay en el tablero
+     * El tercero es el tiempo de descanso que hay entre cada actualizacion del
+     * tablero
+     * El cuarto dato es si admite o no colores la consola que estas utilizando (un
+     * 0 es que admite, un 1 no admite)
+     * 
      * @param valoresAnteriores Es el array de configuracion anterior
      * @return Devuelve el array de configuracion
      * @throws IOException
      */
     public static int[] cambiarConfiguracion(int[] valoresAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
-        // Array de configuracuin
-        /*
-         * El primer dato es el numero de filas que hay en el tablero
-         * El segundo dato es el numero de columnas que hay en el tablero
-         * 
-         * El tercero es el tiempo de descanso que hay entre cada actualizacion del
-         * tablero
-         * 
-         * El cuarto dato es si admite o no colores la consola que estas utilizando (un
-         * 0 es que admite, un 1 no admite)
-         * 
-         */
         int[] dimensiones = { valoresAnteriores[0], valoresAnteriores[1] };
         int tiempoMilisegundos = valoresAnteriores[2];
         int admiteColores = valoresAnteriores[3];
@@ -80,11 +79,18 @@ public class Configuracion {
         return array;
     }
 
-    /**
-     * @param valoresAnteriores Es el array de dimensiones anterior
-     * @return Devuelve el nuevo array de dimensiones
-     * @throws IOException
-     */
+
+/**
+ * Modifica las dimensiones actuales del tablero si el usuario decide cambiarlas.
+ * Muestra las dimensiones actuales y permite al usuario ingresar nuevas
+ * dimensiones dentro de un rango especificado.
+ * 
+ * @param valoresAnteriores Array que contiene las dimensiones anteriores: 
+ *                          [numero de filas, numero de columnas].
+ * @return Array con las nuevas dimensiones: [numero de filas, numero de columnas].
+ * @throws IOException Si ocurre un error durante la lectura de la entrada del usuario.
+ */
+
     public static int[] cambioDimensiones(int[] valoresAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -143,11 +149,17 @@ public class Configuracion {
         return nuevasDimensiones;
     }
 
-    /**
-     * @param valorAnteriores Es el valor de tiempo anterior
-     * @return Es el nuevo valor de Tiempo
-     * @throws IOException
-     */
+
+/**
+ * Cambia el tiempo de actualización del tablero de juego.
+ * Permite al usuario ajustar la velocidad del juego especificando
+ * un nuevo tiempo de espera en milisegundos.
+ *
+ * @param valorAnteriores El tiempo de espera actual en milisegundos.
+ * @return El nuevo tiempo de espera en milisegundos, ajustado por el usuario.
+ * @throws IOException Si ocurre un error durante la lectura de la entrada del usuario.
+ */
+
     public static int cambioTiempo(int valorAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -192,11 +204,19 @@ public class Configuracion {
         return nivelDificultad;
     }
 
-    /**
-     * @param valorAnteriores Es el valor anterior de si admite o no colores
-     * @return Devuelve el nuevo valor para saber si admite colores
-     * @throws IOException
-     */
+
+/**
+ * Cambia la configuración de colores de la consola.
+ * Permite al usuario habilitar o deshabilitar los colores 
+ * en la interfaz de consola mediante una entrada manual.
+ *
+ * @param valorAnteriores El valor actual indicando si la consola 
+ * admite colores (0 para admite, 1 para no admite).
+ * @return El nuevo valor indicando si la consola admite colores 
+ * después de la modificación.
+ * @throws IOException Si ocurre un error durante la lectura de la entrada del usuario.
+ */
+
     public static int cambioColores(int valorAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

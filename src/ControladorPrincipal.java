@@ -1,3 +1,4 @@
+
 /*
  * Autor: Aitor de Santos Amoros
  * Fecha: 17/10/2024
@@ -9,6 +10,14 @@ import java.io.*;
 import utils.ColoresConsola;
 
 public class ControladorPrincipal {
+    /**
+     * Metodo principal, este es el que se encarga de comunicarse con el usuario,
+     * y de recibir las instrucciones para el juego. Tambien es el que se encarga de
+     * escribir las instrucciones en un archivo de texto.
+     * 
+     * @param args Los argumentos del main, que en este caso no se utilizan
+     * @throws IOException La excepcion de lectura
+     */
     public static void main(String[] args) throws IOException /* Capto las excepciones de la entrada de datos */ {
 
         /* ----- Parte declarativa ----- */
