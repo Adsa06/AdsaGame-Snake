@@ -26,9 +26,6 @@ public class Main {
 
         /* ----- Parte declarativa ----- */
 
-        // Declaro el BufferedReader para leer datos por consola
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         Player player = new Player();
 
         int option = 0;
@@ -83,7 +80,7 @@ public class Main {
         // que me pida un nombre hasta que sea adecuado
         do {
             System.out.println(mensajeSaludo);
-            player.setName(br.readLine());
+            player.setName(Utilidades.pedirString());
             // Este es un if que detecta si es mayor a cuarenta la longitud de la frase si
             // es asi ejecuta el sigueinte linea de codigo
             if (player.getName().length() > 40)
@@ -112,7 +109,7 @@ public class Main {
                 case 3:
                     player.mostrarPerfil();
                     System.out.println("Presiona enter para salir");
-                    br.readLine();
+                    Utilidades.presionarEnter();
                     break;
                 default:
                     System.out.println("Opcion incorrecta");

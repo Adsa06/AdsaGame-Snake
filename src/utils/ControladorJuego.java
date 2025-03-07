@@ -1,8 +1,6 @@
 package utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import clases.ModosDeJuego.ModoAtrabesarParedes;
 import clases.ModosDeJuego.ModoNormal;
@@ -27,7 +25,6 @@ public class ControladorJuego {
    public static double iniciarJuego(int[] configuracionSnake, Player player) throws IOException, InterruptedException {
 
       /* ----- Parte declarativa ----- */
-      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
       int opcionModoJuego = 0;
       JuegoBase nuevoJuego;
       String[] explicacionModos = {
@@ -65,38 +62,30 @@ public class ControladorJuego {
       };
 
       /* ----- Parte principal ----- */
-      do {
+      for (String frases : explicacionModos) {
+         System.out.println(frases);
+      }
 
-         for (String frases : explicacionModos) {
-            System.out.println(frases);
-         }
+      opcionModoJuego = Utilidades.pedirNumeroEntero("Elige el modo \"1\" o \"2\": ", 1, 2);
 
-         try {
-            opcionModoJuego = Integer.parseInt(br.readLine());
-         } catch (NumberFormatException e) {
-            System.out.println("Porfavor, escriba una opcion valida");
-            opcionModoJuego = 0;
-         }
-
-         switch (opcionModoJuego) {
-            case 1:
-               nuevoJuego = new ModoNormal();
-               break;
-            case 2:
-               nuevoJuego = new ModoAtrabesarParedes();
-               break;
-            default:
-               nuevoJuego = new ModoNormal();
-               break;
-         }
-      } while (opcionModoJuego < 1 || opcionModoJuego > 2);
+      switch (opcionModoJuego) {
+         case 1:
+            nuevoJuego = new ModoNormal();
+            break;
+         case 2:
+            nuevoJuego = new ModoAtrabesarParedes();
+            break;
+         default:
+            nuevoJuego = new ModoNormal();
+            break;
+      }
 
       // Elegir tipo de juego
       for (String frases : explicacionJuego[player.getCongiguration()[3]]) {
          System.out.println(frases);
       }
       // Esto hace q no continue el programa sin que presione el enter
-      br.readLine();
+      Utilidades.presionarEnter();
       return nuevoJuego.iniciarJuego(configuracionSnake);
    }
 }

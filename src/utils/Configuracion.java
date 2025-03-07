@@ -6,10 +6,6 @@
  */
 package utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class Configuracion {
 
     /**
@@ -26,9 +22,8 @@ public class Configuracion {
      * 
      * @param valoresAnteriores Es el array de configuracion anterior
      * @return Devuelve el array de configuracion
-     * @throws IOException
      */
-    public static int[] cambiarConfiguracion(int[] valoresAnteriores) throws IOException {
+    public static int[] cambiarConfiguracion(int[] valoresAnteriores) {
         /* ----- Parte declarativa ----- */
         int[] dimensiones = { valoresAnteriores[0], valoresAnteriores[1] };
         int tiempoMilisegundos = valoresAnteriores[2];
@@ -79,13 +74,10 @@ public class Configuracion {
      *                          [numero de filas, numero de columnas].
      * @return Array con las nuevas dimensiones: [numero de filas, numero de
      *         columnas].
-     * @throws IOException Si ocurre un error durante la lectura de la entrada del
-     *                     usuario.
      */
 
-    public static int[] cambioDimensiones(int[] valoresAnteriores) throws IOException {
+    public static int[] cambioDimensiones(int[] valoresAnteriores) {
         /* ----- Parte declarativa ----- */
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int[] nuevasDimensiones = valoresAnteriores;
 
         String opcion;
@@ -118,7 +110,7 @@ public class Configuracion {
         }
 
         System.out.println("Presiona enter para continuar");
-        br.readLine();
+        Utilidades.presionarEnter();
         /* ----- Envio de datos ----- */
         return nuevasDimensiones;
     }
@@ -130,13 +122,10 @@ public class Configuracion {
      *
      * @param valorAnteriores El tiempo de espera actual en milisegundos.
      * @return El nuevo tiempo de espera en milisegundos, ajustado por el usuario.
-     * @throws IOException Si ocurre un error durante la lectura de la entrada del
-     *                     usuario.
      */
 
-    public static int cambioTiempo(int valorAnteriores) throws IOException {
+    public static int cambioTiempo(int valorAnteriores) {
         /* ----- Parte declarativa ----- */
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int nivelDificultad = valorAnteriores;
 
         String opcion;
@@ -167,7 +156,7 @@ public class Configuracion {
             System.out.println("El nuevo valor es: " + nivelDificultad + " milisegundos");
         }
         System.out.println("Presiona enter para continuar");
-        br.readLine();
+        Utilidades.presionarEnter();
         /* ----- Envio de datos ----- */
         return nivelDificultad;
     }
@@ -181,13 +170,10 @@ public class Configuracion {
      *                        admite colores (0 para admite, 1 para no admite).
      * @return El nuevo valor indicando si la consola admite colores
      *         después de la modificación.
-     * @throws IOException Si ocurre un error durante la lectura de la entrada del
-     *                     usuario.
      */
 
-    public static int cambioColores(int valorAnteriores) throws IOException {
+    public static int cambioColores(int valorAnteriores) {
         /* ----- Parte declarativa ----- */
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int admiteColores = valorAnteriores;
 
         String opcion;
@@ -214,7 +200,7 @@ public class Configuracion {
                 opcion.equalsIgnoreCase("S") ? admiteColores == 1 ? "Colores habilitados" : "Colores deshabilitados"
                         : "No se ha cambiado el valor");
         System.out.println("Presiona enter para continuar");
-        br.readLine();
+        Utilidades.presionarEnter();
         /* ----- Envio de datos ----- */
         return admiteColores;
     }
