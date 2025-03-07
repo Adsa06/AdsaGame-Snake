@@ -10,6 +10,7 @@ import java.io.*;
 
 import clases.Player;
 import utils.ControladorJuego;
+import utils.Utilidades;
 import utils.Configuracion;
 
 public class Main {
@@ -30,7 +31,6 @@ public class Main {
 
         Player player = new Player();
 
-        Boolean continuar = true;
         int option = 0;
 
         String mensajeSaludo = "\r\n" + //
@@ -93,14 +93,7 @@ public class Main {
 
         do {
             System.out.println(mensajeMenu);
-            // Conversion de tipo de dato
-            try { // Este try impide que el usuario escriba una letra y pete el programa, como
-                  // opcion es = 0, se ira al default en el switch
-                option = Integer.parseInt(br.readLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Porfavor, escriba una opcion valida");
-                option = 0;
-            }
+            option = Utilidades.pedirNumeroEntero("Introduce una opcion", 1, 4);
             switch (option) {
                 case 1:
 
@@ -121,14 +114,11 @@ public class Main {
                     System.out.println("Presiona enter para salir");
                     br.readLine();
                     break;
-                case 4:
-                    continuar = false;
-                    break;
                 default:
                     System.out.println("Opcion incorrecta");
                     break;
             }
-        } while (continuar);
+        } while (option != 4);
         System.out.println("Hasta otra");
     }
 }

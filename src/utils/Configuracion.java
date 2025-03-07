@@ -34,9 +34,7 @@ public class Configuracion {
         int tiempoMilisegundos = valoresAnteriores[2];
         int admiteColores = valoresAnteriores[3];
 
-        boolean continuar = true;
         int option = 0;
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         /* ----- Parte principal ----- */
         do {
@@ -49,13 +47,8 @@ public class Configuracion {
             System.out.println("3. Habilitar colores, el valor actual es: " + (admiteColores == 1 ? "Si" : "No")
                     + " admite colores");
             System.out.println("4. Salir al menu principal");
-            try { // Este try impide que el usuario escriba una letra y pete el programa, como
-                  // opcion es = 0, se ira al default en el switch
-                option = Integer.parseInt(br.readLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Porfavor, escriba una opcion valida");
-                option = 0;
-            }
+
+            option = Utilidades.pedirNumeroEntero("Introduce una opcion", 1, 4);
             switch (option) {
                 case 1:
                     dimensiones = cambioDimensiones(dimensiones);
@@ -66,30 +59,29 @@ public class Configuracion {
                 case 3:
                     admiteColores = cambioColores(admiteColores);
                     break;
-                case 4:
-                    continuar = false;
-                    break;
                 default:
                     System.out.println("Opcion incorrecta");
                     break;
             }
-        } while (continuar);
+        } while (option != 4);
         /* ----- Envio de datos ----- */
         int[] array = { dimensiones[0], dimensiones[1], tiempoMilisegundos, admiteColores };
         return array;
     }
 
-
-/**
- * Modifica las dimensiones actuales del tablero si el usuario decide cambiarlas.
- * Muestra las dimensiones actuales y permite al usuario ingresar nuevas
- * dimensiones dentro de un rango especificado.
- * 
- * @param valoresAnteriores Array que contiene las dimensiones anteriores: 
- *                          [numero de filas, numero de columnas].
- * @return Array con las nuevas dimensiones: [numero de filas, numero de columnas].
- * @throws IOException Si ocurre un error durante la lectura de la entrada del usuario.
- */
+    /**
+     * Modifica las dimensiones actuales del tablero si el usuario decide
+     * cambiarlas.
+     * Muestra las dimensiones actuales y permite al usuario ingresar nuevas
+     * dimensiones dentro de un rango especificado.
+     * 
+     * @param valoresAnteriores Array que contiene las dimensiones anteriores:
+     *                          [numero de filas, numero de columnas].
+     * @return Array con las nuevas dimensiones: [numero de filas, numero de
+     *         columnas].
+     * @throws IOException Si ocurre un error durante la lectura de la entrada del
+     *                     usuario.
+     */
 
     public static int[] cambioDimensiones(int[] valoresAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
@@ -97,7 +89,6 @@ public class Configuracion {
         int[] nuevasDimensiones = valoresAnteriores;
 
         String opcion;
-        boolean continuar = true;
         /* ----- Parte principal ----- */
         System.out.println("\n\n\n");
         System.out.println(
@@ -105,60 +96,43 @@ public class Configuracion {
         System.out.println("¿Quieres cambiarlos? (S o N)");
 
         do {
-            opcion = br.readLine();
+            opcion = Utilidades.pedirString();
             if (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"))
                 System.out.println(
                         "Porfavor, escriba una opcion valida (\"S\" para cambiar el valor, \"N\" para no cambiar el valor): ");
-
-            continuar = opcion.equalsIgnoreCase("S") ? true : false;
         } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
 
-        if (!continuar)
+        if (!opcion.equalsIgnoreCase("S")) {
             System.out.println("No se ha cambiado el valor");
+        } else {
+            System.out.println("Escribe el nuevo numero de filas: ");
+            System.out.println("Escriba un numero entre 3 y 40");
+            nuevasDimensiones[0] = Utilidades.pedirNumeroEntero("Escribe el nuevo numero de filas: ", 3, 40);
 
-        while (continuar) {
-            do {
-                System.out.println("Escribe el nuevo numero de filas: ");
-                System.out.println("Escriba un numero entre 3 y 40");
-                try {
-                    nuevasDimensiones[0] = Integer.parseInt(br.readLine());
-                } catch (NumberFormatException e) {
-                    nuevasDimensiones[0] = 0;
-                    System.out.println("Porfavor, escriba un numero entre 3 y 40");
-                }
-            } while (nuevasDimensiones[0] < 3 || nuevasDimensiones[0] > 40);
+            System.out.println("Escribe el nuevo numero de columnas: ");
+            System.out.println("Escriba un numero entre 3 y 80");
+            nuevasDimensiones[1] = Utilidades.pedirNumeroEntero("Escribe el nuevo numero de columnas: ", 3, 80);
 
-            do {
-                System.out.println("Escribe el nuevo numero de columnas: ");
-                System.out.println("Escriba un numero entre 3 y 80");
-                try {
-                    nuevasDimensiones[1] = Integer.parseInt(br.readLine());
-                } catch (NumberFormatException e) {
-                    nuevasDimensiones[1] = 0;
-                    System.out.println("Porfavor, escriba un numero entre 3 y 80");
-                }
-            } while (nuevasDimensiones[1] < 3 || nuevasDimensiones[1] > 80);
-
-            continuar = false;
             System.out.println("Los nuevos valores son: " + nuevasDimensiones[0] + " filas y " + nuevasDimensiones[1]
                     + " columnas");
         }
+
         System.out.println("Presiona enter para continuar");
         br.readLine();
         /* ----- Envio de datos ----- */
         return nuevasDimensiones;
     }
 
-
-/**
- * Cambia el tiempo de actualización del tablero de juego.
- * Permite al usuario ajustar la velocidad del juego especificando
- * un nuevo tiempo de espera en milisegundos.
- *
- * @param valorAnteriores El tiempo de espera actual en milisegundos.
- * @return El nuevo tiempo de espera en milisegundos, ajustado por el usuario.
- * @throws IOException Si ocurre un error durante la lectura de la entrada del usuario.
- */
+    /**
+     * Cambia el tiempo de actualización del tablero de juego.
+     * Permite al usuario ajustar la velocidad del juego especificando
+     * un nuevo tiempo de espera en milisegundos.
+     *
+     * @param valorAnteriores El tiempo de espera actual en milisegundos.
+     * @return El nuevo tiempo de espera en milisegundos, ajustado por el usuario.
+     * @throws IOException Si ocurre un error durante la lectura de la entrada del
+     *                     usuario.
+     */
 
     public static int cambioTiempo(int valorAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
@@ -172,29 +146,23 @@ public class Configuracion {
         System.out.println("¿Quieres cambiarlo? (S o N)");
 
         do {
-            opcion = br.readLine();
+            opcion = Utilidades.pedirString();
             if (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"))
                 System.out.println(
                         "Porfavor, escriba una opcion valida (\"S\" para cambiar el valor, \"N\" para no cambiar el valor): ");
         } while (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"));
 
         if (opcion.equalsIgnoreCase("S")) {
-            do {
-                System.out.println("Escribe el nuevo valor: ");
-                System.out.println("Escriba un numero entre 375 y 5000 milisegundos");
 
-                System.out.println("375 milisegundos es la dificultad extrema");
-                System.out.println("500 milisegundos es la dificultad dificil");
-                System.out.println("750 milisegundos es la dificultad normal");
-                System.out.println("1000 milisegundos es la dificultad facil");
-                System.out.println("5000 milisegundos es el tiempo maximo");
-                try {
-                    nivelDificultad = Integer.parseInt(br.readLine());
-                } catch (NumberFormatException e) {
-                    nivelDificultad = 0;
-                    System.out.println("Porfavor, escriba un numero");
-                }
-            } while (nivelDificultad < 375 || nivelDificultad > 5000);
+            System.out.println("Escribe el nuevo valor: ");
+            System.out.println("Escriba un numero entre 375 y 5000 milisegundos");
+
+            System.out.println("375 milisegundos es la dificultad extrema");
+            System.out.println("500 milisegundos es la dificultad dificil");
+            System.out.println("750 milisegundos es la dificultad normal");
+            System.out.println("1000 milisegundos es la dificultad facil");
+            System.out.println("5000 milisegundos es el tiempo maximo");
+            nivelDificultad = Utilidades.pedirNumeroEntero("Escribe el nuevo valor: ", 375, 5000);
 
             System.out.println("El nuevo valor es: " + nivelDificultad + " milisegundos");
         }
@@ -204,18 +172,18 @@ public class Configuracion {
         return nivelDificultad;
     }
 
-
-/**
- * Cambia la configuración de colores de la consola.
- * Permite al usuario habilitar o deshabilitar los colores 
- * en la interfaz de consola mediante una entrada manual.
- *
- * @param valorAnteriores El valor actual indicando si la consola 
- * admite colores (0 para admite, 1 para no admite).
- * @return El nuevo valor indicando si la consola admite colores 
- * después de la modificación.
- * @throws IOException Si ocurre un error durante la lectura de la entrada del usuario.
- */
+    /**
+     * Cambia la configuración de colores de la consola.
+     * Permite al usuario habilitar o deshabilitar los colores
+     * en la interfaz de consola mediante una entrada manual.
+     *
+     * @param valorAnteriores El valor actual indicando si la consola
+     *                        admite colores (0 para admite, 1 para no admite).
+     * @return El nuevo valor indicando si la consola admite colores
+     *         después de la modificación.
+     * @throws IOException Si ocurre un error durante la lectura de la entrada del
+     *                     usuario.
+     */
 
     public static int cambioColores(int valorAnteriores) throws IOException {
         /* ----- Parte declarativa ----- */
@@ -232,7 +200,7 @@ public class Configuracion {
         System.out.println("¿Quieres cambiarlos? (S o N)");
 
         do {
-            opcion = br.readLine();
+            opcion = Utilidades.pedirString();
             if (!opcion.equalsIgnoreCase("S") && !opcion.equalsIgnoreCase("N"))
                 System.out.println(
                         "Porfavor, escriba una opcion valida (\"S\" para cambiar el valor, \"N\" para no cambiar el valor): ");
