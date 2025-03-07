@@ -6,7 +6,7 @@ Este es un proyecto de un juego de **Snake** en consola, desarrollado en **Java*
 |----------------------|-------------------|
 | **Autor**            | Aitor de Santos   |
 | **Fecha de inicio**  | 17/10/2024        |
-| **Última revisión**  | v4 08/02/2025     |
+| **Última revisión**  | v5 07/03/2025     |
 
 ## Estructura del Proyecto
 
@@ -38,8 +38,8 @@ VideojuegoFundamentos_project/
 
 1. Abre una terminal y escriba los siguientes comandos
 2. cd ruta al proyecto en el src
-3. `javac Main.java utils/ControladorJuego.java utils/ColoresConsola.java utils/Configuracion.java clases/Player.java clases/JuegoBase.java clases/ModosDeJuego/ModoNormal.java clases/ModosDeJuego/ModoAtrabesarParedes.java`
-4. `jar cfe MiProgramaSnake.jar Main Main.class utils/ControladorJuego.class utils/ColoresConsola.class utils/Configuracion.class clases/Player.class clases/JuegoBase.class clases/ModosDeJuego/ModoNormal.class clases/ModosDeJuego/ModoAtrabesarParedes.class`
+3. `javac Main.java utils/ControladorJuego.java utils/ColoresConsola.java utils/Configuracion.java utils/Utilidades.java clases/Player.java clases/JuegoBase.java clases/ModosDeJuego/ModoNormal.java clases/ModosDeJuego/ModoAtrabesarParedes.java`
+4. `jar cfe MiProgramaSnake.jar Main Main.class utils/ControladorJuego.class utils/ColoresConsola.class utils/Configuracion.class utils/Utilidades.class clases/Player.class clases/JuegoBase.class clases/ModosDeJuego/ModoNormal.class clases/ModosDeJuego/ModoAtrabesarParedes.class`
 5. `javac ControladorPrincipal.java utils/ColoresConsola.java`
 6. `jar cfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class utils/ColoresConsola.class`
 7. Ten abierta 2 terminales y ejecute un comando en cada una
