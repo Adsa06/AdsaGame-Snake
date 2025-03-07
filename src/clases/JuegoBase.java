@@ -286,14 +286,16 @@ public abstract class JuegoBase {
       cordenadas[cordsComida[0]].replace(cordsComida[1], cordsComida[1] + 1, "2");
    }
 
-   /**
+/**
+    * Genera una fila del tablero para mostrar por pantalla.
     * 
-    * @param tablero       Es la variable en la que genera la serpiente
-    * @param cordsCabeza   Son las cordenadas de la cabeza de la serpiente
-    * @param cordsCola     Son las cordenadas de la cola de la serpiente
-    * @param admiteColores Es la variable que almacena si admite o no colores
+    * @param numFila      El numero de la fila que se va a generar.
+    * @param admiteColores Un boolean que indica si la consola admite colores.
+    * @return La fila generada como un String.
     */
-   public static void mostrarTablero(int admiteColores) {
+    public String generarFila(int numFila, int admiteColores) {
+      // Utilizo un StringBuilder para trabajar mejor con la frase
+      StringBuilder fila = new StringBuilder();
       final String[][] FRUTA = {
             { "@", "l" },
             { ColoresConsola.ANSI_RED() + "@" + ColoresConsola.ANSI_RESET(),
@@ -308,35 +310,48 @@ public abstract class JuegoBase {
 
       };
 
-      // Bucles for uno dentro de otro para que recorra el mapa de las cordenadas 1
-      // por 1
-      for (int filas = 0; filas < cordenadas.length; filas++) {
-         System.out.printf("=");
-         for (int columnas = 0; columnas < cordenadas[filas].length(); columnas++) {
+      // Borde izquierdo
+      fila.append("=");
 
-            Character character = cordenadas[filas].charAt(columnas);
-            switch (character) {
-               case '1':
-                  System.out.printf("%s",
-                        SNAKE[admiteColores][filas == cordsCabeza[1] && columnas == cordsCabeza[0] - 1 ? 2
-                              : filas == cordsCola[1] && columnas == cordsCola[0] - 1 ? 0 : 1]);
-                  break;
+      for (int columnas = 0; columnas < cordenadas[numFila].length(); columnas++) {
 
-               case '2':
-                  System.out.printf("%s", FRUTA[admiteColores][0]);
-                  break;
+         Character character = cordenadas[numFila].charAt(columnas);
+         switch (character) {
+            case '1':
+               // Seleciono el simbolo correspondiente: cabeza (2), cola (0) o cuerpo (1)
+               int parteSnake = (numFila == cordsCabeza[1] && columnas == cordsCabeza[0] - 1) ? 2
+                     : (numFila == cordsCola[1] && columnas == cordsCola[0] - 1) ? 0 : 1;
+               fila.append(SNAKE[admiteColores][parteSnake]);
+               break;
 
-               case '0':
-                  System.out.printf("%s", " ");
-                  break;
-               default:
-                  break;
-            }
+            case '2':
+               fila.append(FRUTA[admiteColores][0]);
+               break;
+
+            case '0':
+               fila.append(" ");
+               break;
+            default:
+               break;
          }
-         System.out.printf("=");
-         System.out.printf("%n");
       }
+      // Borde derecho
+      fila.append("=");
 
+      return fila.toString();
+   }
+
+
+   /**
+    * Muestra el tablero del juego en la consola. La funcion genera
+    * cada fila del tablero y la imprime en la consola.
+    * 
+    * @param admiteColores Es un boolean que indica si la consola admite colores
+    */
+   public void mostrarTablero(int admiteColores) {
+      for (int fila = 0; fila < cordenadas.length; fila++) {
+         System.out.println(generarFila(fila, admiteColores));
+      }
    }
 
    /**
