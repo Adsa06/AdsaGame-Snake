@@ -47,9 +47,17 @@ public abstract class JuegoBase {
       JuegoBase.cordsCabeza[1] = segundaCords;
    }
 
+   /**
+    * Establece las cordenadas de la cabeza de la serpiente.
+    * 
+    * @param cordsCabeza Un array de dos enteros que representa las nuevas
+    *                    coordenadas x e y de la cabeza de la serpiente en el
+    *                    tablero.
+    */
    public static void setCordsCabeza(int[] cordsCabeza) {
       JuegoBase.cordsCabeza = cordsCabeza;
    }
+
    /**
     * Establece las cordenadas de la cola de la serpiente.
     * 
@@ -61,9 +69,17 @@ public abstract class JuegoBase {
       JuegoBase.cordsCola[1] = segundaCords;
    }
 
+   /**
+    * Establece las coordenadas de la cola de la serpiente.
+    * 
+    * @param cordsCola Un array de dos enteros que representa las nuevas
+    *                  coordenadas x e y de la cola de la serpiente en el tablero.
+    */
+
    public static void setCordsCola(int[] cordsCola) {
       JuegoBase.cordsCola = cordsCola;
    }
+
    /* ----- Metodos abstractos ----- */
    public abstract double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException;
 
@@ -88,8 +104,8 @@ public abstract class JuegoBase {
    }
 
    /**
+    * Inicializa el tablero del juego con las dimensiones indicadas.
     * 
-    * @param tablero     Es la variable que genera el tablero
     * @param dimensiones Son las dimensiones que debe tener el tablero
     */
    public static void inicializarTablero(int[] dimensiones) {
@@ -110,9 +126,11 @@ public abstract class JuegoBase {
    }
 
    /**
+    * Genera una fruta en el tablero. La fruta se coloca en una posicion aleatoria
+    * en el tablero, y se evita que se coloque en una posicion en la que ya este
+    * la serpiente.
     * 
-    * @param tablero     Es la variable que genera el tablero
-    * @param dimensiones Son las dimensiones que debe tener el tablero
+    * @param dimensiones Un array que contiene las dimensiones del tablero.
     */
    public static void generarFruta(int[] dimensiones) {
       int[] cordsComida = { 0, 0 };
@@ -137,14 +155,14 @@ public abstract class JuegoBase {
       cordenadas[cordsComida[0]].replace(cordsComida[1], cordsComida[1] + 1, "2");
    }
 
-/**
+   /**
     * Genera una fila del tablero para mostrar por pantalla.
     * 
-    * @param numFila      El numero de la fila que se va a generar.
+    * @param numFila       El numero de la fila que se va a generar.
     * @param admiteColores Un boolean que indica si la consola admite colores.
     * @return La fila generada como un String.
     */
-    public String generarFila(int numFila, int admiteColores) {
+   public String generarFila(int numFila, int admiteColores) {
       // Utilizo un StringBuilder para trabajar mejor con la frase
       StringBuilder fila = new StringBuilder();
       final String[][] FRUTA = {
@@ -192,7 +210,6 @@ public abstract class JuegoBase {
       return fila.toString();
    }
 
-
    /**
     * Muestra el tablero del juego en la consola. La funcion genera
     * cada fila del tablero y la imprime en la consola.
@@ -207,34 +224,38 @@ public abstract class JuegoBase {
 
    /**
     * Detecta si la serpiente ha comido una fruta. Segun la direccion en la que
-    * se esta moviendo la serpiente, se evalua la casilla que esta en frente
+    * se esta moviendo la serpiente, se evalua la casilla que esta en la pared
+    * opuesta
     * para ver si es una fruta. Si es una fruta se marca que ha comido y se
     * incrementa la longitud de la serpiente en 1.
+    * 
+    * @param direcion La direccion en la que se esta moviendo la serpiente
+    * @return Un boolean que indica si la serpiente ha comido una fruta
     */
    public static boolean detectarFruta(String direcion) {
       boolean frutaDetectada = false;
       switch (direcion) {
          case "W":
             if ('2' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1)) {
-               frutaDetectada = true; 
+               frutaDetectada = true;
             }
             break;
 
          case "A":
             if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0] - 2)) {
-               frutaDetectada = true; 
+               frutaDetectada = true;
             }
             break;
 
          case "S":
             if ('2' == cordenadas[cordsCabeza[1] + 1].charAt(cordsCabeza[0] - 1)) {
-               frutaDetectada = true; 
+               frutaDetectada = true;
             }
             break;
 
          case "D":
             if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
-               frutaDetectada = true; 
+               frutaDetectada = true;
             }
             break;
          default:
@@ -244,13 +265,19 @@ public abstract class JuegoBase {
    }
 
    /**
-    * 
-    * Switch para crear la cabeza
-    * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
-    * que haya por la cabeza y luego actualizo la posicion de ella
-    * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
-    * serpiente, si es asi muere
+    * Crea la cabeza de la serpiente en el tablero según la dirección de
+    * movimiento.
+    * Actualiza la posición de la cabeza y verifica si la serpiente ha colisionado
+    * consigo misma.
+    *
+    * @param alive    Un booleano que indica si la serpiente está viva antes del
+    *                 movimiento.
+    * @param direcion La dirección en la que se está moviendo la serpiente: "W",
+    *                 "A", "S", o "D".
+    * @return Un booleano que indica si la serpiente sigue viva después del
+    *         movimiento.
     */
+
    public static boolean crearCabeza(boolean alive, String direcion) {
       switch (direcion) {
          case "W":

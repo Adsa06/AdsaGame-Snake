@@ -13,11 +13,14 @@ public class ModoNormal extends JuegoBase {
    }
 
    /**
-    * 
-    * @param tablero   Es la variable en la que elimina la cola
-    * @param cordsCola Es la posicion de la cola actual
-    * @param movs      Es la lista de movimientos
+    * Elimina la cola de la serpiente en el tablero y actualiza las coordenadas
+    * de la cola en función del movimiento especificado.
+    *
+    * @param movs Un string que representa la lista de movimientos. El primer
+    *             carácter de este string se utiliza para determinar la dirección
+    *             del movimiento actual de la serpiente ('W', 'A', 'S', 'D').
     */
+
    @Override
    public void eliminarCola(String movs) {
       // Elimino la cola
@@ -111,10 +114,10 @@ public class ModoNormal extends JuegoBase {
 
          try { // Este try lo que esta haciendo es para que en el switch de la cabeza me pille
                // el error de que se ha salido del array
-               if(detectarFruta(direcion)) {
-                  haComido = true;
-                  snakeLongitud++;
-               }
+            if (detectarFruta(direcion)) {
+               haComido = true;
+               snakeLongitud++;
+            }
 
             movs = movs.concat(direcion);
 

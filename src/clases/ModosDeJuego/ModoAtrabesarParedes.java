@@ -11,11 +11,14 @@ public class ModoAtrabesarParedes extends JuegoBase {
    public ModoAtrabesarParedes() {
    }
 
+
    /**
+    * Elimina la cola de la serpiente. La cola se encuentra en la esquina opuesta
+    * a la cabeza de la serpiente. La cola se elimina reemplazando su valor en el
+    * tablero por un "0" y actualizando la posicion de la cola en la variable
+    * cordsCola.
     * 
-    * @param tablero   Es la variable en la que elimina la cola
-    * @param cordsCola Es la posicion de la cola actual
-    * @param movs      Es la lista de movimientos
+    * @param movs La lista de movimientos que se va a realizar.
     */
    @Override
    public void eliminarCola(String movs) {
@@ -172,11 +175,15 @@ public class ModoAtrabesarParedes extends JuegoBase {
       return calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
    }
 
-   /**
-    * Comprueba si el snake ha llegado al borde de la pantalla.
-    * 
-    * @return Un boolean que indica si el snake ha llegado al borde de la pantalla.
-    */
+
+/**
+ * Comprueba si la serpiente ha llegado al borde del tablero en función de la dirección
+ * en la que se está moviendo.
+ *
+ * @param direcion La dirección en la que se mueve la serpiente (W, A, S, D).
+ * @return Un booleano que indica si la serpiente ha colisionado con el borde del tablero.
+ */
+
    public boolean comprobarColision(String direcion) {
 
       boolean estaAlBorde = false;
@@ -193,13 +200,16 @@ public class ModoAtrabesarParedes extends JuegoBase {
       return estaAlBorde;
    }
 
+
    /**
-    * 
     * Metodo para crear la cabeza en la pared opuesta a la que se iba a chocar
     * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
     * que haya por la cabeza y luego actualizo la posicion de ella
     * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
     * serpiente, si es asi muere
+    * @param alive   Variable que indica si el snake esta vivo o no
+    * @param direcion Direccion en la que se esta moviendo el snake
+    * @return Un boolean que indica si el snake ha muerto o no
     */
    public boolean crearCabezaDetras(boolean alive, String direcion) {
       switch (direcion) {
