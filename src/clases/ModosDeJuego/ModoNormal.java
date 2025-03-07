@@ -19,7 +19,7 @@ public class ModoNormal extends JuegoBase {
     * @param movs      Es la lista de movimientos
     */
    @Override
-   public void eliminarCola() {
+   public void eliminarCola(String movs) {
       // Elimino la cola
       reemplazarCasilla(getCordsCola()[1], getCordsCola()[0] - 1, getCordsCola()[0], "0");
 
@@ -32,7 +32,7 @@ public class ModoNormal extends JuegoBase {
        * 0));
        */
 
-      switch (getMovs().charAt(0)) {
+      switch (movs.charAt(0)) {
          case 'W':
             setCordsCola(getCordsCola()[0], getCordsCola()[1] - 1);
             break;
@@ -74,16 +74,23 @@ public class ModoNormal extends JuegoBase {
       final int TIEMPOMILISEGUNDOS = configuracionSnake[2];
       final int ADMITECOLORES = configuracionSnake[3];
 
+      String guardarDireccion;
+      int snakeLongitud = 3;
+      boolean win = false;
+      boolean alive = true;
+      boolean haComido = true;
+      String direcion = "D";
+      String movs = "DD"; // Secuencia de movimientos para saber la continuacion de la cola
+
       BufferedReader fr = new BufferedReader(new FileReader("./content.txt"));
-      resetearVariables();
 
       super.inicializarTablero(DIMENSIONES);
 
       do {
 
-         if (super.isHaComido()) {
+         if (haComido) {
             super.generarFruta(DIMENSIONES);
-            super.setHaComido(false);
+            haComido = false;
          }
 
          mostrarTablero(ADMITECOLORES);
@@ -93,48 +100,50 @@ public class ModoNormal extends JuegoBase {
          separacion();
 
          // Esto se tendra que hacer despues para que un espacio en blanco no de fallo
-         super.setGuardarDireccion(fr.readLine());
+         guardarDireccion = fr.readLine();
          // 1 condicion ternarias para validar si no es nulo y si es W, A, S o D
-         super.setDirecion((super.getGuardarDireccion() != null && !super.getGuardarDireccion().equals("")
-               && "WASD".contains(super.getGuardarDireccion().toUpperCase())) ? super.getGuardarDireccion()
-                     : super.getDirecion());
-         super.setDirecion(super.getDirecion().toUpperCase());
+         direcion = ((guardarDireccion != null && !guardarDireccion.equals("")
+               && "WASD".contains(guardarDireccion.toUpperCase())) ? guardarDireccion
+                     : direcion);
+         direcion = direcion.toUpperCase();
          // Detecta si es un movimiento valido con una condicion ternaria y guarda el
          // movimiento para crear la cola
 
          try { // Este try lo que esta haciendo es para que en el switch de la cabeza me pille
                // el error de que se ha salido del array
+               if(detectarFruta(direcion)) {
+                  haComido = true;
+                  snakeLongitud++;
+               }
 
-            detectarFruta();
+            movs = movs.concat(direcion);
 
-            super.setMovs(super.getMovs().concat(getDirecion()));
+            if (!haComido) {
 
-            if (!super.isHaComido()) {
-
-               eliminarCola();
+               eliminarCola(movs);
 
                // Elimina el primer movimiento ya que deberia ya haberse ejecutado
-               super.setMovs(super.getMovs().substring(1));
+               movs = movs.substring(1);
             }
 
-            crearCabeza();
+            crearCabeza(alive, direcion);
 
          } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la
                                                       // pantalla, por lo tanto pasa de vivo a muerto
-            super.setAlive(false);
+            alive = false;
          } catch (Exception e) { // Por si acaso que no me fio xD
-            super.setAlive(false);
+            alive = false;
          }
 
-         if (super.getSnakeLongitud() == DIMENSIONES[0] * DIMENSIONES[1])
-            super.setWin(true);
+         if (snakeLongitud == DIMENSIONES[0] * DIMENSIONES[1])
+            win = true;
 
-      } while (super.isAlive() && !super.isWin());
+      } while (alive && !win);
 
-      System.out.println(super.isAlive() ? "Enhorabuena, has ganado" : "Has perdido");
+      System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
       fr.close();
 
-      return calcularPuntaje(super.getSnakeLongitud(), DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
+      return calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
    }
 
 }
