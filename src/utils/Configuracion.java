@@ -43,7 +43,7 @@ public class Configuracion {
                     + " admite colores");
             System.out.println("4. Salir al menu principal");
 
-            option = Utilidades.pedirNumeroEntero("Introduce una opcion", 1, 4);
+            option = Utilidades.pedirNumeroEntero("Introduce una opcion entre", 1, 4);
             switch (option) {
                 case 1:
                     dimensiones = cambioDimensiones(dimensiones);
@@ -99,11 +99,11 @@ public class Configuracion {
         } else {
             System.out.println("Escribe el nuevo numero de filas: ");
             System.out.println("Escriba un numero entre 3 y 40");
-            nuevasDimensiones[0] = Utilidades.pedirNumeroEntero("Escribe el nuevo numero de filas: ", 3, 40);
+            nuevasDimensiones[0] = Utilidades.pedirNumeroEntero("Escribe el nuevo numero de filas entre: ", 3, 40);
 
             System.out.println("Escribe el nuevo numero de columnas: ");
             System.out.println("Escriba un numero entre 3 y 80");
-            nuevasDimensiones[1] = Utilidades.pedirNumeroEntero("Escribe el nuevo numero de columnas: ", 3, 80);
+            nuevasDimensiones[1] = Utilidades.pedirNumeroEntero("Escribe el nuevo numero de columnas entre: ", 3, 80);
 
             System.out.println("Los nuevos valores son: " + nuevasDimensiones[0] + " filas y " + nuevasDimensiones[1]
                     + " columnas");
@@ -151,7 +151,7 @@ public class Configuracion {
             System.out.println("750 milisegundos es la dificultad normal");
             System.out.println("1000 milisegundos es la dificultad facil");
             System.out.println("5000 milisegundos es el tiempo maximo");
-            nivelDificultad = Utilidades.pedirNumeroEntero("Escribe el nuevo valor: ", 375, 5000);
+            nivelDificultad = Utilidades.pedirNumeroEntero("Escribe el nuevo valor entre: ", 375, 5000);
 
             System.out.println("El nuevo valor es: " + nivelDificultad + " milisegundos");
         }

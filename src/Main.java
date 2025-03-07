@@ -90,7 +90,7 @@ public class Main {
 
         do {
             System.out.println(mensajeMenu);
-            option = Utilidades.pedirNumeroEntero("Introduce una opcion", 1, 4);
+            option = Utilidades.pedirNumeroEntero("Introduce una opcion entre", 1, 4);
             switch (option) {
                 case 1:
 

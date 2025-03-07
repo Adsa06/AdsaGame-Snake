@@ -66,7 +66,7 @@ public class ControladorJuego {
          System.out.println(frases);
       }
 
-      opcionModoJuego = Utilidades.pedirNumeroEntero("Elige el modo \"1\" o \"2\": ", 1, 2);
+      opcionModoJuego = Utilidades.pedirNumeroEntero("Elige el modo: ", 1, 2);
 
       switch (opcionModoJuego) {
          case 1:
