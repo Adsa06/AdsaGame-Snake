@@ -58,7 +58,8 @@ public class ControladorPrincipal {
                         + ColoresConsola.ANSI_CYAN() + "D" + ColoresConsola.ANSI_RESET() + "\": ");
                 instrucion = br.readLine();
                 // write escribe en el archivo
-                fr.write(instrucion + "\n");
+                if(instrucion.length() == 1)
+                    fr.write(instrucion + "\n");
                 // flush fuerza a escribir los fatos en el archivo
                 fr.flush();
                 // Ahora tiene una forma de salir

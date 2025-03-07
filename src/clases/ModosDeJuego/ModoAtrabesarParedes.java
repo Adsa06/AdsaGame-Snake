@@ -234,14 +234,14 @@ public class ModoAtrabesarParedes extends JuegoBase {
    public void detectarFrutaDetras() {
       switch (getDirecion()) {
          case "W":
-            if ('2' == getCordenadas()[getCordenadas().length - 2].charAt(getCordsCabeza()[0] - 1)) {
+            if ('2' == getCordenadas()[getCordenadas().length - 1].charAt(getCordsCabeza()[0] - 1)) {
                setHaComido(true);
                setSnakeLongitud(getSnakeLongitud() + 1);
             }
             break;
 
          case "A":
-            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordenadas()[getCordsCabeza()[1]].length() - 2)) {
+            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordenadas()[getCordsCabeza()[1]].length() - 1)) {
                setHaComido(true);
                setSnakeLongitud(getSnakeLongitud() + 1);
             }
@@ -255,7 +255,7 @@ public class ModoAtrabesarParedes extends JuegoBase {
             break;
 
          case "D":
-            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(1)) {
+            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(0)) {
                setHaComido(true);
                setSnakeLongitud(getSnakeLongitud() + 1);
             }
