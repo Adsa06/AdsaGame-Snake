@@ -5,10 +5,10 @@ import java.io.IOException;
 import utils.ColoresConsola;
 
 public abstract class JuegoBase {
-   private static StringBuilder[] cordenadas;
+   private StringBuilder[] cordenadas;
 
-   private static int[] cordsCabeza = { 3, 0 };
-   private static int[] cordsCola = { 1, 0 };
+   private int[] coordsCabeza = { 3, 0 };
+   private int[] coordsCola = { 1, 0 };
 
    /* ----- GETTERS Y SETTERS ----- */
 
@@ -25,7 +25,7 @@ public abstract class JuegoBase {
     *         cabeza de la serpiente en el tablero.
     */
    public int[] getCordsCabeza() {
-      return cordsCabeza;
+      return coordsCabeza;
    }
 
    /**
@@ -33,7 +33,7 @@ public abstract class JuegoBase {
     *         cola de la serpiente en el tablero.
     */
    public int[] getCordsCola() {
-      return cordsCola;
+      return coordsCola;
    }
 
    /**
@@ -42,9 +42,9 @@ public abstract class JuegoBase {
     * @param primeraCords La primera cordenada de la cabeza de la serpiente.
     * @param segundaCords La segunda cordenada de la cabeza de la serpiente.
     */
-   public static void setCordsCabeza(int primeraCords, int segundaCords) {
-      JuegoBase.cordsCabeza[0] = primeraCords;
-      JuegoBase.cordsCabeza[1] = segundaCords;
+   public void setCordsCabeza(int primeraCords, int segundaCords) {
+      this.coordsCabeza[0] = primeraCords;
+      this.coordsCabeza[1] = segundaCords;
    }
 
    /**
@@ -54,8 +54,8 @@ public abstract class JuegoBase {
     *                    coordenadas x e y de la cabeza de la serpiente en el
     *                    tablero.
     */
-   public static void setCordsCabeza(int[] cordsCabeza) {
-      JuegoBase.cordsCabeza = cordsCabeza;
+   public void setCordsCabeza(int[] cordsCabeza) {
+      this.coordsCabeza = cordsCabeza;
    }
 
    /**
@@ -64,9 +64,9 @@ public abstract class JuegoBase {
     * @param primeraCords La primera cordenada de la cola de la serpiente.
     * @param segundaCords La segunda cordenada de la cola de la serpiente.
     */
-   public static void setCordsCola(int primeraCords, int segundaCords) {
-      JuegoBase.cordsCola[0] = primeraCords;
-      JuegoBase.cordsCola[1] = segundaCords;
+   public void setCordsCola(int primeraCords, int segundaCords) {
+      this.coordsCola[0] = primeraCords;
+      this.coordsCola[1] = segundaCords;
    }
 
    /**
@@ -76,8 +76,8 @@ public abstract class JuegoBase {
     *                  coordenadas x e y de la cola de la serpiente en el tablero.
     */
 
-   public static void setCordsCola(int[] cordsCola) {
-      JuegoBase.cordsCola = cordsCola;
+   public void setCordsCola(int[] cordsCola) {
+      this.coordsCola = cordsCola;
    }
 
    /* ----- Metodos abstractos ----- */
@@ -99,7 +99,7 @@ public abstract class JuegoBase {
     * @param nuevoCaracter El nuevo caracter que se va a reemplazar en la seccion
     *                      del tablero.
     */
-   public static void reemplazarCasilla(int fila, int inicioColumna, int finalColumna, String nuevoCaracter) {
+   public void reemplazarCasilla(int fila, int inicioColumna, int finalColumna, String nuevoCaracter) {
       cordenadas[fila].replace(inicioColumna, finalColumna, nuevoCaracter);
    }
 
@@ -108,9 +108,9 @@ public abstract class JuegoBase {
     * 
     * @param dimensiones Son las dimensiones que debe tener el tablero
     */
-   public static void inicializarTablero(int[] dimensiones) {
-      cordsCola = new int[] { 1, 0 };
-      cordsCabeza = new int[] { 3, 0 };
+   public void inicializarTablero(int[] dimensiones) {
+      coordsCola = new int[] { 1, 0 };
+      coordsCabeza = new int[] { 3, 0 };
       cordenadas = new StringBuilder[dimensiones[0]];
 
       // Creacion del mapa segun las variables de dimensiones
@@ -132,7 +132,7 @@ public abstract class JuegoBase {
     * 
     * @param dimensiones Un array que contiene las dimensiones del tablero.
     */
-   public static void generarFruta(int[] dimensiones) {
+   public void generarFruta(int[] dimensiones) {
       int[] cordsComida = { 0, 0 };
 
       cordsComida[0] = (int) (Math.random() * (dimensiones[0] - 1));
@@ -188,8 +188,8 @@ public abstract class JuegoBase {
          switch (character) {
             case '1':
                // Seleciono el simbolo correspondiente: cabeza (2), cola (0) o cuerpo (1)
-               int parteSnake = (numFila == cordsCabeza[1] && columnas == cordsCabeza[0] - 1) ? 2
-                     : (numFila == cordsCola[1] && columnas == cordsCola[0] - 1) ? 0 : 1;
+               int parteSnake = (numFila == coordsCabeza[1] && columnas == coordsCabeza[0] - 1) ? 2
+                     : (numFila == coordsCola[1] && columnas == coordsCola[0] - 1) ? 0 : 1;
                fila.append(SNAKE[admiteColores][parteSnake]);
                break;
 
@@ -232,29 +232,29 @@ public abstract class JuegoBase {
     * @param direcion La direccion en la que se esta moviendo la serpiente
     * @return Un boolean que indica si la serpiente ha comido una fruta
     */
-   public static boolean detectarFruta(String direcion) {
+   public boolean detectarFruta(String direcion) {
       boolean frutaDetectada = false;
       switch (direcion) {
          case "W":
-            if ('2' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1)) {
+            if ('2' == cordenadas[coordsCabeza[1] - 1].charAt(coordsCabeza[0] - 1)) {
                frutaDetectada = true;
             }
             break;
 
          case "A":
-            if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0] - 2)) {
+            if ('2' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0] - 2)) {
                frutaDetectada = true;
             }
             break;
 
          case "S":
-            if ('2' == cordenadas[cordsCabeza[1] + 1].charAt(cordsCabeza[0] - 1)) {
+            if ('2' == cordenadas[coordsCabeza[1] + 1].charAt(coordsCabeza[0] - 1)) {
                frutaDetectada = true;
             }
             break;
 
          case "D":
-            if ('2' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0])) {
+            if ('2' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0])) {
                frutaDetectada = true;
             }
             break;
@@ -278,45 +278,45 @@ public abstract class JuegoBase {
     *         movimiento.
     */
 
-   public static boolean crearCabeza(boolean alive, String direcion) {
+   public boolean crearCabeza(boolean alive, String direcion) {
       switch (direcion) {
          case "W":
-            if ('1' == cordenadas[cordsCabeza[1] - 1].charAt(cordsCabeza[0] - 1))
+            if ('1' == cordenadas[coordsCabeza[1] - 1].charAt(coordsCabeza[0] - 1))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[cordsCabeza[1] - 1].replace(cordsCabeza[0] - 1, cordsCabeza[0], "1");
+            cordenadas[coordsCabeza[1] - 1].replace(coordsCabeza[0] - 1, coordsCabeza[0], "1");
 
-            cordsCabeza[1] -= 1;
+            coordsCabeza[1] -= 1;
             break;
 
          case "A":
-            if ('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0] - 2))
+            if ('1' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0] - 2))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[cordsCabeza[1]].replace(cordsCabeza[0] - 2, cordsCabeza[0] - 1, "1");
+            cordenadas[coordsCabeza[1]].replace(coordsCabeza[0] - 2, coordsCabeza[0] - 1, "1");
 
-            cordsCabeza[0] -= 1;
+            coordsCabeza[0] -= 1;
             break;
 
          case "S":
-            if ('1' == cordenadas[cordsCabeza[1] + 1].charAt(cordsCabeza[0] - 1))
+            if ('1' == cordenadas[coordsCabeza[1] + 1].charAt(coordsCabeza[0] - 1))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[cordsCabeza[1] + 1].replace(cordsCabeza[0] - 1, cordsCabeza[0], "1");
+            cordenadas[coordsCabeza[1] + 1].replace(coordsCabeza[0] - 1, coordsCabeza[0], "1");
 
-            cordsCabeza[1] += 1;
+            coordsCabeza[1] += 1;
             break;
 
          case "D":
-            if ('1' == cordenadas[cordsCabeza[1]].charAt(cordsCabeza[0]))
+            if ('1' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0]))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[cordsCabeza[1]].replace(cordsCabeza[0], cordsCabeza[0] + 1, "1");
-            cordsCabeza[0] += 1;
+            cordenadas[coordsCabeza[1]].replace(coordsCabeza[0], coordsCabeza[0] + 1, "1");
+            coordsCabeza[0] += 1;
             break;
 
          default:
@@ -342,18 +342,13 @@ public abstract class JuegoBase {
    public static double calcularPuntaje(int longitudSerpiente, int filasTablero, int columnasTablero, int velocidad) {
       // Normalizar las dimensiones del tablero: cuantas más celdas tenga el tablero,
       // más puntos se pueden ganar
-      System.out.println("El tablero tiene " + filasTablero + " filas y " + columnasTablero + " columnas.");
       int totalCeldas = filasTablero * columnasTablero;
-      System.out.println("El tablero tiene " + totalCeldas + " celdas.");
 
       // Ajustar el puntaje según la velocidad (la velocidad más baja tiene un puntaje
       // más alto)
-      System.out.println("La velocidad del juego es de " + velocidad + " milisegundos.");
-      double velocidadFactor = 1.0 / (velocidad / 1000.0); // Hacer que la velocidad más alta sea más baja en el cálculo
-      System.out.println("El factor de velocidad es de " + velocidadFactor);
+      double velocidadFactor = 1000.0 / velocidad; // Hacer que la velocidad más alta sea más baja en el cálculo
 
       // Calcular el puntaje final con un ponderado de cada aspecto
-      System.out.println("La longitud de la serpiente es de " + longitudSerpiente);
       double puntaje = (longitudSerpiente * velocidadFactor * ((double) ((longitudSerpiente * 100) / totalCeldas)));
       System.out.println("El puntaje final es de " + puntaje);
 

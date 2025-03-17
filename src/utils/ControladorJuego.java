@@ -2,7 +2,7 @@ package utils;
 
 import java.io.IOException;
 
-import clases.ModosDeJuego.ModoAtrabesarParedes;
+import clases.ModosDeJuego.ModoAtravesarParedes;
 import clases.ModosDeJuego.ModoNormal;
 import clases.JuegoBase;
 import clases.Player;
@@ -30,7 +30,7 @@ public class ControladorJuego {
       String[] explicacionModos = {
             "1. Modo Normal: es el modo clasico del juego de Snake",
             "2. Modo Atrabesar Paredes: es el modo en el cual el jugador puede atrabesar las paredes",
-            "Elige el modo \"1\" o \"2\""
+
       };
       String[][] explicacionJuego = {
             {
@@ -73,7 +73,7 @@ public class ControladorJuego {
             nuevoJuego = new ModoNormal();
             break;
          case 2:
-            nuevoJuego = new ModoAtrabesarParedes();
+            nuevoJuego = new ModoAtravesarParedes();
             break;
          default:
             nuevoJuego = new ModoNormal();
