@@ -38,8 +38,8 @@ VideojuegoFundamentos_project/
 
 1. Abre una terminal y escriba los siguientes comandos
 2. cd ruta al proyecto en el src
-3. `javac Main.java utils/ControladorJuego.java utils/ColoresConsola.java utils/Configuracion.java utils/Utilidades.java clases/Player.java clases/Partida.java clases/JuegoBase.java clases/ModosDeJuego/ModoNormal.java clases/ModosDeJuego/ModoAtrabesarParedes.java`
-4. `jar cfe MiProgramaSnake.jar Main Main.class utils/ControladorJuego.class utils/ColoresConsola.class utils/Configuracion.class utils/Utilidades.class clases/Player.class clases/Partida.java clases/JuegoBase.class clases/ModosDeJuego/ModoNormal.class clases/ModosDeJuego/ModoAtrabesarParedes.class`
+3. `javac Main.java utils/ControladorJuego.java utils/ColoresConsola.java utils/Configuracion.java utils/Utilidades.java clases/Player.java clases/Partida.java clases/JuegoBase.java clases/ModosDeJuego/ModoNormal.java clases/ModosDeJuego/ModoAtravesarParedes.java`
+4. `jar cfe MiProgramaSnake.jar Main Main.class utils/ControladorJuego.class utils/ColoresConsola.class utils/Configuracion.class utils/Utilidades.class clases/Player.class clases/Partida.class clases/Partida$ModoDeJuego.class clases/JuegoBase.class clases/ModosDeJuego/ModoNormal.class clases/ModosDeJuego/ModoAtravesarParedes.class`
 5. `javac ControladorPrincipal.java utils/ColoresConsola.java`
 6. `jar cfe MiProgramaControlador.jar ControladorPrincipal ControladorPrincipal.class utils/ColoresConsola.class`
 7. Ten abierta 2 terminales y ejecute un comando en cada una

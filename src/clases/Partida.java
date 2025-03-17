@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class Partida {
 
-    private  enum ModoDeJuego {
+    private enum ModoDeJuego {
         MODO_NORMAL("Modo Normal"),
         MODO_ATRABESAR_PAREDES("Modo Atrabesar Paredes");
     
