@@ -8,6 +8,7 @@
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
 
+import clases.Partida;
 import clases.Player;
 import utils.ControladorJuego;
 import utils.Utilidades;
@@ -99,9 +100,16 @@ public class Main {
                     BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
                     fr.close();
                     /* ----- */
-                    double scoreProvisional = ControladorJuego.iniciarJuego(player.getCongiguration(), player);
-                    if (scoreProvisional > player.getScore())
-                        player.setScore(scoreProvisional);
+                    Partida partida = new Partida();
+                    partida.actualizarFechaInicio();
+                    double scoreProvisional = ControladorJuego.iniciarJuego(player, partida);
+                    partida.actualizarFechaFinal();
+                    partida.setPuntuacion(scoreProvisional);
+                    partida.setVelocidad(player.getCongiguration()[2]);
+                    partida.setDimensionesTablero(player.getCongiguration()[0], player.getCongiguration()[1]);
+                    if (scoreProvisional > player.getMaxScore())
+                        player.setMaxScore(scoreProvisional);
+                    player.addPartida(partida);
                     break;
                 case 2:
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));

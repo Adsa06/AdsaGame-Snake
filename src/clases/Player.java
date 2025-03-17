@@ -6,24 +6,37 @@
  */
 package clases;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Player {
     // Variables privadas ya que no deberian hacederse de forma general si no de
     // funciones
+    /** Nombre del jugador */
     private String name;
-    private double score;
+    /**
+     * Array de configuración
+     * Los 2 primeros datos indican las dimensiones (Filas y Columnas) del tablero
+     * El tercer dato es el tiempo de descanso que hay entre cada actualizacion del
+     * tablero
+     * El cuarto dato es si admite o no colores la consola que estas utilizando (un
+     * 0 es que admite, un 1 no admite)
+     */
     private int[] configuration = new int[4];
+    /** Score maximo del jugador */
+    private double maxScore = 0;
+    /** La lista de todas la partidas */
+    private List<Partida> partidas = new ArrayList<Partida>();
 
     /* ----- Metodos constructores ----- */
     public Player() {
-        score = 0;
+        maxScore = 0;
         configuration = new int[] { 10, 20, 375, 0 };
     }
 
-    public Player(String nombre, int puntuacion, int[] configPersonalizada) {
+    public Player(String nombre, int[] configPersonalizada) {
         this.name = nombre;
-        this.score = puntuacion;
         this.configuration = configPersonalizada;
     }
 
@@ -40,15 +53,6 @@ public class Player {
     }
 
     /**
-     * Obtiene el puntaje del jugador.
-     * 
-     * @return El puntaje del jugador.
-     */
-    public double getScore() {
-        return score;
-    }
-
-    /**
      * Obtiene la configuración del jugador.
      * 
      * @return Un array de enteros que representa la configuración actual del
@@ -59,6 +63,14 @@ public class Player {
         return configuration;
     }
 
+    /**
+     * Obtiene el puntaje del jugador.
+     * 
+     * @return El puntaje del jugador.
+     */
+    public double getMaxScore() {
+        return maxScore;
+    }
     /* ----- Parte del setter ----- */
 
     /**
@@ -68,15 +80,6 @@ public class Player {
      */
     public void setName(String nombre) {
         this.name = nombre;
-    }
-
-    /**
-     * Establece el puntaje del jugador.
-     * 
-     * @param puntuacion El nuevo puntaje del jugador.
-     */
-    public void setScore(double puntuacion) {
-        this.score = puntuacion;
     }
 
     /**
@@ -92,25 +95,39 @@ public class Player {
         this.configuration = configPersonalizada;
     }
 
+    /**
+     * Establece el puntaje del jugador.
+     * 
+     * @param puntuacion El nuevo puntaje del jugador.
+     */
+    public void setMaxScore(double puntuacion) {
+        this.maxScore = puntuacion;
+    }
+
     /* ----- Metodos de comportamiento ----- */
 
     /**
      * Muestra el perfil del jugador, incluyendo el nombre y la puntuacion.
      */
     public void mostrarPerfil() {
-        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion: " + score);
+        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion maxima: " + maxScore);
+    }
+
+    public void addPartida(Partida partida) {
+        this.partidas.add(partida);
     }
 
     /**
-     * Returns a string representation of the Player object, including the
-     * player's name, score, and configuration settings.
-     * 
-     * @return A string containing the player's name, score, and configuration.
+     * Devuelve una representación en forma de cadena de texto del objeto Player,
+     * incluyendo el nombre, la configuración y las partidas.
+     *
+     * @return Una cadena de texto que representa al jugador y sus atributos.
      */
 
     @Override
     public String toString() {
-        return "Player [Nombre: " + name + ", Puntuacion: " + score + ", Configuracion: "
-                + Arrays.toString(configuration) + "]";
+        return "Player [name=" + name + ", configuration=" + Arrays.toString(configuration) + ", maxScore=" + maxScore
+                + ", partidas=" + partidas + "]";
     }
+
 }

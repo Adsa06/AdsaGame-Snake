@@ -81,7 +81,7 @@ public abstract class JuegoBase {
    }
 
    /* ----- Metodos abstractos ----- */
-   public abstract double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException;
+   public abstract double iniciarJuego(int[] configuracionSnake, Partida partida) throws IOException, InterruptedException;
 
    public abstract void eliminarCola(String movs);
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import clases.ModosDeJuego.ModoAtravesarParedes;
 import clases.ModosDeJuego.ModoNormal;
 import clases.JuegoBase;
+import clases.Partida;
 import clases.Player;
 
 public class ControladorJuego {
@@ -22,7 +23,7 @@ public class ControladorJuego {
     * @throws InterruptedException Si el hilo de ejecuci n es interrumpido
     *                              durante el tiempo de espera.
     */
-   public static double iniciarJuego(int[] configuracionSnake, Player player) throws IOException, InterruptedException {
+   public static double iniciarJuego(Player player, Partida partida) throws IOException, InterruptedException {
 
       /* ----- Parte declarativa ----- */
       int opcionModoJuego = 0;
@@ -86,6 +87,6 @@ public class ControladorJuego {
       }
       // Esto hace q no continue el programa sin que presione el enter
       Utilidades.presionarEnter();
-      return nuevoJuego.iniciarJuego(configuracionSnake);
+      return nuevoJuego.iniciarJuego(player.getCongiguration(), partida);
    }
 }

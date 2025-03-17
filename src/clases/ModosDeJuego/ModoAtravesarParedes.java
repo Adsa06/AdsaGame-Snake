@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import clases.JuegoBase;
+import clases.Partida;
 
 public class ModoAtravesarParedes extends JuegoBase {
    /* ----- Metodo constructor ----- */
@@ -82,7 +83,7 @@ public class ModoAtravesarParedes extends JuegoBase {
     *                              el tiempo de espera.
     */
    @Override
-   public double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException {
+   public double iniciarJuego(int[] configuracionSnake, Partida partida) throws IOException, InterruptedException {
       final int[] DIMENSIONES = { configuracionSnake[0], configuracionSnake[1] };
       final int TIEMPOMILISEGUNDOS = configuracionSnake[2];
       final int ADMITECOLORES = configuracionSnake[3];
@@ -106,6 +107,7 @@ public class ModoAtravesarParedes extends JuegoBase {
             haComido = false;
          }
 
+         System.out.println("Longitud de la serpiente: " + snakeLongitud);
          mostrarTablero(ADMITECOLORES);
 
          // Tiempo de espera con hilos
@@ -167,7 +169,8 @@ public class ModoAtravesarParedes extends JuegoBase {
 
       System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
       fr.close();
-
+      partida.setGanado(win);
+      partida.setLongitudSerpiente(snakeLongitud);
       return calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
    }
 
