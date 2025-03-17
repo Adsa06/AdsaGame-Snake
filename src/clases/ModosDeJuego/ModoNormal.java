@@ -105,7 +105,7 @@ public class ModoNormal extends JuegoBase {
 
          // Esto se tendra que hacer despues para que un espacio en blanco no de fallo
          guardarDireccion = fr.readLine();
-         direcion = (guardarDireccion != null ? guardarDireccion : direcion.toUpperCase());
+         direcion = ((guardarDireccion != null && guardarDireccion.length() == 1) ? guardarDireccion.toUpperCase() : direcion.toUpperCase());
          // Detecta si es un movimiento valido con una condicion ternaria y guarda el
          // movimiento para crear la cola
 
@@ -126,7 +126,7 @@ public class ModoNormal extends JuegoBase {
                movs = movs.substring(1);
             }
 
-            crearCabeza(alive, direcion);
+            alive = crearCabeza(alive, direcion);
 
          } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la
                                                       // pantalla, por lo tanto pasa de vivo a muerto

@@ -5,7 +5,7 @@ import java.io.IOException;
 import utils.ColoresConsola;
 
 public abstract class JuegoBase {
-   private StringBuilder[] cordenadas;
+   private StringBuilder[] coordenadas;
 
    private int[] coordsCabeza = { 3, 0 };
    private int[] coordsCola = { 1, 0 };
@@ -17,7 +17,7 @@ public abstract class JuegoBase {
     *         StringBuilder es una fila del tablero.
     */
    public StringBuilder[] getCordenadas() {
-      return cordenadas;
+      return coordenadas;
    }
 
    /**
@@ -100,7 +100,7 @@ public abstract class JuegoBase {
     *                      del tablero.
     */
    public void reemplazarCasilla(int fila, int inicioColumna, int finalColumna, String nuevoCaracter) {
-      cordenadas[fila].replace(inicioColumna, finalColumna, nuevoCaracter);
+      coordenadas[fila].replace(inicioColumna, finalColumna, nuevoCaracter);
    }
 
    /**
@@ -111,18 +111,18 @@ public abstract class JuegoBase {
    public void inicializarTablero(int[] dimensiones) {
       coordsCola = new int[] { 1, 0 };
       coordsCabeza = new int[] { 3, 0 };
-      cordenadas = new StringBuilder[dimensiones[0]];
+      coordenadas = new StringBuilder[dimensiones[0]];
 
       // Creacion del mapa segun las variables de dimensiones
       for (int filas = 0; filas < dimensiones[0]; filas++) {
          // Como comienza con el valor "null" tengo que crearlo vacio
-         cordenadas[filas] = new StringBuilder("");
+         coordenadas[filas] = new StringBuilder("");
          for (int columnas = 0; columnas < dimensiones[1]; columnas++) {
-            cordenadas[filas].append("0");
+            coordenadas[filas].append("0");
          }
       }
       // Remplazo de la primera linAea las 3 primeras letras para hacer la serpiente
-      cordenadas[0].replace(0, 3, "111");
+      coordenadas[0].replace(0, 3, "111");
    }
 
    /**
@@ -138,11 +138,11 @@ public abstract class JuegoBase {
       cordsComida[0] = (int) (Math.random() * (dimensiones[0] - 1));
       cordsComida[1] = (int) (Math.random() * (dimensiones[1] - 1));
 
-      Character comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
+      Character comprobarPosicionTablero = coordenadas[cordsComida[0]].charAt(cordsComida[1]);
       while (comprobarPosicionTablero.equals('1')) {
-         if (cordsComida[1] == cordenadas[0].length() - 1) {
+         if (cordsComida[1] == coordenadas[0].length() - 1) {
             cordsComida[1] = 0;
-            if (cordsComida[0] == cordenadas.length - 1) {
+            if (cordsComida[0] == coordenadas.length - 1) {
                cordsComida[0] = 0;
             } else {
                cordsComida[0] += 1;
@@ -150,9 +150,9 @@ public abstract class JuegoBase {
          } else {
             cordsComida[1] += 1;
          }
-         comprobarPosicionTablero = cordenadas[cordsComida[0]].charAt(cordsComida[1]);
+         comprobarPosicionTablero = coordenadas[cordsComida[0]].charAt(cordsComida[1]);
       }
-      cordenadas[cordsComida[0]].replace(cordsComida[1], cordsComida[1] + 1, "2");
+      coordenadas[cordsComida[0]].replace(cordsComida[1], cordsComida[1] + 1, "2");
    }
 
    /**
@@ -182,9 +182,9 @@ public abstract class JuegoBase {
       // Borde izquierdo
       fila.append("=");
 
-      for (int columnas = 0; columnas < cordenadas[numFila].length(); columnas++) {
+      for (int columnas = 0; columnas < coordenadas[numFila].length(); columnas++) {
 
-         Character character = cordenadas[numFila].charAt(columnas);
+         Character character = coordenadas[numFila].charAt(columnas);
          switch (character) {
             case '1':
                // Seleciono el simbolo correspondiente: cabeza (2), cola (0) o cuerpo (1)
@@ -217,7 +217,7 @@ public abstract class JuegoBase {
     * @param admiteColores Es un boolean que indica si la consola admite colores
     */
    public void mostrarTablero(int admiteColores) {
-      for (int fila = 0; fila < cordenadas.length; fila++) {
+      for (int fila = 0; fila < coordenadas.length; fila++) {
          System.out.println(generarFila(fila, admiteColores));
       }
    }
@@ -236,25 +236,25 @@ public abstract class JuegoBase {
       boolean frutaDetectada = false;
       switch (direcion) {
          case "W":
-            if ('2' == cordenadas[coordsCabeza[1] - 1].charAt(coordsCabeza[0] - 1)) {
+            if ('2' == coordenadas[coordsCabeza[1] - 1].charAt(coordsCabeza[0] - 1)) {
                frutaDetectada = true;
             }
             break;
 
          case "A":
-            if ('2' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0] - 2)) {
+            if ('2' == coordenadas[coordsCabeza[1]].charAt(coordsCabeza[0] - 2)) {
                frutaDetectada = true;
             }
             break;
 
          case "S":
-            if ('2' == cordenadas[coordsCabeza[1] + 1].charAt(coordsCabeza[0] - 1)) {
+            if ('2' == coordenadas[coordsCabeza[1] + 1].charAt(coordsCabeza[0] - 1)) {
                frutaDetectada = true;
             }
             break;
 
          case "D":
-            if ('2' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0])) {
+            if ('2' == coordenadas[coordsCabeza[1]].charAt(coordsCabeza[0])) {
                frutaDetectada = true;
             }
             break;
@@ -281,41 +281,41 @@ public abstract class JuegoBase {
    public boolean crearCabeza(boolean alive, String direcion) {
       switch (direcion) {
          case "W":
-            if ('1' == cordenadas[coordsCabeza[1] - 1].charAt(coordsCabeza[0] - 1))
+            if ('1' == coordenadas[coordsCabeza[1] - 1].charAt(coordsCabeza[0] - 1))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[coordsCabeza[1] - 1].replace(coordsCabeza[0] - 1, coordsCabeza[0], "1");
+            coordenadas[coordsCabeza[1] - 1].replace(coordsCabeza[0] - 1, coordsCabeza[0], "1");
 
             coordsCabeza[1] -= 1;
             break;
 
          case "A":
-            if ('1' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0] - 2))
+            if ('1' == coordenadas[coordsCabeza[1]].charAt(coordsCabeza[0] - 2))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[coordsCabeza[1]].replace(coordsCabeza[0] - 2, coordsCabeza[0] - 1, "1");
+            coordenadas[coordsCabeza[1]].replace(coordsCabeza[0] - 2, coordsCabeza[0] - 1, "1");
 
             coordsCabeza[0] -= 1;
             break;
 
          case "S":
-            if ('1' == cordenadas[coordsCabeza[1] + 1].charAt(coordsCabeza[0] - 1))
+            if ('1' == coordenadas[coordsCabeza[1] + 1].charAt(coordsCabeza[0] - 1))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[coordsCabeza[1] + 1].replace(coordsCabeza[0] - 1, coordsCabeza[0], "1");
+            coordenadas[coordsCabeza[1] + 1].replace(coordsCabeza[0] - 1, coordsCabeza[0], "1");
 
             coordsCabeza[1] += 1;
             break;
 
          case "D":
-            if ('1' == cordenadas[coordsCabeza[1]].charAt(coordsCabeza[0]))
+            if ('1' == coordenadas[coordsCabeza[1]].charAt(coordsCabeza[0]))
                alive = false;
 
             /* ----- Parte de la cabeza ----- */
-            cordenadas[coordsCabeza[1]].replace(coordsCabeza[0], coordsCabeza[0] + 1, "1");
+            coordenadas[coordsCabeza[1]].replace(coordsCabeza[0], coordsCabeza[0] + 1, "1");
             coordsCabeza[0] += 1;
             break;
 

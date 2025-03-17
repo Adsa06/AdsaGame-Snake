@@ -111,8 +111,21 @@ public class Player {
      */
     public void mostrarPerfil() {
         System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion maxima: " + maxScore);
+        if(partidas.size() > 0) {
+            System.out.println("Partidas jugadas: " + partidas.size());
+            for (Partida partida : partidas) {
+                System.out.println(partida.toString());
+            }
+        } else {
+            System.out.println("No se han jugado partidas");
+        }
     }
 
+    /**
+     * Añade una partida al historial de partidas del jugador.
+     * 
+     * @param partida La partida a agregar.
+     */
     public void addPartida(Partida partida) {
         this.partidas.add(partida);
     }

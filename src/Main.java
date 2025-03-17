@@ -120,7 +120,8 @@ public class Main {
                     Utilidades.presionarEnter();
                     break;
                 default:
-                    System.out.println("Opcion incorrecta");
+                    if(option != 4)
+                        System.out.println("Opcion incorrecta");
                     break;
             }
         } while (option != 4);

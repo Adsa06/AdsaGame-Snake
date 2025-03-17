@@ -69,6 +69,7 @@ public class ControladorJuego {
 
       opcionModoJuego = Utilidades.pedirNumeroEntero("Elige el modo: ", 1, 2);
 
+      partida.setModoDeJuego(opcionModoJuego);
       switch (opcionModoJuego) {
          case 1:
             nuevoJuego = new ModoNormal();

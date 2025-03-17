@@ -11,6 +11,20 @@ import java.util.Arrays;
 
 public class Partida {
 
+    private  enum ModoDeJuego {
+        MODO_NORMAL("Modo Normal"),
+        MODO_ATRABESAR_PAREDES("Modo Atrabesar Paredes");
+    
+        private final String descripcion;
+    
+        ModoDeJuego(String descripcion) {
+            this.descripcion = descripcion;
+        }
+    
+        public String getDescripcion() {
+            return descripcion;
+        }
+    }
     /** Fecha inicio de la partida */
     private LocalDateTime fechaInicio;
     /** Fecha final de la partida */
@@ -24,7 +38,9 @@ public class Partida {
     /** Dimensiones del tablero */
     private int[] dimensionesTablero = new int[2];
     /** Ganado de la partida */
-    public boolean ganado;
+    private boolean ganado;
+    /** Modo de juego */
+    private ModoDeJuego modoDeJuego;
 
     /**
      * Actualiza la fecha de inicio de la partida al momento actual.
@@ -69,11 +85,11 @@ public class Partida {
 
     /**
      * Establece las dimensiones del tablero en la partida.
-     * 
+     * Utilizo array copy para no copiar la referencia si no el contenido
      * @param dimensiones Los nuevos dimensiones del tablero en la partida.
      */
     public void setDimensionesTablero(int[] dimensiones) {
-        this.dimensionesTablero = dimensiones;
+        this.dimensionesTablero = Arrays.copyOf(dimensiones, dimensiones.length);
     }
 
     /**
@@ -95,10 +111,32 @@ public class Partida {
         this.ganado = ganado;
     }
 
+    /**
+     * Establece el modo de juego en la partida.
+     * 
+     * @param modoDeJuego El nuevo modo de juego en la partida.
+     */
+    public void setModoDeJuego(int numModoDeJuego) {
+        switch (numModoDeJuego) {
+            case 1:
+                modoDeJuego = ModoDeJuego.MODO_NORMAL;
+                break;
+
+            case 2:
+                modoDeJuego = ModoDeJuego.MODO_ATRABESAR_PAREDES;
+                break;
+            default:
+                
+                break;
+        }
+    }
+
     @Override
     public String toString() {
         return "Partida [fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal
                 + ", puntuacion=" + puntuacion + ", longitudSerpiente=" + longitudSerpiente + ", velocidad=" + velocidad
-                + ", dimensionesTablero=" + Arrays.toString(dimensionesTablero) + ", ganado=" + ganado + "]";
+                + ", dimensionesTablero=" + Arrays.toString(dimensionesTablero) + ", ganado=" + ganado
+                + ", modoDeJuego="
+                + modoDeJuego.getDescripcion() + "]";
     }
 }
