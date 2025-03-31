@@ -9,6 +9,11 @@ package clases;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Player {
     // Variables privadas ya que no deberian hacederse de forma general si no de
@@ -129,6 +134,29 @@ public class Player {
     public void addPartida(Partida partida) {
         this.partidas.add(partida);
     }
+
+        // Método para guardar la lista de jugadores en un archivo
+        public static void guardarJugadores(List<Player> jugadores, String rutaArchivo) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaArchivo))) {
+                oos.writeObject(jugadores);
+                System.out.println("Jugadores guardados correctamente en " + rutaArchivo);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        // Método para cargar la lista de jugadores desde un archivo
+        public static Player cargarJugadores(String rutaArchivo) {
+            Player jugadores = null;
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rutaArchivo))) {
+                jugadores = (Player) ois.readObject();
+                System.out.println("Jugadores cargados correctamente desde " + rutaArchivo);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            return jugadores;
+        }
+    
 
     /**
      * Devuelve una representación en forma de cadena de texto del objeto Player,
