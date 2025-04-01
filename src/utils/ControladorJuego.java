@@ -1,3 +1,8 @@
+/**
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 1/4/2024
+ * Descripcion: Este archivo es el que contiene las funciones para iniciar el juego
+ */
 package utils;
 
 import java.io.IOException;

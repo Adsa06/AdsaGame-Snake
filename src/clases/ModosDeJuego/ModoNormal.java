@@ -1,3 +1,8 @@
+/**
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 1/4/2024
+ * Descripcion: Clase para iniciar el juego en modo normal
+ */
 package clases.ModosDeJuego;
 
 import java.io.BufferedReader;

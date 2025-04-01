@@ -1,3 +1,8 @@
+/**
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 1/4/2024
+ * Descripcion: Clase plantilla del juego
+ */
 package clases;
 
 import java.io.IOException;
