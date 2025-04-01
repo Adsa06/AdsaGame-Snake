@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class Player {
+public class Player implements Serializable {
     // Variables privadas ya que no deberian hacederse de forma general si no de
     // funciones
     /** Nombre del jugador */
@@ -142,9 +144,14 @@ public class Player {
      * @param rutaArchivo La ruta del archivo donde se guardará el objeto Player.
      */
 
-    public static void guardarJugadores(Player jugadores, String rutaArchivo) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaArchivo))) {
-            oos.writeObject(jugadores);
+    public static void guardarJugador(Player player) {
+        File file = new File("Players");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Players/" + player.getName() + ".txt"))) {
+            oos.writeObject(player);
             System.out.println("Jugador guardado correctamente");
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,18 +166,23 @@ public class Player {
      * @return El objeto Player cargado desde el archivo, o null si ocurre un error.
      */
 
-    public static Player cargarJugadores(String rutaArchivo) {
-        Player jugadores = null;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rutaArchivo))) {
-            jugadores = (Player) ois.readObject();
-            System.out.println("Jugador cargado correctamente");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+    public static Player cargarJugador(String nombreJugador) {
+        File file = new File("Players/" + nombreJugador + ".txt");
+        Player jugador = null;
+        if(file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Players/" + nombreJugador + ".txt"))) {
+                jugador = (Player) ois.readObject();
+                System.out.println("Jugador cargado correctamente");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("El jugador no existe");
         }
 
-        return jugadores;
+        return jugador;
     }
 
     /**

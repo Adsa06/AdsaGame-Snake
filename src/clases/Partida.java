@@ -6,10 +6,11 @@
  */
 package clases;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-public class Partida {
+public class Partida implements Serializable{
 
     private enum ModoDeJuego {
         MODO_NORMAL("Modo Normal"),

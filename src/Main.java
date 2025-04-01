@@ -31,18 +31,6 @@ public class Main {
 
         int option = 0;
 
-        String mensajeSaludo = "\r\n" + //
-                "  ___                                _  _                 _   ___                    _                              _        _  _                         ___ \r\n"
-                + //
-                " | _ ) _  _  ___  _ _   ___  ___  __| |(_) __ _  ___     (_) / __| ___  _ __   ___  | |_  ___   _ __  _  _  ___  __| | ___  | || | __ _  _ __   __ _  _ _|__ \\\r\n"
-                + //
-                " | _ \\| || |/ -_)| ' \\ / _ \\(_-< / _` || |/ _` |(_-< _  / /_| (__ / _ \\| '  \\ / _ \\ |  _|/ -_) | '_ \\| || |/ -_)/ _` |/ _ \\ | || |/ _` || '  \\ / _` || '_| /_/\r\n"
-                + //
-                " |___/ \\_,_|\\___||_||_|\\___//__/ \\__,_||_|\\__,_|/__/( ) \\___|\\___|\\___/|_|_|_|\\___/  \\__|\\___| | .__/ \\_,_|\\___|\\__,_|\\___/ |_||_|\\__,_||_|_|_|\\__,_||_|  (_) \r\n"
-                + //
-                "                                                    |/                                         |_|                                                            \r\n"
-                + //
-                "";
         // https://patorjk.com/software/taag/
         // Font: small, default y default
         String mensajeMenu = "\r\n" + //
@@ -75,20 +63,7 @@ public class Main {
                 "";
 
         /* ----- Parte principal ----- */
-
-        // Aqui faltaria limpiar la pantalla por consola
-        // Evito el error que aparece al introducir un nombre demasiado largo repetiendo
-        // que me pida un nombre hasta que sea adecuado
-        do {
-            System.out.println(mensajeSaludo);
-            player.setName(Utilidades.pedirString());
-            // Este es un if que detecta si es mayor a cuarenta la longitud de la frase si
-            // es asi ejecuta el sigueinte linea de codigo
-            // El pattern detecta \ / y espacios
-            if (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()))
-                System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
-        } while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()));
-        // Actualizamos el contenido del array con el nombre correcto
+        Utilidades.iniciarJugador(player);
 
         do {
             System.out.println(mensajeMenu);
@@ -126,6 +101,7 @@ public class Main {
                     break;
             }
         } while (option != 4);
+        Player.guardarJugador(player);
         System.out.println("Hasta otra");
     }
 }
