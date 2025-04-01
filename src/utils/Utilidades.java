@@ -91,7 +91,8 @@ public class Utilidades {
      * si no es así, pide el nombre del jugador y lo guarda.
      * @param player El jugador que se va a iniciar
      */
-    public static void iniciarJugador(Player player) {
+    public static Player iniciarJugador() {
+        Player player = null;
         boolean playerExists = false;
         do {
             String optionCuentaGuardada = "";
@@ -104,6 +105,7 @@ public class Utilidades {
                 player = Player.cargarJugador(nombre);
                 playerExists = true;
             } else {
+                player = new Player();
                 // Creacion de una cuenta nueva
                 do {
                     System.out.println("Buenos dias, ¿Cual es tu nombre?");
@@ -117,5 +119,6 @@ public class Utilidades {
                 playerExists = true;
             }
         } while (!playerExists);
+        return player;
     }
 }

@@ -27,80 +27,82 @@ public class Main {
 
         /* ----- Parte declarativa ----- */
 
-        Player player = new Player();
+        Player player = null;
 
         int option = 0;
 
         // https://patorjk.com/software/taag/
         // Font: small, default y default
-        String mensajeMenu = "\r\n" + //
-                "   _    _                        _                         _                   ___ \r\n" + //
-                "  (_)  /_\\    __ _ _  _ ___   __| |___ ___ ___ __ _ ___   (_)_  _ __ _ __ _ _ |__ \\\r\n" + //
-                " / /_ / _ \\  / _` | || / -_) / _` / -_|_-</ -_) _` (_-<   | | || / _` / _` | '_|/_/\r\n" + //
-                " \\___/_/ \\_\\ \\__, |\\_,_\\___| \\__,_\\___/__/\\___\\__,_/__/  _/ |\\_,_\\__, \\__,_|_| (_) \r\n" + //
-                "                |_|                                     |__/     |___/                     \r\n" + //
-                "  _            _                                                                           \r\n" + //
-                " / |  ___   _ | |_  _ __ _ __ _ _ _                                                        \r\n" + //
-                " | | |___| | || | || / _` / _` | '_|                                                       \r\n" + //
-                " |_| |___|  \\__/ \\_,_\\__, \\__,_|_|                                                     \r\n" + //
-                "                     |___/                                                                 \r\n" + //
-                "                                                                                           \r\n" + //
-                "  ___          ___           __ _                                                          \r\n" + //
-                " |_  )  ___   / __|___ _ _  / _(_)                                                         \r\n" + //
-                "  / /  |___| | (__/ _ \\ ' \\|  _| |                                                       \r\n" + //
-                " /___| |___|  \\___\\___/_||_|_|_|_|                                                       \r\n" + //
-                "                                                                                           \r\n" + //
-                "  _ __        ___          __ _ _                                                          \r\n" + //
-                " |__ /  ___  | _ \\___ _ _ / _(_) |                                                        \r\n" + //
-                "  |_ \\ |___| |  _/ -_) '_|  _| | |                                                        \r\n" + //
-                " |___/ |___| |_| \\___|_| |_| |_|_|                                                        \r\n" + //
-                "                                                                                           \r\n" + //
-                "  _ __        ___      _ _                                                                 \r\n" + //
-                " | | |  ___  / __|__ _| (_)_ _                                                             \r\n" + //
-                " |_  _||___| \\__ / _` | | | '_|                                                           \r\n" + //
-                "   |_| |___| |___\\__,_|_|_|_|                                                             \r\n" + //
-                "                                                                                           \r\n" + //
-                "";
+        String mensajeMenu = "\n" + //
+                        "   _    _                        _                         _                   ___ \n" + //
+                        "  (_)  /_\\    __ _ _  _ ___   __| |___ ___ ___ __ _ ___   (_)_  _ __ _ __ _ _ |__ \\\n" + //
+                        " / /_ / _ \\  / _` | || / -_) / _` / -_|_-</ -_) _` (_-<   | | || / _` / _` | '_|/_/\n" + //
+                        " \\___/_/ \\_\\ \\__, |\\_,_\\___| \\__,_\\___/__/\\___\\__,_/__/  _/ |\\_,_\\__, \\__,_|_| (_) \n" + //
+                        "  _            _|_|                                     |__/     |___/             \n" + //
+                        " / |  ___   _ | |_  _ __ _ __ _ _ _                                                \n" + //
+                        " | | |___| | || | || / _` / _` | '_|                                               \n" + //
+                        " |_| |___|  \\__/ \\_,_\\__, \\__,_|_|                                                 \n" + //
+                        "  ___          ___   |___/   __ _                                                  \n" + //
+                        " |_  )  ___   / __|___ _ _  / _(_)__ _                                             \n" + //
+                        "  / /  |___| | (__/ _ \\ ' \\|  _| / _` |                                            \n" + //
+                        " /___| |___|  \\___\\___/_||_|_| |_\\__, |                                            \n" + //
+                        "  ____        ___          __ _ _|___/                                             \n" + //
+                        " |__ /  ___  | _ \\___ _ _ / _(_) |                                                 \n" + //
+                        "  |_ \\ |___| |  _/ -_) '_|  _| | |                                                 \n" + //
+                        " |___/ |___| |_| \\___|_| |_| |_|_|                                                 \n" + //
+                        "  _ _           ___                                   _                            \n" + //
+                        " | | |   ___   / __|___ _ _ _ _ __ _ _ _   ___ ___ __(_)___ _ _                    \n" + //
+                        " |_  _| |___| | (__/ -_) '_| '_/ _` | '_| (_-</ -_|_-< / _ \\ ' \\                   \n" + //
+                        "   |_|  |___|  \\___\\___|_| |_| \\__,_|_|   /__/\\___/__/_\\___/_||_|                  \n" + //
+                        "  ___          ___                  _                   ___       _ _              \n" + //
+                        " | __|  ___   / __|_  _ __ _ _ _ __| |__ _ _ _   _  _  / __| __ _| (_)_ _          \n" + //
+                        " |__ \\ |___| | (_ | || / _` | '_/ _` / _` | '_| | || | \\__ \\/ _` | | | '_|         \n" + //
+                        " |___/ |___|  \\___|\\_,_\\__,_|_| \\__,_\\__,_|_|    \\_, | |___/\\__,_|_|_|_|           \n" + //
+                        "                                                 |__/                              \n" + //
+                        "";
 
         /* ----- Parte principal ----- */
-        Utilidades.iniciarJugador(player);
+        player = Utilidades.iniciarJugador();
 
         do {
             System.out.println(mensajeMenu);
-            option = Utilidades.pedirNumeroEntero("Introduce una opcion entre", 1, 4);
+            option = Utilidades.pedirNumeroEntero("Introduce una opcion entre", 1, 5);
             switch (option) {
-                case 1:
-
-                    /* ----- Esta zona hara que se reinicie el archivo txt ----- */ // Estas lineas estan explicadas en
-                                                                                    // el ControladorPrincipal.java
+                case 1 -> {
+                    /* ----- Esta zona hara que se reinicie el archivo txt ----- */ 
+                    // Estas lineas estan explicadas en
+                    // el ControladorPrincipal.java
                     BufferedWriter fr = new BufferedWriter(new FileWriter("./content.txt", false));
                     fr.close();
                     /* ----- */
                     Partida partida = new Partida();
                     partida.actualizarFechaInicio();
                     double scoreProvisional = ControladorJuego.iniciarJuego(player, partida);
-                    partida.actualizarFechaFinal();
-                    partida.setPuntuacion(scoreProvisional);
-                    partida.setVelocidad(player.getCongiguration()[2]);
-                    partida.setDimensionesTablero(player.getCongiguration()[0], player.getCongiguration()[1]);
+                    partida.anadirPartidaTerminada(scoreProvisional, player.getCongiguration()[2], player.getCongiguration()[0], player.getCongiguration()[1]);
                     if (scoreProvisional > player.getMaxScore())
                         player.setMaxScore(scoreProvisional);
                     player.addPartida(partida);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));
-                    break;
-                case 3:
+                }
+
+                case 3 -> {
                     player.mostrarPerfil();
                     System.out.println("Presiona enter para salir");
                     Utilidades.presionarEnter();
-                    break;
-                default:
-                    if(option != 4)
+                }
+
+                case 4 -> {
+
+                }
+
+                default -> {
+                    if (option != 5)
                         System.out.println("Opcion incorrecta");
-                    break;
+                }
             }
-        } while (option != 4);
+        } while (option != 5);
         Player.guardarJugador(player);
         System.out.println("Hasta otra");
     }

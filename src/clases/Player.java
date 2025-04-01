@@ -18,6 +18,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Player implements Serializable {
+    /** Constante para la Serializacion */
+    private static final long serialVersionUID = 1L;
     // Variables privadas ya que no deberian hacederse de forma general si no de
     // funciones
     /** Nombre del jugador */
@@ -145,12 +147,12 @@ public class Player implements Serializable {
      */
 
     public static void guardarJugador(Player player) {
-        File file = new File("Players");
+        File file = new File("./Players");
         if (!file.exists()) {
             file.mkdirs();
         }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Players/" + player.getName() + ".txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./Players/" + player.getName() + ".txt"))) {
             oos.writeObject(player);
             System.out.println("Jugador guardado correctamente");
         } catch (IOException e) {
@@ -167,10 +169,10 @@ public class Player implements Serializable {
      */
 
     public static Player cargarJugador(String nombreJugador) {
-        File file = new File("Players/" + nombreJugador + ".txt");
+        File file = new File("./Players/" + nombreJugador + ".txt");
         Player jugador = null;
         if(file.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Players/" + nombreJugador + ".txt"))) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 jugador = (Player) ois.readObject();
                 System.out.println("Jugador cargado correctamente");
             } catch (IOException e) {

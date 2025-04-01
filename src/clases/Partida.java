@@ -14,7 +14,7 @@ public class Partida implements Serializable{
 
     private enum ModoDeJuego {
         MODO_NORMAL("Modo Normal"),
-        MODO_ATRABESAR_PAREDES("Modo Atrabesar Paredes");
+        MODO_ATRAVESAR_PAREDES("Modo Atravesar Paredes");
     
         private final String descripcion;
     
@@ -124,12 +124,19 @@ public class Partida implements Serializable{
                 break;
 
             case 2:
-                modoDeJuego = ModoDeJuego.MODO_ATRABESAR_PAREDES;
+                modoDeJuego = ModoDeJuego.MODO_ATRAVESAR_PAREDES;
                 break;
             default:
                 
                 break;
         }
+    }
+
+    public void anadirPartidaTerminada(double puntuacion, int velocidad, int filas, int columnas) {
+        actualizarFechaFinal();
+        setPuntuacion(puntuacion);
+        setVelocidad(velocidad);
+        setDimensionesTablero(filas, columnas);
     }
 
     @Override
