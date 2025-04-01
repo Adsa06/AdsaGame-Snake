@@ -2,6 +2,8 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Utilidades {
     /**
@@ -65,5 +67,19 @@ public class Utilidades {
             br.readLine();
         } catch (Exception e) {
         }
+    }
+
+    /**
+     * Valida si una cadena coincide con un patrón especificado.
+     * 
+     * @param patron El patrón de expresión regular a utilizar para la validación.
+     * @param cadena La cadena de texto que se va a verificar contra el patrón.
+     * @return true si la cadena coincide con el patrón, false en caso contrario.
+     */
+
+    public static boolean validarPatron(String patron, String cadena) {
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(cadena);
+        return matcher.find();
     }
 }

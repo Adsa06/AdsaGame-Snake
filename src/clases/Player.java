@@ -116,7 +116,7 @@ public class Player {
      */
     public void mostrarPerfil() {
         System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion maxima: " + maxScore);
-        if(partidas.size() > 0) {
+        if (partidas.size() > 0) {
             System.out.println("Partidas jugadas: " + partidas.size());
             for (Partida partida : partidas) {
                 System.out.println(partida.toString());
@@ -135,28 +135,43 @@ public class Player {
         this.partidas.add(partida);
     }
 
-        // Método para guardar la lista de jugadores en un archivo
-        public static void guardarJugadores(List<Player> jugadores, String rutaArchivo) {
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaArchivo))) {
-                oos.writeObject(jugadores);
-                System.out.println("Jugadores guardados correctamente en " + rutaArchivo);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    /**
+     * Guarda un objeto Player en un archivo especificado.
+     * 
+     * @param jugadores   El objeto Player que se desea guardar.
+     * @param rutaArchivo La ruta del archivo donde se guardará el objeto Player.
+     */
+
+    public static void guardarJugadores(Player jugadores, String rutaArchivo) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaArchivo))) {
+            oos.writeObject(jugadores);
+            System.out.println("Jugador guardado correctamente");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        
-        // Método para cargar la lista de jugadores desde un archivo
-        public static Player cargarJugadores(String rutaArchivo) {
-            Player jugadores = null;
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rutaArchivo))) {
-                jugadores = (Player) ois.readObject();
-                System.out.println("Jugadores cargados correctamente desde " + rutaArchivo);
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            return jugadores;
+    }
+
+    /**
+     * Carga un objeto Player desde un archivo especificado.
+     * 
+     * @param rutaArchivo La ruta del archivo desde donde se cargará el objeto
+     *                    Player.
+     * @return El objeto Player cargado desde el archivo, o null si ocurre un error.
+     */
+
+    public static Player cargarJugadores(String rutaArchivo) {
+        Player jugadores = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rutaArchivo))) {
+            jugadores = (Player) ois.readObject();
+            System.out.println("Jugador cargado correctamente");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-    
+
+        return jugadores;
+    }
 
     /**
      * Devuelve una representación en forma de cadena de texto del objeto Player,

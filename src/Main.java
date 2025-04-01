@@ -84,9 +84,10 @@ public class Main {
             player.setName(Utilidades.pedirString());
             // Este es un if que detecta si es mayor a cuarenta la longitud de la frase si
             // es asi ejecuta el sigueinte linea de codigo
-            if (player.getName().length() > 40)
-                System.out.println("Introduzca un nombre menor a 40 caracteres");
-        } while (player.getName().length() > 40);
+            // El pattern detecta \ / y espacios
+            if (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()))
+                System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
+        } while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()));
         // Actualizamos el contenido del array con el nombre correcto
 
         do {
