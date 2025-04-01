@@ -94,7 +94,7 @@ public class Main {
                 }
 
                 case 4 -> {
-
+                    player = Utilidades.cerrarSesion(player);
                 }
 
                 default -> {

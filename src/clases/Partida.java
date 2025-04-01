@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class Partida implements Serializable{
+    /** Constante para la Serializacion */
+    private static final long serialVersionUID = 1L;
 
     private enum ModoDeJuego {
         MODO_NORMAL("Modo Normal"),

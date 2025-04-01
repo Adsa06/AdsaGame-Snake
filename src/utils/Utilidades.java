@@ -103,7 +103,7 @@ public class Utilidades {
                 System.out.println("Escriba el nombre de la cuenta");
                 String nombre = Utilidades.pedirString();
                 player = Player.cargarJugador(nombre);
-                playerExists = true;
+                playerExists = player != null;
             } else {
                 player = new Player();
                 // Creacion de una cuenta nueva
@@ -120,5 +120,12 @@ public class Utilidades {
             }
         } while (!playerExists);
         return player;
+    }
+
+    public static Player cerrarSesion(Player player) {
+        Player.guardarJugador(player);
+        System.out.println("Sesion cerrada");
+        player = null;
+        return iniciarJugador();
     }
 }
