@@ -7,6 +7,7 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -113,18 +114,25 @@ public class Utilidades {
                 player = Player.cargarJugador(nombre);
                 playerExists = player != null;
             } else {
-                player = new Player();
-                // Creacion de una cuenta nueva
-                do {
-                    System.out.println("Buenos dias, ¿Cual es tu nombre?");
-                    player.setName(Utilidades.pedirString());
-                    // Este es un if que detecta si es mayor a cuarenta la longitud de la frase si
-                    // es asi ejecuta el sigueinte linea de codigo
-                    // El pattern detecta \ / y espacios
-                    if (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()))
-                        System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
-                } while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()));
-                playerExists = true;
+                // Comprueba si existe o no existe la carpeta para saber si de verdad es nuevo
+                System.out.println("Buenos dias, ¿Cual es tu nombre?");
+                String nombre = Utilidades.pedirString();
+                File file = new File("./Players", nombre + ".dat");
+                if(!file.exists()) {
+                    player = new Player();
+                    player.setName(nombre);
+                    // Creacion de una cuenta nueva
+                    do {
+                        // Este es un if que detecta si es mayor a cuarenta la longitud de la frase si
+                        // es asi ejecuta el sigueinte linea de codigo
+                        // El pattern detecta \ / y espacios
+                        if (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()))
+                            System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
+                    } while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()));
+                    playerExists = true;
+                } else {
+                    System.out.println("¡Jugador existente!");
+                }
             }
         } while (!playerExists);
         return player;

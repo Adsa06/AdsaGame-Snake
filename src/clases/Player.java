@@ -162,6 +162,7 @@ public class Player implements Serializable {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./Players/" + player.getName() + ".dat"))) {
             oos.writeObject(player);
             System.out.println("Jugador guardado correctamente");
+            oos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,6 +183,7 @@ public class Player implements Serializable {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 jugador = (Player) ois.readObject();
                 System.out.println("Jugador cargado correctamente");
+                ois.close();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
