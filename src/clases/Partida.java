@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import utils.ColoresConsola;
+import utils.Utilidades;
+
 public class Partida implements Serializable{
     /** Constante para la Serializacion */
     private static final long serialVersionUID = 1L;
@@ -134,6 +137,14 @@ public class Partida implements Serializable{
         }
     }
 
+    /**
+     * Aade una partida terminada a la lista de partidas.
+     * 
+     * @param puntuacion La puntuacion de la partida terminada.
+     * @param velocidad  La velocidad de la partida terminada.
+     * @param filas      El numero de filas del tablero de la partida terminada.
+     * @param columnas   El numero de columnas del tablero de la partida terminada.
+     */
     public void anadirPartidaTerminada(double puntuacion, int velocidad, int filas, int columnas) {
         actualizarFechaFinal();
         setPuntuacion(puntuacion);
@@ -141,6 +152,101 @@ public class Partida implements Serializable{
         setDimensionesTablero(filas, columnas);
     }
 
+    /**
+     * Devuelve un mensaje de informacion de la partida, con o sin color,
+     * dependiendo del parametro admiteColores.
+     * 
+     * @param admiteColores Un boolean que indica si la consola admite colores.
+     * @return Un String con la informacion de la partida.
+     */
+    public String mostrarInfo(boolean admiteColores) {
+
+        StringBuilder info = new StringBuilder();
+
+        if (admiteColores) {
+            // Encabezado con negrita y color cian
+            info.append(ColoresConsola.ANSI_BOLD())
+                .append(ColoresConsola.ANSI_CYAN())
+                .append("=== Información de la Partida ===\n")
+                .append(ColoresConsola.ANSI_RESET());
+            
+            // Fecha de inicio
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Fecha de inicio: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(fechaInicio.toString())
+                .append("\n");
+
+            // Tiempo transcurrido
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Tiempo transcurrido: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(Utilidades.formatearFecha(fechaInicio, fechaFinal))
+                .append("\n");
+
+            // Puntuación
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Puntuación: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(String.format("%.3f",puntuacion))
+                .append("\n");
+
+            // Longitud de la serpiente
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Longitud de la serpiente: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(longitudSerpiente)
+                .append("\n");
+
+            // Velocidad
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Velocidad: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(velocidad)
+                .append("\n");
+
+            // Dimensiones del tablero
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Dimensiones del tablero: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(Arrays.toString(dimensionesTablero))
+                .append("\n");
+
+            // Ganado
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Ganado: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(ganado ? "Sí" : "No")
+                .append("\n");
+
+            // Modo de juego (usando el método getDescripcion())
+            info.append(ColoresConsola.ANSI_BROWN())
+                .append("Modo de juego: ")
+                .append(ColoresConsola.ANSI_RESET())
+                .append(modoDeJuego.getDescripcion())
+                .append("\n");
+        } else {
+            // Sin colores, formato simple
+            info.append("=== Información de la Partida ===\n");
+            info.append("Fecha de inicio: ").append(fechaInicio.toString()).append("\n");
+            info.append("Tiempo transcurrido: ").append(Utilidades.formatearFecha(fechaInicio, fechaFinal)).append("\n");
+            info.append("Puntuación: ").append(String.format("%.3f",puntuacion)).append("\n");
+            info.append("Longitud de la serpiente: ").append(longitudSerpiente).append("\n");
+            info.append("Velocidad: ").append(velocidad).append("\n");
+            info.append("Dimensiones del tablero: ").append(Arrays.toString(dimensionesTablero)).append("\n");
+            info.append("Ganado: ").append(ganado ? "Sí" : "No").append("\n");
+            info.append("Modo de juego: ").append(modoDeJuego.getDescripcion()).append("\n");
+        }
+
+        return info.toString();
+    }
+
+
+    /**
+     * Convierte la partida en una cadena que describe su informacion.
+     * 
+     * @return Un String que describe la partida.
+     */
     @Override
     public String toString() {
         return "Partida [fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal

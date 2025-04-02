@@ -9,6 +9,9 @@ package clases;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import utils.ColoresConsola;
+
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.FileOutputStream;
@@ -119,11 +122,15 @@ public class Player implements Serializable {
      * Muestra el perfil del jugador, incluyendo el nombre y la puntuacion.
      */
     public void mostrarPerfil() {
-        System.out.println("Perfil del jugador: \nNombre: " + name + "\nPuntuacion maxima: " + maxScore);
+        String[] infoPlayer = {
+            ("Perfil del jugador: \nNombre: " + name + "\nPuntuacion maxima: " + String.format("%.3f",maxScore)), 
+            (ColoresConsola.ANSI_BLUE() + "Perfil del jugador: \nNombre: " + name + "\nPuntuacion maxima: " + String.format("%.3f",maxScore) + ColoresConsola.ANSI_RESET())
+        };
+        System.out.println(infoPlayer[configuration[3]]);
         if (partidas.size() > 0) {
             System.out.println("Partidas jugadas: " + partidas.size());
             for (Partida partida : partidas) {
-                System.out.println(partida.toString());
+                System.out.println(partida.mostrarInfo(configuration[3] == 1));
             }
         } else {
             System.out.println("No se han jugado partidas");
@@ -152,7 +159,7 @@ public class Player implements Serializable {
             file.mkdirs();
         }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./Players/" + player.getName() + ".txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./Players/" + player.getName() + ".dat"))) {
             oos.writeObject(player);
             System.out.println("Jugador guardado correctamente");
         } catch (IOException e) {
@@ -169,7 +176,7 @@ public class Player implements Serializable {
      */
 
     public static Player cargarJugador(String nombreJugador) {
-        File file = new File("./Players/" + nombreJugador + ".txt");
+        File file = new File("./Players/" + nombreJugador + ".dat");
         Player jugador = null;
         if(file.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {

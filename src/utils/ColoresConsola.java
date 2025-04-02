@@ -130,6 +130,15 @@ public class ColoresConsola {
     }
 
     /**
+     * Devuelve el código para poner el texto en marrón.
+     * 
+     * @return El string con el código para poner el texto en marrón.
+     */
+    public static String ANSI_BROWN() {
+        return "\u001B[38;2;165;42;42m"; // RGB para color marrón
+    }
+
+    /**
      * Devuelve el codigo para poner el texto en un color RGB especifico.
      * 
      * @param r el valor rojo (0-255)

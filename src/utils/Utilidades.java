@@ -8,6 +8,8 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 import clases.Player;
@@ -133,5 +135,17 @@ public class Utilidades {
         System.out.println("Sesion cerrada");
         player = null;
         return iniciarJugador();
+    }
+
+    public static String formatearFecha(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
+
+        // Calcular el tiempo transcurrido entre fechaInicio y fechaFinal
+        Duration duracion = Duration.between(fechaInicio, fechaFinal);
+        long horas = duracion.toHours();
+        long minutos = (duracion.toMinutes() % 60);
+        long segundos = (duracion.getSeconds() % 60);
+        String tiempoTranscurrido = String.format("%02d:%02d:%02d", horas, minutos, segundos);
+
+        return tiempoTranscurrido;
     }
 }
