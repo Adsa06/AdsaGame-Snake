@@ -1,12 +1,16 @@
+/**
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 1/4/2024
+ * Descripcion: Este archivo es el que contiene las funciones para iniciar el juego
+ */
 package utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import clases.ModosDeJuego.ModoAtrabesarParedes;
+import clases.ModosDeJuego.ModoAtravesarParedes;
 import clases.ModosDeJuego.ModoNormal;
 import clases.JuegoBase;
+import clases.Partida;
 import clases.Player;
 
 public class ControladorJuego {
@@ -24,16 +28,15 @@ public class ControladorJuego {
     * @throws InterruptedException Si el hilo de ejecuci n es interrumpido
     *                              durante el tiempo de espera.
     */
-   public static double iniciarJuego(int[] configuracionSnake, Player player) throws IOException, InterruptedException {
+   public static double iniciarJuego(Player player, Partida partida) throws IOException, InterruptedException {
 
       /* ----- Parte declarativa ----- */
-      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
       int opcionModoJuego = 0;
       JuegoBase nuevoJuego;
       String[] explicacionModos = {
             "1. Modo Normal: es el modo clasico del juego de Snake",
             "2. Modo Atrabesar Paredes: es el modo en el cual el jugador puede atrabesar las paredes",
-            "Elige el modo \"1\" o \"2\""
+
       };
       String[][] explicacionJuego = {
             {
@@ -65,38 +68,31 @@ public class ControladorJuego {
       };
 
       /* ----- Parte principal ----- */
-      do {
+      for (String frases : explicacionModos) {
+         System.out.println(frases);
+      }
 
-         for (String frases : explicacionModos) {
-            System.out.println(frases);
-         }
+      opcionModoJuego = Utilidades.pedirNumeroEntero("Elige el modo: ", 1, 2);
 
-         try {
-            opcionModoJuego = Integer.parseInt(br.readLine());
-         } catch (NumberFormatException e) {
-            System.out.println("Porfavor, escriba una opcion valida");
-            opcionModoJuego = 0;
-         }
-
-         switch (opcionModoJuego) {
-            case 1:
-               nuevoJuego = new ModoNormal();
-               break;
-            case 2:
-               nuevoJuego = new ModoAtrabesarParedes();
-               break;
-            default:
-               nuevoJuego = new ModoNormal();
-               break;
-         }
-      } while (opcionModoJuego < 1 || opcionModoJuego > 2);
+      partida.setModoDeJuego(opcionModoJuego);
+      switch (opcionModoJuego) {
+         case 1:
+            nuevoJuego = new ModoNormal();
+            break;
+         case 2:
+            nuevoJuego = new ModoAtravesarParedes();
+            break;
+         default:
+            nuevoJuego = new ModoNormal();
+            break;
+      }
 
       // Elegir tipo de juego
       for (String frases : explicacionJuego[player.getCongiguration()[3]]) {
          System.out.println(frases);
       }
       // Esto hace q no continue el programa sin que presione el enter
-      br.readLine();
-      return nuevoJuego.iniciarJuego(configuracionSnake);
+      Utilidades.presionarEnter();
+      return nuevoJuego.iniciarJuego(player.getCongiguration(), partida);
    }
 }

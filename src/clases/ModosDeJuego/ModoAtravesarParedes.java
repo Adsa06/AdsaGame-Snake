@@ -1,3 +1,8 @@
+/**
+ * Autor: Aitor de Santos Amoros
+ * Fecha: 1/4/2024
+ * Descripcion: Clase para iniciar el juego en modo atravesar paredes
+ */
 package clases.ModosDeJuego;
 
 import java.io.BufferedReader;
@@ -5,20 +10,24 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import clases.JuegoBase;
+import clases.Partida;
 
-public class ModoAtrabesarParedes extends JuegoBase {
+public class ModoAtravesarParedes extends JuegoBase {
    /* ----- Metodo constructor ----- */
-   public ModoAtrabesarParedes() {
+   public ModoAtravesarParedes() {
    }
 
+
    /**
+    * Elimina la cola de la serpiente. La cola se encuentra en la esquina opuesta
+    * a la cabeza de la serpiente. La cola se elimina reemplazando su valor en el
+    * tablero por un "0" y actualizando la posicion de la cola en la variable
+    * cordsCola.
     * 
-    * @param tablero   Es la variable en la que elimina la cola
-    * @param cordsCola Es la posicion de la cola actual
-    * @param movs      Es la lista de movimientos
+    * @param movs La lista de movimientos que se va a realizar.
     */
    @Override
-   public void eliminarCola() {
+   public void eliminarCola(String movs) {
       // Elimino la cola
       reemplazarCasilla(getCordsCola()[1], getCordsCola()[0] - 1, getCordsCola()[0], "0");
 
@@ -30,7 +39,7 @@ public class ModoAtrabesarParedes extends JuegoBase {
        * cordsCola[1] += (movs.charAt(0) == 'W' ? -1 : (movs.charAt(0) == 'S' ? 1 :
        * 0));
        */
-      switch (getMovs().charAt(0)) {
+      switch (movs.charAt(0)) {
          case 'W':
             if (getCordsCola()[1] == 0)
                setCordsCola(getCordsCola()[0], getCordenadas().length - 1);
@@ -79,120 +88,138 @@ public class ModoAtrabesarParedes extends JuegoBase {
     *                              el tiempo de espera.
     */
    @Override
-   public double iniciarJuego(int[] configuracionSnake) throws IOException, InterruptedException {
+   public double iniciarJuego(int[] configuracionSnake, Partida partida) throws IOException, InterruptedException {
       final int[] DIMENSIONES = { configuracionSnake[0], configuracionSnake[1] };
       final int TIEMPOMILISEGUNDOS = configuracionSnake[2];
       final int ADMITECOLORES = configuracionSnake[3];
 
+      String guardarDireccion;
+      int snakeLongitud = 3;
+      boolean win = false;
+      boolean alive = true;
+      boolean haComido = true;
+      String direcion = "D";
+      String movs = "DD"; // Secuencia de movimientos para saber la continuacion de la cola
+
       BufferedReader fr = new BufferedReader(new FileReader("./content.txt"));
-      resetearVariables();
 
       super.inicializarTablero(DIMENSIONES);
 
       do {
 
-         if (super.isHaComido()) {
+         if (haComido) {
             super.generarFruta(DIMENSIONES);
-            super.setHaComido(false);
+            haComido = false;
          }
 
+         System.out.println("Longitud de la serpiente: " + snakeLongitud);
          mostrarTablero(ADMITECOLORES);
 
          // Tiempo de espera con hilos
          Thread.sleep(TIEMPOMILISEGUNDOS);
          separacion();
 
-         // Esto se tendra que hacer despues para que un espacio en blanco no de fallo
-         super.setGuardarDireccion(fr.readLine());
-         // 1 condicion ternarias para validar si no es nulo y si es W, A, S o D
-         super.setDirecion((super.getGuardarDireccion() != null && !super.getGuardarDireccion().equals("")
-               && "WASD".contains(super.getGuardarDireccion().toUpperCase())) ? super.getGuardarDireccion()
-                     : super.getDirecion());
-         super.setDirecion(super.getDirecion().toUpperCase());
+         guardarDireccion = fr.readLine();
+         direcion = ((guardarDireccion != null && guardarDireccion.length() == 1) ? guardarDireccion.toUpperCase() : direcion.toUpperCase());
          // Detecta si es un movimiento valido con una condicion ternaria y guarda el
          // movimiento para crear la cola
 
          try { // Este try lo que esta haciendo es para que en el switch de la cabeza me pille
                // el error de que se ha salido del array
 
-            if (comprobarColision())
-               detectarFrutaDetras();
-            else
-               detectarFruta();
+            if (comprobarColision(direcion)) {
+               if(detectarFrutaDetras(direcion)) {
+                  snakeLongitud++;
+                  haComido = true;
+               }
+            } else {
+               if(detectarFruta(direcion)) {
+                  snakeLongitud++;
+                  haComido = true;
+               }
+            }
             /*
              * 
              * Parte para la eliminacion y actualizacion de la cola
              * 
              */
-            super.setMovs(super.getMovs().concat(getDirecion()));
+            movs = (movs.concat(direcion));
 
-            if (!super.isHaComido()) {
+            if (!haComido) {
 
-               eliminarCola();
+               eliminarCola(movs);
 
                // Elimina el primer movimiento ya que deberia ya haberse ejecutado
-               super.setMovs(super.getMovs().substring(1));
+               movs = movs.substring(1);
             }
 
-            if (comprobarColision())
-               crearCabezaDetras();
+            if (comprobarColision(direcion))
+               alive = crearCabezaDetras(alive, direcion);
             else
-               crearCabeza();
+               alive = crearCabeza(alive, direcion);
 
          } catch (StringIndexOutOfBoundsException e) {// Aqui capta el error de que el snake se ha salido de la
                                                       // pantalla, por lo tanto pasa de vivo a muerto
-            super.setAlive(false);
+            alive = false;
             System.out.println("Ha petado");
          } catch (Exception e) { // Por si acaso que no me fio xD
-            super.setAlive(false);
+            alive = false;
          }
 
-         if (super.getSnakeLongitud() == DIMENSIONES[0] * DIMENSIONES[1])
-            super.setWin(true);
+         if (snakeLongitud == DIMENSIONES[0] * DIMENSIONES[1])
+            win = true;
 
-      } while (super.isAlive() && !super.isWin());
+      } while (alive && !win);
 
-      System.out.println(super.isAlive() ? "Enhorabuena, has ganado" : "Has perdido");
+      System.out.println(alive ? "Enhorabuena, has ganado" : "Has perdido");
       fr.close();
-
-      return calcularPuntaje(super.getSnakeLongitud(), DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
+      partida.setGanado(win);
+      partida.setLongitudSerpiente(snakeLongitud);
+      return calcularPuntaje(snakeLongitud, DIMENSIONES[0], DIMENSIONES[1], TIEMPOMILISEGUNDOS);
    }
 
-   /**
-    * Comprueba si el snake ha llegado al borde de la pantalla.
-    * 
-    * @return Un boolean que indica si el snake ha llegado al borde de la pantalla.
-    */
-   public boolean comprobarColision() {
+
+/**
+ * Comprueba si la serpiente ha llegado al borde del tablero en función de la dirección
+ * en la que se está moviendo.
+ *
+ * @param direcion La dirección en la que se mueve la serpiente (W, A, S, D).
+ * @return Un booleano que indica si la serpiente ha colisionado con el borde del tablero.
+ */
+
+   public boolean comprobarColision(String direcion) {
 
       boolean estaAlBorde = false;
-      if (getCordsCabeza()[1] == 0 && getDirecion().equals("W")) {
+      if (getCordsCabeza()[1] == 0 && direcion.equals("W")) {
          estaAlBorde = true;
-      } else if (getCordsCabeza()[1] == (getCordenadas().length - 1) && getDirecion().equals("S")) {
+      } else if (getCordsCabeza()[1] == (getCordenadas().length - 1) && direcion.equals("S")) {
          estaAlBorde = true;
-      } else if (getCordsCabeza()[0] == 1 && getDirecion().equals("A")) {
+      } else if (getCordsCabeza()[0] == 1 && direcion.equals("A")) {
          estaAlBorde = true;
-      } else if (getCordsCabeza()[0] == (getCordenadas()[0].length()) && getDirecion().equals("D")) {
+      } else if (getCordsCabeza()[0] == (getCordenadas()[0].length()) && direcion.equals("D")) {
          estaAlBorde = true;
       }
 
       return estaAlBorde;
    }
 
+
    /**
-    * 
     * Metodo para crear la cabeza en la pared opuesta a la que se iba a chocar
     * En este Switch lo que hago es detectar hacia donde va la cabeza y remplazo lo
     * que haya por la cabeza y luego actualizo la posicion de ella
     * Con el if detecta si la posicion a la que quiere haceder esta el cuerpo de la
     * serpiente, si es asi muere
+    * @param alive   Variable que indica si el snake esta vivo o no
+    * @param direcion Direccion en la que se esta moviendo el snake
+    * @return Un boolean que indica si el snake ha muerto o no
     */
-   public void crearCabezaDetras() {
-      switch (getDirecion()) {
+   public boolean crearCabezaDetras(boolean alive, String direcion) {
+      switch (direcion) {
          case "W":
             setCordsCabeza(getCordsCabeza()[0], (getCordenadas().length - 1));
             if ('1' == getCordenadas()[getCordsCabeza()[1] - 1].charAt(getCordsCabeza()[0] - 1))
-               setAlive(false);
+               alive = false;
 
             reemplazarCasilla((getCordenadas().length - 1), getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
             break;
@@ -200,14 +227,14 @@ public class ModoAtrabesarParedes extends JuegoBase {
          case "A":
             setCordsCabeza(getCordenadas()[getCordsCabeza()[1]].length(), getCordsCabeza()[1]);
             if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0] - 2))
-               setAlive(false);
+               alive = false;
             reemplazarCasilla(getCordsCabeza()[1], getCordenadas()[1].length() - 1, getCordenadas()[1].length(), "1");
             break;
 
          case "S":
             setCordsCabeza(getCordsCabeza()[0], 0);
             if ('1' == getCordenadas()[getCordsCabeza()[1] + 1].charAt(getCordsCabeza()[0] - 1))
-               setAlive(false);
+               alive = false;
 
             reemplazarCasilla(0, getCordsCabeza()[0] - 1, getCordsCabeza()[0], "1");
             break;
@@ -215,13 +242,15 @@ public class ModoAtrabesarParedes extends JuegoBase {
          case "D":
             setCordsCabeza(1, getCordsCabeza()[1]);
             if ('1' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordsCabeza()[0]))
-               setAlive(false);
+               alive = false;
             reemplazarCasilla(getCordsCabeza()[1], 0, 1, "1");
             break;
 
          default:
             break;
       }
+
+      return alive;
    }
 
    /**
@@ -230,38 +259,40 @@ public class ModoAtrabesarParedes extends JuegoBase {
     * opuesta
     * para ver si es una fruta. Si es una fruta se marca que ha comido y se
     * incrementa la longitud de la serpiente en 1.
+    * 
+    * @param snakeLongitud La longitud actual de la serpiente
+    * @return La longitud actualizada de la serpiente
     */
-   public void detectarFrutaDetras() {
-      switch (getDirecion()) {
+   public boolean detectarFrutaDetras(String direcion) {
+      boolean frutaDetectada = false;
+      switch (direcion) {
          case "W":
-            if ('2' == getCordenadas()[getCordenadas().length - 2].charAt(getCordsCabeza()[0] - 1)) {
-               setHaComido(true);
-               setSnakeLongitud(getSnakeLongitud() + 1);
+            if ('2' == getCordenadas()[getCordenadas().length - 1].charAt(getCordsCabeza()[0] - 1)) {
+               frutaDetectada = true;
             }
             break;
 
          case "A":
-            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordenadas()[getCordsCabeza()[1]].length() - 2)) {
-               setHaComido(true);
-               setSnakeLongitud(getSnakeLongitud() + 1);
+            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(getCordenadas()[getCordsCabeza()[1]].length() - 1)) {
+               frutaDetectada = true;
             }
             break;
 
          case "S":
             if ('2' == getCordenadas()[0].charAt(getCordsCabeza()[0] - 1)) {
-               setHaComido(true);
-               setSnakeLongitud(getSnakeLongitud() + 1);
+               frutaDetectada = true;
             }
             break;
 
          case "D":
-            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(1)) {
-               setHaComido(true);
-               setSnakeLongitud(getSnakeLongitud() + 1);
+            if ('2' == getCordenadas()[getCordsCabeza()[1]].charAt(0)) {
+               frutaDetectada = true;
             }
             break;
          default:
             break;
       }
+
+      return frutaDetectada;
    }
 }
