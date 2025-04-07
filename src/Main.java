@@ -54,10 +54,14 @@ public class Main {
                         " | | |   ___   / __|___ _ _ _ _ __ _ _ _   ___ ___ __(_)___ _ _                    \n" + //
                         " |_  _| |___| | (__/ -_) '_| '_/ _` | '_| (_-</ -_|_-< / _ \\ ' \\                   \n" + //
                         "   |_|  |___|  \\___\\___|_| |_| \\__,_|_|   /__/\\___/__/_\\___/_||_|                  \n" + //
-                        "  ___          ___                  _                   ___       _ _              \n" + //
-                        " | __|  ___   / __|_  _ __ _ _ _ __| |__ _ _ _   _  _  / __| __ _| (_)_ _          \n" + //
-                        " |__ \\ |___| | (_ | || / _` | '_/ _` / _` | '_| | || | \\__ \\/ _` | | | '_|         \n" + //
-                        " |___/ |___|  \\___|\\_,_\\__,_|_| \\__,_\\__,_|_|    \\_, | |___/\\__,_|_|_|_|           \n" + //
+                        "  ___         ___ _ _       _                                __ _ _  \n" + //
+                        " | __|  ___  | __| (_)_ __ (_)_ _  __ _ _ _   _ __  ___ _ _ / _(_) | \n" + //
+                        " |__ \\ |___| | _|| | | '  \\| | ' \\/ _` | '_| | '_ \\/ -_) '_|  _| | | \n" + //
+                        " |___/ |___| |___|_|_|_|_|_|_|_||_\\__,_|_|   | .__/\\___|_| |_| |_|_| \n" + //
+                        "   __          ___                  _        |_|        ___       _ _              \n" + //
+                        "  / /   ___   / __|_  _ __ _ _ _ __| |__ _ _ _   _  _  / __| __ _| (_)_ _          \n" + //
+                        " / _ \\ |___| | (_ | || / _` | '_/ _` / _` | '_| | || | \\__ \\/ _` | | | '_|         \n" + //
+                        " \\___/ |___|  \\___|\\_,_\\__,_|_| \\__,_\\__,_|_|    \\_, | |___/\\__,_|_|_|_|           \n" + //
                         "                                                 |__/                              \n" + //
                         "";
 
@@ -66,7 +70,7 @@ public class Main {
 
         do {
             System.out.println(mensajeMenu);
-            option = Utilidades.pedirNumeroEntero("Introduce una opcion entre", 1, 5);
+            option = Utilidades.pedirNumeroEntero("Introduce una opcion entre", 1, 6);
             switch (option) {
                 case 1 -> {
                     /* ----- Esta zona hara que se reinicie el archivo txt ----- */ 
@@ -97,12 +101,16 @@ public class Main {
                     player = Utilidades.cerrarSesion(player);
                 }
 
+                case 5 -> {
+                    player = Utilidades.eliminarPerfil(player);
+                }
+
                 default -> {
-                    if (option != 5)
+                    if (option != 6)
                         System.out.println("Opcion incorrecta");
                 }
             }
-        } while (option != 5);
+        } while (option != 6);
         Player.guardarJugador(player);
         System.out.println("Hasta otra");
     }

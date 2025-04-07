@@ -145,6 +145,20 @@ public class Utilidades {
         return iniciarJugador();
     }
 
+    public static Player eliminarPerfil(Player player) {
+        File file = new File("./Players", player.getName() + ".dat");
+        if(file.exists())
+            if(file.delete())
+                System.out.println("Cuenta eliminada");
+            else
+                System.out.println("Error al eliminar la cuenta");
+        else
+            System.out.println("Cuenta no encontrada");
+        
+        player = null;
+        return iniciarJugador();
+    }
+
     public static String formatearFecha(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
 
         // Calcular el tiempo transcurrido entre fechaInicio y fechaFinal
