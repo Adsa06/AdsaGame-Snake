@@ -113,7 +113,7 @@ public class Utilidades {
                 String nombre = Utilidades.pedirString();
                 player = Player.cargarJugador(nombre);
                 playerExists = player != null;
-            } else {
+            } else if(optionCuentaGuardada.equals("N")) {
                 // Comprueba si existe o no existe la carpeta para saber si de verdad es nuevo
                 System.out.println("Buenos dias, ¿Cual es tu nombre?");
                 String nombre = Utilidades.pedirString();
