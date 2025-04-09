@@ -135,6 +135,7 @@ public class Utilidades {
                 }
             }
         } while (!playerExists);
+        Player.guardarJugador(player);
         return player;
     }
 

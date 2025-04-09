@@ -29,8 +29,6 @@ public class Main {
 
         /* ----- Parte declarativa ----- */
 
-        Player player = null;
-
         int option = 0;
 
         // https://patorjk.com/software/taag/
@@ -68,7 +66,7 @@ public class Main {
                         "";
 
         /* ----- Parte principal ----- */
-        player = Utilidades.iniciarJugador();
+        Player player = new Player(Utilidades.iniciarJugador());
 
         do {
             System.out.println(mensajeMenu);

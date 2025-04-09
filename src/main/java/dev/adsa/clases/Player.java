@@ -47,9 +47,11 @@ public class Player implements Serializable {
         configuration = new int[] { 10, 20, 375, 0 };
     }
 
-    public Player(String nombre, int[] configPersonalizada) {
-        this.name = nombre;
-        this.configuration = configPersonalizada;
+    public Player(Player player) {
+        this.name = player.name;
+        this.configuration = player.configuration.clone();
+        this.maxScore = player.maxScore;
+        this.partidas = new ArrayList<Partida>(player.partidas);
     }
 
     /* ----- Parte del getter ----- */
