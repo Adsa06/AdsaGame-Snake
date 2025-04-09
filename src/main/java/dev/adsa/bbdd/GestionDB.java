@@ -1,7 +1,7 @@
 package dev.adsa.bbdd;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.SQLException;
 
 public class GestionDB {
@@ -30,7 +30,15 @@ public class GestionDB {
 
         try {
             Connection conexion = ConexionDB.getConnection();
-            PreparedStatement sentencia = conexion.prepareStatement(sqlTablaPartidas);
+            Statement sentencia = conexion.createStatement();
+            
+            // Crear la tabla Player
+            sentencia.executeUpdate(sqlTablaPlayer);
+                    
+            // Crear la tabla Partida
+            sentencia.executeUpdate(sqlTablaPartidas);
+                    
+            tablasCreadas = true;
         } catch(SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
