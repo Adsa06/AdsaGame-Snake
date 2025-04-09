@@ -1,11 +1,10 @@
-package dev.adsa;
-
 /**
  * @author Aitor de Santos Amoros
  * Fecha: 17/10/2024
  * Este archivo muestra el menu y llama a las distintas funciones
  * 
  */
+package dev.adsa;
 
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;

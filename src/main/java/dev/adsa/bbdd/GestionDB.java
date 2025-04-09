@@ -1,19 +1,36 @@
+/**
+ * @author Aitor de Santos Amoros
+ * Fecha: 09/04/2025
+ * Este archivo tiene las funciones para la gestion de la bases de datos
+ * 
+ */
 package dev.adsa.bbdd;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
+
+import dev.adsa.clases.Partida;
+import dev.adsa.clases.Player;
+
 import java.sql.SQLException;
 
 public class GestionDB {
+    public static void main(String[] args) {
+        creacionTablas();
+        Player player = new Player();
+        player.setName("null");
+        guardarJugadorDB(player);
+    }
     public static boolean creacionTablas() {
         boolean tablasCreadas = false;
-        String sqlTablaPlayer = "CREATE TABLE Player (\n" + //
+        String sqlTablaPlayer = "CREATE TABLE if not exists Player (\n" + //
                                 "    id INT AUTO_INCREMENT PRIMARY KEY,\n" + //
-                                "    name VARCHAR(40) NOT NULL,\n" + //
+                                "    userName VARCHAR(40) NOT NULL,\n" + //
                                 "    maxScore DOUBLE NOT NULL\n" + //
                                 ");";
 
-        String sqlTablaPartidas = "CREATE TABLE Partida (\n" + //
+        String sqlTablaPartidas = "CREATE TABLE if not exists Partida (\n" + //
                                     "    id INT AUTO_INCREMENT PRIMARY KEY,\n" + //
                                     "    player_id INT,  -- Relaciona la partida con un jugador\n" + //
                                     "    fechaInicio DATETIME NOT NULL,\n" + //
@@ -44,4 +61,56 @@ public class GestionDB {
         }
         return tablasCreadas;
     }
+
+    public static boolean guardarJugadorDB(Player player) {
+        boolean datosCreados = false;
+
+        String sqlNewPlayer = "INSERT INTO player(userName, maxScore) VALUES (?, 0);";
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlNewPlayer);
+
+            sentencia.setString(1, player.getName());
+
+            sentencia.executeUpdate();
+                    
+            datosCreados = true;
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+
+        return datosCreados;
+    }
+
+    public static boolean guardarPartidaDB(Partida partida, Player player) {
+        boolean datosCreados = false;
+
+        String sqlNewPlayer = "INSERT INTO partida(player_id, fechaInicio, fechaFinal, puntuacion, longitudSerpiente, velocidad, ganado, modoJuego, filas, columnas) " + 
+                                "VALUES ((SELECT p.id from player p where p.username = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlNewPlayer);
+
+            sentencia.setString(1, player.getName());
+            sentencia.setTimestamp(2)
+            sentencia.setString(3, player.getName());
+            sentencia.setString(4, player.getName());
+            sentencia.setString(5, player.getName());
+            sentencia.setString(6, player.getName());
+            sentencia.setString(7, player.getName());
+            sentencia.setString(8, player.getName());
+            sentencia.setString(9, player.getName());
+            sentencia.setString(10, player.getName());
+
+            sentencia.executeUpdate();
+                    
+            datosCreados = true;
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+
+        return datosCreados;
+    }
+    
+    
 }
