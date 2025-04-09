@@ -1,5 +1,5 @@
-/*
- * Autor: Aitor de Santos Amoros
+/**
+ * @author: Aitor de Santos Amoros
  * Fecha: 09/12/2024
  * Este archivo es el apartado de configuracion del juego, este devuelve un array con la configuracion establecida
  * 

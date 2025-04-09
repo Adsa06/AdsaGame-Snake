@@ -1,5 +1,5 @@
 /**
- * Autor: Aitor de Santos Amoros
+ * @author: Aitor de Santos Amoros
  * Fecha: 1/4/2024
  * Descripcion: Este archivo es el que contiene las funciones para iniciar el juego
  */
@@ -7,11 +7,11 @@ package utils;
 
 import java.io.IOException;
 
-import clases.ModosDeJuego.ModoAtravesarParedes;
-import clases.ModosDeJuego.ModoNormal;
 import clases.JuegoBase;
 import clases.Partida;
 import clases.Player;
+import clases.modos.ModoAtravesarParedes;
+import clases.modos.ModoNormal;
 
 public class ControladorJuego {
    /**

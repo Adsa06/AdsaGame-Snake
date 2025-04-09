@@ -1,5 +1,5 @@
-/*
- * Autor: Aitor de Santos Amoros
+/**
+ * @author: Aitor de Santos Amoros
  * Fecha: 17/10/2024
  * Este archivo es el que da los colores a todos los demas archivos
  * 

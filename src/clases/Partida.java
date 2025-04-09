@@ -1,5 +1,5 @@
-/*
- * Autor: Aitor de Santos Amoros
+/**
+ * @author: Aitor de Santos Amoros
  * Fecha: 15/12/2024
  * Este archivo es la clase de cada partida, en esta se almacena toda la informacion cada partida
  * 

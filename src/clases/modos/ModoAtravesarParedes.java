@@ -1,9 +1,10 @@
 /**
- * Autor: Aitor de Santos Amoros
+ * @author: Aitor de Santos Amoros
  * Fecha: 1/4/2024
  * Descripcion: Clase para iniciar el juego en modo atravesar paredes
+ * @see JuegoBase
  */
-package clases.ModosDeJuego;
+package clases.modos;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

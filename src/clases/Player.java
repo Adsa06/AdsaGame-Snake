@@ -1,5 +1,5 @@
-/*
- * Autor: Aitor de Santos Amoros
+/**
+ * @author: Aitor de Santos Amoros
  * Fecha: 10/12/2024
  * Este archivo es la clase del jugador, en esta se almacena toda la informacion del jugador
  * 

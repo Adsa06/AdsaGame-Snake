@@ -1,7 +1,9 @@
 /**
- * Autor: Aitor de Santos Amoros
+ * @author: Aitor de Santos Amoros
  * Fecha: 1/4/2024
  * Descripcion: Clase plantilla del juego
+ * @see modos.ModoAtravesarParedes
+ * @see modos.ModoNormal
  */
 package clases;
 
