@@ -191,8 +191,6 @@ public class Player implements Serializable {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("El jugador no existe");
         }
 
         return jugador;

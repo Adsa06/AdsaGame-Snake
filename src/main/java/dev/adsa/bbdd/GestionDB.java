@@ -8,6 +8,7 @@ package dev.adsa.bbdd;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
@@ -134,5 +135,28 @@ public class GestionDB {
         return datosModificados;
     }
     
-    
+    public static boolean detectarJugadorExistente(String name) {
+        boolean jugadorDetectado = false;
+
+        String sqlDetectarJugador = "select username from player where username = ?;";
+
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlDetectarJugador);
+            
+            sentencia.setString(1, name);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            jugadorDetectado = resultado.next();
+            
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+        return jugadorDetectado;
+    }
+    public static Player leerDatos() {
+        return new Player();
+    }
+    public static void eliminarPerfil(){}
 }
