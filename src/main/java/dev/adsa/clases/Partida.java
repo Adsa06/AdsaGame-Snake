@@ -48,6 +48,23 @@ public class Partida implements Serializable{
     /** Modo de juego */
     private ModoDeJuego modoDeJuego;
 
+    /* ----- Metodos constructores ----- */
+    public Partida() {
+
+    }
+
+    public Partida(LocalDateTime fechaInicio, LocalDateTime fechaFinal,  double puntuacion, int longitudSerpiente, int velocidad, int filas, int columnas,  boolean ganado, ModoDeJuego modoDeJuego) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+        this.puntuacion = puntuacion;
+        this.longitudSerpiente = longitudSerpiente;
+        this.velocidad = velocidad;
+        this.dimensionesTablero[0] = filas;
+        this.dimensionesTablero[1] = columnas;
+        this.ganado = ganado;
+        this.modoDeJuego = modoDeJuego;
+    }
+
     /**
      * Actualiza la fecha de inicio de la partida al momento actual.
      */

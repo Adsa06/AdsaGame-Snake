@@ -116,7 +116,7 @@ public class Utilidades {
                 if(file.exists())
                     player = Player.cargarJugador(nombre);
                 else if (GestionDB.detectarJugadorExistente(nombre))
-                    player = GestionDB.leerDatos();
+                    player = GestionDB.leerDatos(nombre);
                 else
                     System.out.println("El jugador no existe");
                 playerExists = player != null;

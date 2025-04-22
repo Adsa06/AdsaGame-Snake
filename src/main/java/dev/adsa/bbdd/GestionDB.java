@@ -28,7 +28,7 @@ public class GestionDB {
         boolean tablasCreadas = false;
         String sqlTablaPlayer = "CREATE TABLE if not exists Player (\n" + //
                                 "    id INT AUTO_INCREMENT PRIMARY KEY,\n" + //
-                                "    userName VARCHAR(40) NOT NULL UNIQUE,\n" + //
+                                "    username VARCHAR(40) NOT NULL UNIQUE,\n" + //
                                 "    maxScore DOUBLE NOT NULL\n" + //
                                 ");";
 
@@ -58,9 +58,13 @@ public class GestionDB {
             sentencia.executeUpdate(sqlTablaPartidas);
                     
             tablasCreadas = true;
+
+            sentencia.close();
+            conexion.close();
         } catch(SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
+        
         return tablasCreadas;
     }
 
@@ -77,6 +81,9 @@ public class GestionDB {
             sentencia.executeUpdate();
                     
             datosCreados = true;
+
+            sentencia.close();
+            conexion.close();
         } catch(SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
@@ -107,6 +114,9 @@ public class GestionDB {
             sentencia.executeUpdate();
                     
             datosCreados = true;
+
+            sentencia.close();
+            conexion.close();
         } catch(SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
@@ -128,6 +138,8 @@ public class GestionDB {
 
             sentencia.executeUpdate();
             
+            sentencia.close();
+            conexion.close();
         } catch(SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
@@ -138,7 +150,7 @@ public class GestionDB {
     public static boolean detectarJugadorExistente(String name) {
         boolean jugadorDetectado = false;
 
-        String sqlDetectarJugador = "select username from player where username = ?;";
+        String sqlDetectarJugador = "SELECT username FROM player WHERE username = ?;";
 
         try {
             Connection conexion = ConexionDB.getConnection();
@@ -149,14 +161,58 @@ public class GestionDB {
             ResultSet resultado = sentencia.executeQuery();
 
             jugadorDetectado = resultado.next();
-            
+
+            sentencia.close();
+            resultado.close();
+            conexion.close();
         } catch(SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
         return jugadorDetectado;
     }
-    public static Player leerDatos() {
-        return new Player();
+    public static Player leerDatos(String name) {
+        String sqlPedirDatosJugador = "SELECT username, maxScore FROM player WHERE username = ?;";
+        String sqlPedirDatosPartidas =  "SELECT fechaInicio, fechaFinal, puntuacion, longitudSerpiente, velocidad, filas, columnas, ganado, modoJuego \n" + //
+                                            "FROM partida \n" + //
+                                            "WHERE player_id = \n" + //
+                                            "\t(SELECT id \n" + //
+                                            "    FROM player WHERE username = ?);";
+        Player player = null;
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlPedirDatosJugador);
+            
+            sentencia.setString(1, name);
+
+            ResultSet resultado = sentencia.executeQuery();
+            if (resultado.next())
+                player = new Player(resultado.getString("username"), resultado.getDouble("maxScore"));
+
+            sentencia.close();
+            resultado.close();
+            conexion.close();
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlPedirDatosPartidas);
+            
+            sentencia.setString(1, name);
+
+            ResultSet res = sentencia.executeQuery();
+            while(res.next()) {
+                player.addPartida(new Partida(res.));
+            }
+
+            sentencia.close();
+            res.close();
+            conexion.close();
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+        return player;
     }
     public static void eliminarPerfil(){}
 }

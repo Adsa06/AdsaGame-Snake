@@ -54,6 +54,11 @@ public class Player implements Serializable {
         this.partidas = new ArrayList<Partida>(player.partidas);
     }
 
+    public Player(String name, double maxScore) {
+        this.name = name;
+        this.maxScore = maxScore;
+    }
+
     /* ----- Parte del getter ----- */
 
     /**
