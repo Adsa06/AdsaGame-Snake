@@ -53,7 +53,7 @@ public class Partida implements Serializable{
 
     }
 
-    public Partida(LocalDateTime fechaInicio, LocalDateTime fechaFinal,  double puntuacion, int longitudSerpiente, int velocidad, int filas, int columnas,  boolean ganado, ModoDeJuego modoDeJuego) {
+    public Partida(LocalDateTime fechaInicio, LocalDateTime fechaFinal,  double puntuacion, int longitudSerpiente, int velocidad, int filas, int columnas,  boolean ganado, String strModoJuego) {
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.puntuacion = puntuacion;
@@ -62,7 +62,7 @@ public class Partida implements Serializable{
         this.dimensionesTablero[0] = filas;
         this.dimensionesTablero[1] = columnas;
         this.ganado = ganado;
-        this.modoDeJuego = modoDeJuego;
+        setModoDeJuego(strModoJuego);
     }
 
     /**
@@ -152,6 +152,21 @@ public class Partida implements Serializable{
                 
                 break;
         }
+    }
+
+    /**
+     * Establece el modo de juego en la partida.
+     * 
+     * @param modoDeJuego El nuevo modo de juego en la partida.
+     */
+    public void setModoDeJuego(String strModoJuego) {
+        if (strModoJuego.equals("MODO_NORMAL"))
+            modoDeJuego = ModoDeJuego.MODO_NORMAL;
+        else if (strModoJuego.equals("MODO_ATRAVESAR_PAREDES"))
+            modoDeJuego = ModoDeJuego.MODO_ATRAVESAR_PAREDES;
+        else
+            modoDeJuego = ModoDeJuego.MODO_NORMAL;
+
     }
 
     /**

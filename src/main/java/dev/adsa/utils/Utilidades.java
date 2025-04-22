@@ -124,7 +124,7 @@ public class Utilidades {
                 // Comprueba si existe o no existe la carpeta para saber si de verdad es nuevo
                 System.out.println("Buenos dias, ¿Cual es tu nombre?");
                 String nombre = "?";
-                while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName())) {
+                while (nombre.length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", nombre)) {
                     System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
                     nombre = Utilidades.pedirString();
                 }

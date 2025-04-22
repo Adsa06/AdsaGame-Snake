@@ -203,7 +203,17 @@ public class GestionDB {
 
             ResultSet res = sentencia.executeQuery();
             while(res.next()) {
-                player.addPartida(new Partida(res.));
+                player.addPartida(new Partida(
+                    res.getTimestamp("fechaInicio").toLocalDateTime(), 
+                    res.getTimestamp("fechaFinal").toLocalDateTime(), 
+                    res.getDouble("puntuacion"), 
+                    res.getInt("longitudSerpiente"), 
+                    res.getInt("velocidad"), 
+                    res.getInt("filas"), 
+                    res.getInt("columnas"), 
+                    res.getBoolean("ganado"), 
+                    res.getString("modoJuego")
+                ));
             }
 
             sentencia.close();
