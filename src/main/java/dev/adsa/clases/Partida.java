@@ -152,6 +152,42 @@ public class Partida implements Serializable{
         setDimensionesTablero(filas, columnas);
     }
 
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public LocalDateTime getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public double getPuntuacion() {
+        return puntuacion;
+    }
+
+    public int getLongitudSerpiente() {
+        return longitudSerpiente;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public int getFilasTablero() {
+        return dimensionesTablero[0];
+    }
+
+    public int getColumnasTablero() {
+        return dimensionesTablero[1];
+    }
+
+    public boolean hasGanado() {
+        return ganado;
+    }
+
+    public String getModoDeJuego() {
+        return modoDeJuego.toString();
+    }
+
     /**
      * Devuelve un mensaje de informacion de la partida, con o sin color,
      * dependiendo del parametro admiteColores.

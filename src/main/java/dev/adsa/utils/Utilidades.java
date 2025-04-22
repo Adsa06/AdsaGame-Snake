@@ -12,10 +12,10 @@ import java.io.InputStreamReader;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
-
-import dev.adsa.clases.Player;
-
 import java.util.regex.Matcher;
+
+import dev.adsa.bbdd.GestionDB;
+import dev.adsa.clases.Player;
 
 public class Utilidades {
     /**
@@ -129,7 +129,9 @@ public class Utilidades {
                         if (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()))
                             System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
                     } while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()));
+
                     playerExists = true;
+                    GestionDB.guardarJugadorDB(player);
                 } else {
                     System.out.println("¡Jugador existente!");
                 }

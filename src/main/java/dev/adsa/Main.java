@@ -9,6 +9,7 @@ package dev.adsa;
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
 
+import dev.adsa.bbdd.GestionDB;
 import dev.adsa.clases.Partida;
 import dev.adsa.clases.Player;
 import dev.adsa.utils.Configuracion;
@@ -65,6 +66,7 @@ public class Main {
                         "";
 
         /* ----- Parte principal ----- */
+        GestionDB.creacionTablas();
         Player player = new Player(Utilidades.iniciarJugador());
 
         do {
@@ -82,9 +84,12 @@ public class Main {
                     partida.actualizarFechaInicio();
                     double scoreProvisional = ControladorJuego.iniciarJuego(player, partida);
                     partida.anadirPartidaTerminada(scoreProvisional, player.getCongiguration()[2], player.getCongiguration()[0], player.getCongiguration()[1]);
-                    if (scoreProvisional > player.getMaxScore())
+                    if (scoreProvisional > player.getMaxScore()) {
                         player.setMaxScore(scoreProvisional);
+                        GestionDB.actualizarMaxScore(player);
+                    }
                     player.addPartida(partida);
+                    GestionDB.guardarPartidaDB(partida, player);
                 }
                 case 2 -> {
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));

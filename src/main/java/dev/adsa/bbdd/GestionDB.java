@@ -9,6 +9,7 @@ package dev.adsa.bbdd;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import dev.adsa.clases.Partida;
 import dev.adsa.clases.Player;
@@ -26,7 +27,7 @@ public class GestionDB {
         boolean tablasCreadas = false;
         String sqlTablaPlayer = "CREATE TABLE if not exists Player (\n" + //
                                 "    id INT AUTO_INCREMENT PRIMARY KEY,\n" + //
-                                "    userName VARCHAR(40) NOT NULL,\n" + //
+                                "    userName VARCHAR(40) NOT NULL UNIQUE,\n" + //
                                 "    maxScore DOUBLE NOT NULL\n" + //
                                 ");";
 
@@ -65,7 +66,7 @@ public class GestionDB {
     public static boolean guardarJugadorDB(Player player) {
         boolean datosCreados = false;
 
-        String sqlNewPlayer = "INSERT INTO player(userName, maxScore) VALUES (?, 0);";
+        String sqlNewPlayer = "INSERT INTO player(username, maxScore) VALUES (?, 0);";
         try {
             Connection conexion = ConexionDB.getConnection();
             PreparedStatement sentencia = conexion.prepareStatement(sqlNewPlayer);
@@ -92,15 +93,15 @@ public class GestionDB {
             PreparedStatement sentencia = conexion.prepareStatement(sqlNewPlayer);
 
             sentencia.setString(1, player.getName());
-            sentencia.setTimestamp(2)
-            sentencia.setString(3, player.getName());
-            sentencia.setString(4, player.getName());
-            sentencia.setString(5, player.getName());
-            sentencia.setString(6, player.getName());
-            sentencia.setString(7, player.getName());
-            sentencia.setString(8, player.getName());
-            sentencia.setString(9, player.getName());
-            sentencia.setString(10, player.getName());
+            sentencia.setTimestamp(2, Timestamp.valueOf(partida.getFechaInicio()));
+            sentencia.setTimestamp(3, Timestamp.valueOf(partida.getFechaFinal()));
+            sentencia.setDouble(4, partida.getPuntuacion());
+            sentencia.setInt(5, partida.getLongitudSerpiente());
+            sentencia.setInt(6, partida.getVelocidad());
+            sentencia.setBoolean(7, partida.hasGanado());
+            sentencia.setString(8, partida.getModoDeJuego());
+            sentencia.setInt(9, partida.getFilasTablero());
+            sentencia.setInt(10, partida.getColumnasTablero());
 
             sentencia.executeUpdate();
                     
@@ -110,6 +111,27 @@ public class GestionDB {
         }
 
         return datosCreados;
+    }
+
+    public static boolean actualizarMaxScore(Player player) {
+        boolean datosModificados = false;
+
+        String sqlUpdatePlayer = "UPDATE player SET maxScore = ? WHERE username = ?;";
+
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlUpdatePlayer);
+
+            sentencia.setDouble(1, player.getMaxScore());
+            sentencia.setString(2, player.getName());
+
+            sentencia.executeUpdate();
+            
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+
+        return datosModificados;
     }
     
     
