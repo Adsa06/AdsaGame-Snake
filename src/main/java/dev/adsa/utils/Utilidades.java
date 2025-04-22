@@ -157,12 +157,12 @@ public class Utilidades {
         File file = new File("./Players", player.getName() + ".dat");
         if(file.exists())
             if(file.delete())
-                System.out.println("Cuenta eliminada");
+                System.out.println("Cuenta eliminada localmente");
             else
-                System.out.println("Error al eliminar la cuenta");
+                System.out.println("Error al eliminar la cuenta localmente");
         else
             System.out.println("Cuenta no encontrada");
-        
+        GestionDB.eliminarPerfil(player);
         player = null;
         return iniciarJugador();
     }

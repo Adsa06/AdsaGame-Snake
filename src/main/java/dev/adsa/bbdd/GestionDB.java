@@ -44,7 +44,7 @@ public class GestionDB {
                                     "    modoJuego ENUM('MODO_NORMAL', 'MODO_ATRAVESAR_PAREDES') NOT NULL,\n" + //
                                     "    filas INT NOT NULL,\n" + //
                                     "    columnas INT NOT NULL,\n" + //
-                                    "    FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE\n" + //
+                                    "    CONSTRAINT FK_idPlayer FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE ON UPDATE CASCADE\n" + //
                                     ");";
 
         try {
@@ -224,5 +224,23 @@ public class GestionDB {
         }
         return player;
     }
-    public static void eliminarPerfil(){}
+    public static void eliminarPerfil(Player player) {
+        String sqlEliminarPerfil = "DELETE FROM player WHERE username = ?;";
+
+        try {
+            Connection conexion = ConexionDB.getConnection();
+            PreparedStatement sentencia = conexion.prepareStatement(sqlEliminarPerfil);
+            
+            sentencia.setString(1, player.getName());
+
+            sentencia.executeUpdate();
+
+            sentencia.close();
+            conexion.close();
+
+            System.out.println("Cuenta eliminada en la base de datos");
+        } catch(SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+    }
 }
