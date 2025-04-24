@@ -17,6 +17,10 @@ public abstract class JuegoBase {
    private int[] coordsCabeza = { 3, 0 };
    private int[] coordsCola = { 1, 0 };
 
+   /* ----- Metodos Constructores ----- */
+   public JuegoBase() {
+   }
+
    /* ----- GETTERS Y SETTERS ----- */
 
    /**
