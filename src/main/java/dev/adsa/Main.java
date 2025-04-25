@@ -4,16 +4,21 @@
  * Este archivo muestra el menu y llama a las distintas funciones
  * 
  */
+package dev.adsa;
 
 //Importo las clases de java.io i la carpeta de src
 import java.io.*;
 
-import clases.Partida;
-import clases.Player;
-import utils.ControladorJuego;
-import utils.Utilidades;
-import utils.Configuracion;
+import dev.adsa.bbdd.GestionDB;
+import dev.adsa.clases.Partida;
+import dev.adsa.clases.Player;
+import dev.adsa.utils.Configuracion;
+import dev.adsa.utils.ControladorJuego;
+import dev.adsa.utils.Utilidades;
 
+/**
+ * Clase que muestra el menu principal del juego Snake
+ */
 public class Main {
 
     /**
@@ -26,8 +31,6 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         /* ----- Parte declarativa ----- */
-
-        Player player = null;
 
         int option = 0;
 
@@ -66,7 +69,8 @@ public class Main {
                         "";
 
         /* ----- Parte principal ----- */
-        player = Utilidades.iniciarJugador();
+        GestionDB.creacionTablas();
+        Player player = new Player(Utilidades.iniciarJugador());
 
         do {
             System.out.println(mensajeMenu);
@@ -83,9 +87,12 @@ public class Main {
                     partida.actualizarFechaInicio();
                     double scoreProvisional = ControladorJuego.iniciarJuego(player, partida);
                     partida.anadirPartidaTerminada(scoreProvisional, player.getCongiguration()[2], player.getCongiguration()[0], player.getCongiguration()[1]);
-                    if (scoreProvisional > player.getMaxScore())
+                    if (scoreProvisional > player.getMaxScore()) {
                         player.setMaxScore(scoreProvisional);
+                        GestionDB.actualizarMaxScore(player);
+                    }
                     player.addPartida(partida);
+                    GestionDB.guardarPartidaDB(partida, player);
                 }
                 case 2 -> {
                     player.setCongiguration(Configuracion.cambiarConfiguracion(player.getCongiguration()));
@@ -110,7 +117,7 @@ public class Main {
                         System.out.println("Opcion incorrecta");
                 }
             }
-        } while (option != 6);
+        } while (option != 6);    
         Player.guardarJugador(player);
         System.out.println("Hasta otra");
     }

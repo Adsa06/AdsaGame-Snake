@@ -3,24 +3,25 @@
  * Fecha: 1/4/2024
  * Descripcion: Este archivo es el que contiene las funciones para iniciar el juego
  */
-package utils;
+package dev.adsa.utils;
 
 import java.io.IOException;
 
-import clases.JuegoBase;
-import clases.Partida;
-import clases.Player;
-import clases.modos.ModoAtravesarParedes;
-import clases.modos.ModoNormal;
+import dev.adsa.clases.JuegoBase;
+import dev.adsa.clases.Partida;
+import dev.adsa.clases.Player;
+import dev.adsa.clases.modos.ModoAtravesarParedes;
+import dev.adsa.clases.modos.ModoNormal;
 
+/**
+ * Clase que contiene las funciones para iniciar el juego
+ */
 public class ControladorJuego {
    /**
     * Inicia el juego de Snake con las configuraciones especificadas.
     * 
-    * @param configuracionSnake Un array que contiene la configuracion
-    *                           inicial del juego: [ancho, alto, tiempo de
-    *                           espera en milisegundos, admite colores].
-    * @param player             El jugador que va a jugar.
+    * @param partida La partida que se va a jugar.
+    * @param player  El jugador que va a jugar.
     * @return El puntaje final
     *         calculado al final del juego.
     * @throws IOException          Si ocurre un error durante la lectura del

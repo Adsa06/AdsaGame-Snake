@@ -5,21 +5,31 @@
  * @see modos.ModoAtravesarParedes
  * @see modos.ModoNormal
  */
-package clases;
+package dev.adsa.clases;
 
 import java.io.IOException;
 
-import utils.ColoresConsola;
+import dev.adsa.utils.ColoresConsola;
 
+/**
+ * Clase plantilla del juego
+ */
 public abstract class JuegoBase {
    private StringBuilder[] coordenadas;
 
    private int[] coordsCabeza = { 3, 0 };
    private int[] coordsCola = { 1, 0 };
 
+   /* ----- Metodos Constructores ----- */
+   /** Constructor para el Juego base */
+   public JuegoBase() {
+   }
+
    /* ----- GETTERS Y SETTERS ----- */
 
    /**
+    * Metodo que devuelve el array de coordenadas del tablero
+    * 
     * @return Un array de StringBuilder que representa el tablero del juego. Cada
     *         StringBuilder es una fila del tablero.
     */
@@ -28,6 +38,8 @@ public abstract class JuegoBase {
    }
 
    /**
+    * Metodo que devuelve las coordenadas de la cabeza de la serpiente
+    * 
     * @return Un array con dos enteros que representan las coordenadas x e y de la
     *         cabeza de la serpiente en el tablero.
     */
@@ -36,6 +48,8 @@ public abstract class JuegoBase {
    }
 
    /**
+    * Metodo que devuelve las coordenadas de la cola de la serpiente
+    * 
     * @return Un array con dos enteros que representan las coordenadas x e y de la
     *         cola de la serpiente en el tablero.
     */
@@ -88,8 +102,27 @@ public abstract class JuegoBase {
    }
 
    /* ----- Metodos abstractos ----- */
-   public abstract double iniciarJuego(int[] configuracionSnake, Partida partida) throws IOException, InterruptedException;
+   /**
+    * Inicia el juego de Snake.
+    * 
+    * @param configuracionSnake Un array que contiene la configuración inicial del
+    *                           juego: [ancho, alto, tiempo de espera en
+    *                           milisegundos, admite colores].
+    * @param partida            La partida que se va a jugar.
+    * @return El puntaje final calculado al final del juego.
+    * @throws IOException          Si ocurre un error durante la lectura del
+    *                              archivo de comandos.
+    * @throws InterruptedException Si el hilo de ejecución es interrumpido durante
+    *                              el tiempo de espera.
+    */
+   public abstract double iniciarJuego(int[] configuracionSnake, Partida partida)
+         throws IOException, InterruptedException;
 
+   /**
+    * Elimina la cola de la serpiente.
+    * 
+    * @param movs La lista de movimientos que se va a realizar.
+    */
    public abstract void eliminarCola(String movs);
 
    /* ----- Metodos ----- */
@@ -333,13 +366,14 @@ public abstract class JuegoBase {
    }
 
    /**
-    * 
+    * Metodo que calcula el puntaje en base a distintas variables del juego.
+    *
     * @param longitudSerpiente La longitud de la serpiente en cuadros. Este valor
     *                          representa la cantidad de casillas ocupadas por la
     *                          serpiente en el tablero.
     * @param filasTablero      La cantidad de filas del tablero del juego.
     * @param columnasTablero   La cantidad de columnas del tablero del juego.
-    * @param velocidadLa       velocidad de actualización del juego en
+    * @param velocidad         La velocidad de actualización del juego en
     *                          milisegundos.
     * 
     * @return El puntaje calculado en base a la longitud de la serpiente, las

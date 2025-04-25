@@ -4,13 +4,13 @@
  * Este archivo es la clase del jugador, en esta se almacena toda la informacion del jugador
  * 
  */
-package clases;
+package dev.adsa.clases;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import utils.ColoresConsola;
+import dev.adsa.utils.ColoresConsola;
 
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Clase del jugador, en esta se almacena toda la informacion del jugador
+ */
 public class Player implements Serializable {
     /** Constante para la Serializacion */
     private static final long serialVersionUID = 1L;
@@ -42,14 +45,29 @@ public class Player implements Serializable {
     private List<Partida> partidas = new ArrayList<Partida>();
 
     /* ----- Metodos constructores ----- */
+    /** Metodo constructor base */
     public Player() {
         maxScore = 0;
         configuration = new int[] { 10, 20, 375, 0 };
     }
 
-    public Player(String nombre, int[] configPersonalizada) {
-        this.name = nombre;
-        this.configuration = configPersonalizada;
+    /** Metodo constructor clonar jugador
+     * @param player El jugador a clonar
+     */
+    public Player(Player player) {
+        this.name = player.name;
+        this.configuration = player.configuration.clone();
+        this.maxScore = player.maxScore;
+        this.partidas = new ArrayList<Partida>(player.partidas);
+    }
+
+    /** Metodo constructor para cargar jugador
+     * @param name El nombre del jugador
+     * @param maxScore El score maximo del jugador
+     */
+    public Player(String name, double maxScore) {
+        this.name = name;
+        this.maxScore = maxScore;
     }
 
     /* ----- Parte del getter ----- */
@@ -149,8 +167,7 @@ public class Player implements Serializable {
     /**
      * Guarda un objeto Player en un archivo especificado.
      * 
-     * @param jugadores   El objeto Player que se desea guardar.
-     * @param rutaArchivo La ruta del archivo donde se guardará el objeto Player.
+     * @param player   El objeto Player que se desea guardar.
      */
 
     public static void guardarJugador(Player player) {
@@ -171,7 +188,7 @@ public class Player implements Serializable {
     /**
      * Carga un objeto Player desde un archivo especificado.
      * 
-     * @param rutaArchivo La ruta del archivo desde donde se cargará el objeto
+     * @param nombreJugador La ruta del archivo desde donde se cargará el objeto
      *                    Player.
      * @return El objeto Player cargado desde el archivo, o null si ocurre un error.
      */
@@ -189,8 +206,6 @@ public class Player implements Serializable {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("El jugador no existe");
         }
 
         return jugador;

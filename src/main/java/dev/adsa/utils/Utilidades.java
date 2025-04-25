@@ -4,7 +4,7 @@
  * Descripcion: Este archivo es el que contiene las funciones de utilidad
  */
 
-package utils;
+package dev.adsa.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,11 +12,14 @@ import java.io.InputStreamReader;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
-
-import clases.Player;
-
 import java.util.regex.Matcher;
 
+import dev.adsa.bbdd.GestionDB;
+import dev.adsa.clases.Player;
+
+/**
+ * Clase que contiene las funciones de utilidad
+ */
 public class Utilidades {
     /**
      * Solicita al usuario que introduzca un número entero dentro de un rango
@@ -98,7 +101,8 @@ public class Utilidades {
      * Inicia al jugador con una cuenta guardada o sin ella.
      * Pide al usuario si tiene una cuenta guardada, si es así la carga
      * si no es así, pide el nombre del jugador y lo guarda.
-     * @param player El jugador que se va a iniciar
+     * 
+     * @return El jugador que se ha iniciado o creado.
      */
     public static Player iniciarJugador() {
         Player player = null;
@@ -108,36 +112,54 @@ public class Utilidades {
             System.out.println("¿Tienes una cuenta guardada? (S/N)");
             optionCuentaGuardada = Utilidades.pedirString().toUpperCase();
             // cargar una cuenta existente
-            if(optionCuentaGuardada.equals("S")) {
+            if (optionCuentaGuardada.equals("S")) {
                 System.out.println("Escriba el nombre de la cuenta");
                 String nombre = Utilidades.pedirString();
-                player = Player.cargarJugador(nombre);
+                // Voy a suponer que si existe localmente existe en la base de datos
+                File file = new File("./Players", nombre + ".dat");
+                if (file.exists())
+                    player = Player.cargarJugador(nombre);
+                else if (GestionDB.detectarJugadorExistente(nombre))
+                    player = GestionDB.leerDatos(nombre);
+                else
+                    System.out.println("El jugador no existe");
                 playerExists = player != null;
-            } else if(optionCuentaGuardada.equals("N")) {
+            } else if (optionCuentaGuardada.equals("N")) {
                 // Comprueba si existe o no existe la carpeta para saber si de verdad es nuevo
                 System.out.println("Buenos dias, ¿Cual es tu nombre?");
-                String nombre = Utilidades.pedirString();
+                String nombre = "?";
+                while (nombre.length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", nombre)) {
+                    System.out.println(
+                            "Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
+                    nombre = Utilidades.pedirString();
+                }
+
                 File file = new File("./Players", nombre + ".dat");
-                if(!file.exists()) {
+                if (!file.exists() && !GestionDB.detectarJugadorExistente(nombre)) {
+                    // Creacion de una cuenta nueva
                     player = new Player();
                     player.setName(nombre);
-                    // Creacion de una cuenta nueva
-                    do {
-                        // Este es un if que detecta si es mayor a cuarenta la longitud de la frase si
-                        // es asi ejecuta el sigueinte linea de codigo
-                        // El pattern detecta \ / y espacios
-                        if (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()))
-                            System.out.println("Introduzca un nombre menor a 40 caracteres y que no contenga caracteres especiales");
-                    } while (player.getName().length() > 40 || Utilidades.validarPatron(".*[\\\\/:*?\"<>|\\s].*", player.getName()));
+
                     playerExists = true;
+                    GestionDB.guardarJugadorDB(player);
                 } else {
                     System.out.println("¡Jugador existente!");
                 }
             }
         } while (!playerExists);
+        Player.guardarJugador(player);
         return player;
     }
 
+    /**
+     * Cierra la sesión del jugador actual, guarda su progreso y permite iniciar
+     * sesión
+     * con otro jugador o el mismo jugador nuevamente.
+     *
+     * @param player El jugador cuya sesión se desea cerrar.
+     * @return El nuevo jugador que inicia sesión después de cerrar la sesión
+     *         actual.
+     */
     public static Player cerrarSesion(Player player) {
         Player.guardarJugador(player);
         System.out.println("Sesion cerrada");
@@ -145,20 +167,40 @@ public class Utilidades {
         return iniciarJugador();
     }
 
+    /**
+     * Elimina el perfil del jugador actual tanto localmente como en la base de
+     * datos.
+     * Si el perfil se elimina correctamente, permite iniciar sesión con otro
+     * jugador
+     * o crear un nuevo perfil.
+     *
+     * @param player El jugador cuyo perfil se desea eliminar.
+     * @return El nuevo jugador que inicia sesión después de eliminar el perfil
+     *         actual.
+     */
     public static Player eliminarPerfil(Player player) {
         File file = new File("./Players", player.getName() + ".dat");
-        if(file.exists())
-            if(file.delete())
-                System.out.println("Cuenta eliminada");
+        if (file.exists())
+            if (file.delete())
+                System.out.println("Cuenta eliminada localmente");
             else
-                System.out.println("Error al eliminar la cuenta");
+                System.out.println("Error al eliminar la cuenta localmente");
         else
             System.out.println("Cuenta no encontrada");
-        
+        GestionDB.eliminarPerfil(player);
         player = null;
         return iniciarJugador();
     }
 
+    /**
+     * Formatea la diferencia entre dos fechas en un formato de tiempo legible
+     * (HH:mm:ss).
+     *
+     * @param fechaInicio La fecha y hora de inicio.
+     * @param fechaFinal  La fecha y hora de finalización.
+     * @return Una cadena que representa el tiempo transcurrido entre las dos fechas
+     *         en el formato "HH:mm:ss".
+     */
     public static String formatearFecha(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
 
         // Calcular el tiempo transcurrido entre fechaInicio y fechaFinal

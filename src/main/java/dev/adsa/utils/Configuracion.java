@@ -4,8 +4,13 @@
  * Este archivo es el apartado de configuracion del juego, este devuelve un array con la configuracion establecida
  * 
  */
-package utils;
+package dev.adsa.utils;
 
+/**
+ * Esta clase se encarga de gestionar la configuración del juego, permitiendo al
+ * usuario modificar parámetros como las dimensiones del tablero, la velocidad
+ * del juego y la habilitación de colores en la consola.
+ */
 public class Configuracion {
 
     /**
@@ -60,8 +65,7 @@ public class Configuracion {
             }
         } while (option != 4);
         /* ----- Envio de datos ----- */
-        int[] array = { dimensiones[0], dimensiones[1], tiempoMilisegundos, admiteColores };
-        return array;
+        return new int[] { dimensiones[0], dimensiones[1], tiempoMilisegundos, admiteColores };
     }
 
     /**
