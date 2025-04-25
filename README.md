@@ -48,7 +48,7 @@ VideojuegoFundamentos/
 - Una terminal en el sistema (CMD, PowerShell, etc.).
 
 ## Compilación y Ejecución
-
+java -jar
 ### Compilación con Maven
 
 1. Abre una terminal y navega al directorio del proyecto.
@@ -78,6 +78,16 @@ VideojuegoFundamentos/
    mvn javadoc:javadoc
    ```
 3. Esto generará los archivos necesarios en la carpeta `target\reports\apidocs\`.
+
+### Creacion del .jar con VSCode
+
+En el IDE, en el apartado de JAVA PROJECTS haay un boton para exprotar automaticamente como .jar
+Tendras que hacerlo 2 veces, una para el Controlador principal y el siguiente para Main.
+Advertencia: como los 2 se te guardaran con el mismo nombre tendras que cambiar el nombre al primero que crees
+Estos se te crearan en la raiz del proyecto, para ejecutarlos abra 2 terminales y ejecute este comando para los 2 archivos:
+   ```bash
+   java -jar nombredelarchivo.jar
+   ```
 
 ## Funcionalidades Principales
 
