@@ -7,7 +7,7 @@
 
   <groupId>dev.adsa</groupId>
   <artifactId>videojuego-fundamentos</artifactId>
-  <version>v1.8</version>
+  <version>v1.9</version>
   <name>videojuego-fundamentos</name>
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

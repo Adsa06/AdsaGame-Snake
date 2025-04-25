@@ -17,6 +17,7 @@ VideojuegoFundamentos/
 ├── README.md                       # Este archivo
 ├── .vscode/                        # Configuraciones para Visual Studio Code
 ├── target/                         # Carpeta con el código compilado del src/
+├── Player/                         # Carpeta con la informacion de los jugadores localmente
 ├── src/main/java/dev/adsa          # Carpeta con el código fuente
 │   ├── clases/                     # Clases principales del programa
 │   │   ├── modos/                  # Clases de los modos de juego
@@ -52,20 +53,20 @@ VideojuegoFundamentos/
 1. Abre una terminal y navega al directorio del proyecto.
 2. Ejecuta el siguiente comando para compilar el proyecto:
    ```bash
-   mvn clean install
+   mvn clean compile
    ```
-3. Esto generará un archivo `.jar` en la carpeta `target/`.
+3. Esto generará los archivos `.class` en la carpeta `target/`.
 
 ### Ejecución del Juego
 
 1. Abre dos terminales.
-2. En la primera terminal, ejecuta el controlador principal:
+2. En la primera terminal, ejecuta la clase principal:
    ```bash
-   java -jar target/videojuego-fundamentos.jar
+   mvn exec:java -Dexec.mainClass="dev.adsa.Main"
    ```
-3. En la segunda terminal, ejecuta el controlador de comandos:
+3. En la segunda terminal, ejecuta el controlador:
    ```bash
-   java -cp target/videojuego-fundamentos.jar dev.adsa.ControladorPrincipal
+   mvn exec:java -Dexec.mainClass="dev.adsa.ControladorPrincipal"
    ```
 
 ## Funcionalidades Principales
@@ -86,7 +87,7 @@ VideojuegoFundamentos/
 ### Fase 1: Menú Principal
 
 1. **Inicio del Juego**:
-   Antes de iniciar el juego se necesita crear una base de datos llamada `playerssnake` antes de ejecutar el programa.
+   Antes de iniciar el juego se necesita crear una base de datos llamada `playerssnake` antes de ejecutar el programa. Mas informacion en el punto [Base de Datos](#base-de-datos)
 
    Al iniciar el programa, el usuario es recibido con un mensaje que solicita su nombre y luego presenta un menú con las siguientes opciones:
    - **1**: Jugar al juego de Snake.
@@ -143,4 +144,4 @@ Este proyecto está diseñado para aprender y mejorar en:
 
 - **Modularización**: Descomposición del programa en métodos.
 - **Documentación**: Creación de un análisis técnico del software.
-- **Uso de herramientas modernas**: Familiarización con Visual Studio Code y JDK 21.
+- **Uso de herramientas modernas**: Familiarización con Visual Studio Code, JDK 21, Maven y MySQL.
