@@ -12,6 +12,10 @@ import java.io.IOException;
 
 import dev.adsa.clases.JuegoBase;
 import dev.adsa.clases.Partida;
+
+/**
+ * Clase para iniciar el juego en modo normal
+ */
 public class ModoNormal extends JuegoBase {
 
    /* ----- Metodo constructor ----- */

@@ -13,6 +13,9 @@ import java.util.Arrays;
 import dev.adsa.utils.ColoresConsola;
 import dev.adsa.utils.Utilidades;
 
+/**
+ * Clase de cada partida, en esta se almacena toda la informacion de cada partida
+ */
 public class Partida implements Serializable {
     /** Constante para la Serializacion */
     private static final long serialVersionUID = 1L;

@@ -7,6 +7,9 @@
 
 package dev.adsa.utils;
 
+/**
+ * Esta clase define códigos de color ANSI para la consola.
+ */
 public class ColoresConsola {
 
     /**

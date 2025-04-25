@@ -6,6 +6,11 @@
  */
 package dev.adsa.utils;
 
+/**
+ * Esta clase se encarga de gestionar la configuración del juego, permitiendo al
+ * usuario modificar parámetros como las dimensiones del tablero, la velocidad
+ * del juego y la habilitación de colores en la consola.
+ */
 public class Configuracion {
 
     /**

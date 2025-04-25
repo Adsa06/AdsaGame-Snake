@@ -11,6 +11,9 @@ import java.io.*;
 
 import dev.adsa.utils.ColoresConsola;
 
+/**
+ * Controlador principal, el cual se comunica con el usuario y con el archivo txt
+ */
 public class ControladorPrincipal {
     /**
      * Metodo principal, este es el que se encarga de comunicarse con el usuario,

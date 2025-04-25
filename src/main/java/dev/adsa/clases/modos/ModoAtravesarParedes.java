@@ -13,6 +13,9 @@ import java.io.IOException;
 import dev.adsa.clases.JuegoBase;
 import dev.adsa.clases.Partida;
 
+/**
+ * Clase para iniciar el juego en modo atravesar paredes
+ */
 public class ModoAtravesarParedes extends JuegoBase {
    /* ----- Metodo constructor ----- */
    /** Metodo constructor para este modo */

@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase para la conexion de la base de datos
+ */
 public class ConexionDB {
     /** URL de la base de datos a la que se conecta */
     private static final String URL = "jdbc:mysql://localhost:3306/playerssnake";

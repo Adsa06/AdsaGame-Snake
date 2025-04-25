@@ -16,6 +16,9 @@ import dev.adsa.utils.Configuracion;
 import dev.adsa.utils.ControladorJuego;
 import dev.adsa.utils.Utilidades;
 
+/**
+ * Clase que muestra el menu principal del juego Snake
+ */
 public class Main {
 
     /**

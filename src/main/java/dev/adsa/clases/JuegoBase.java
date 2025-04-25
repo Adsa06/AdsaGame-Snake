@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import dev.adsa.utils.ColoresConsola;
 
+/**
+ * Clase plantilla del juego
+ */
 public abstract class JuegoBase {
    private StringBuilder[] coordenadas;
 

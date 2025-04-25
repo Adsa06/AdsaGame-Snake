@@ -17,6 +17,9 @@ import java.util.regex.Matcher;
 import dev.adsa.bbdd.GestionDB;
 import dev.adsa.clases.Player;
 
+/**
+ * Clase que contiene las funciones de utilidad
+ */
 public class Utilidades {
     /**
      * Solicita al usuario que introduzca un número entero dentro de un rango

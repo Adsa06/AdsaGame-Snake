@@ -17,6 +17,9 @@ import dev.adsa.clases.Player;
 
 import java.sql.SQLException;
 
+/**
+ * Clase para la gestion de la base de datos
+ */
 public class GestionDB {
 
     /**

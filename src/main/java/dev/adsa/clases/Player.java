@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Clase del jugador, en esta se almacena toda la informacion del jugador
+ */
 public class Player implements Serializable {
     /** Constante para la Serializacion */
     private static final long serialVersionUID = 1L;

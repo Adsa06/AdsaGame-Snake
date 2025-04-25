@@ -13,6 +13,9 @@ import dev.adsa.clases.Player;
 import dev.adsa.clases.modos.ModoAtravesarParedes;
 import dev.adsa.clases.modos.ModoNormal;
 
+/**
+ * Clase que contiene las funciones para iniciar el juego
+ */
 public class ControladorJuego {
    /**
     * Inicia el juego de Snake con las configuraciones especificadas.
