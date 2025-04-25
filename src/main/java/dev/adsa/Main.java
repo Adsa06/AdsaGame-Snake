@@ -114,7 +114,7 @@ public class Main {
                         System.out.println("Opcion incorrecta");
                 }
             }
-        } while (option != 6);
+        } while (option != 6);    
         Player.guardarJugador(player);
         System.out.println("Hasta otra");
     }

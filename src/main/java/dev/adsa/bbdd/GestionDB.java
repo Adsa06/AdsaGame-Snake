@@ -46,8 +46,7 @@ public class GestionDB {
                 "    modoJuego ENUM('MODO_NORMAL', 'MODO_ATRAVESAR_PAREDES') NOT NULL,\n" + //
                 "    filas INT NOT NULL,\n" + //
                 "    columnas INT NOT NULL,\n" + //
-                "    CONSTRAINT FK_idPlayer FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE ON UPDATE CASCADE\n"
-                + //
+                "    CONSTRAINT FK_idPlayer FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE ON UPDATE CASCADE\n" + //
                 ");";
 
         try {

@@ -60,8 +60,7 @@ public class Configuracion {
             }
         } while (option != 4);
         /* ----- Envio de datos ----- */
-        int[] array = { dimensiones[0], dimensiones[1], tiempoMilisegundos, admiteColores };
-        return array;
+        return new int[] { dimensiones[0], dimensiones[1], tiempoMilisegundos, admiteColores };
     }
 
     /**
