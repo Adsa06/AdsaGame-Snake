@@ -48,7 +48,7 @@ VideojuegoFundamentos/
 - Una terminal en el sistema (CMD, PowerShell, etc.).
 
 ## Compilación y Ejecución
-java -jar
+
 ### Compilación con Maven
 
 1. Abre una terminal y navega al directorio del proyecto.
