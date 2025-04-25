@@ -17,10 +17,8 @@ public class ControladorJuego {
    /**
     * Inicia el juego de Snake con las configuraciones especificadas.
     * 
-    * @param configuracionSnake Un array que contiene la configuracion
-    *                           inicial del juego: [ancho, alto, tiempo de
-    *                           espera en milisegundos, admite colores].
-    * @param player             El jugador que va a jugar.
+    * @param partida La partida que se va a jugar.
+    * @param player  El jugador que va a jugar.
     * @return El puntaje final
     *         calculado al final del juego.
     * @throws IOException          Si ocurre un error durante la lectura del

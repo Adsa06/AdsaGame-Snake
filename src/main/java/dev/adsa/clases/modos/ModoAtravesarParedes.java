@@ -15,6 +15,7 @@ import dev.adsa.clases.Partida;
 
 public class ModoAtravesarParedes extends JuegoBase {
    /* ----- Metodo constructor ----- */
+   /** Metodo constructor para este modo */
    public ModoAtravesarParedes() {
    }
 
@@ -82,6 +83,7 @@ public class ModoAtravesarParedes extends JuegoBase {
     * @param configuracionSnake Un array que contiene la configuración inicial del
     *                           juego: [ancho, alto, tiempo de espera en
     *                           milisegundos, admite colores].
+    * @param partida            La partida que se va a jugar.
     * @return El puntaje final calculado al final del juego.
     * @throws IOException          Si ocurre un error durante la lectura del
     *                              archivo de comandos.
@@ -261,8 +263,8 @@ public class ModoAtravesarParedes extends JuegoBase {
     * para ver si es una fruta. Si es una fruta se marca que ha comido y se
     * incrementa la longitud de la serpiente en 1.
     * 
-    * @param snakeLongitud La longitud actual de la serpiente
-    * @return La longitud actualizada de la serpiente
+    * @param direcion la direccion en la que se mueve la serpiente (W, A, S, D).
+    * @return true si ha comido, false si no ha comido
     */
    public boolean detectarFrutaDetras(String direcion) {
       boolean frutaDetectada = false;

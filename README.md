@@ -8,6 +8,7 @@ Este es un proyecto de un juego de **Snake** en consola, desarrollado en **Java*
 | **Fecha de inicio**  | 17/10/2024        |
 | **Última revisión**  | v7 25/04/2025     |
 
+Enlace al repositorio de git: https://github.com/Adsa06/VideojuegoFundamentos.git
 ## Estructura del Proyecto
 
 El proyecto está dividido en varios archivos Java organizados en:
@@ -68,6 +69,15 @@ VideojuegoFundamentos/
    ```bash
    mvn exec:java -Dexec.mainClass="dev.adsa.ControladorPrincipal"
    ```
+
+### Creacion del javadoc con maven
+
+1. Abre una terminal y navega al directorio del proyecto.
+2. Ejecuta el siguiente comando para compilar el proyecto:
+   ```bash
+   mvn javadoc:javadoc
+   ```
+3. Esto generará los archivos necesarios en la carpeta `target\reports\apidocs\`.
 
 ## Funcionalidades Principales
 

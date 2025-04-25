@@ -15,6 +15,7 @@ import dev.adsa.clases.Partida;
 public class ModoNormal extends JuegoBase {
 
    /* ----- Metodo constructor ----- */
+   /** Metodo constructor para este modo */
    public ModoNormal() {
    }
 
@@ -71,6 +72,7 @@ public class ModoNormal extends JuegoBase {
     * @param configuracionSnake Un array que contiene la configuración inicial del
     *                           juego: [ancho, alto, tiempo de espera en
     *                           milisegundos, admite colores].
+    * @param partida            La partida que se va a jugar.
     * @return El puntaje final calculado al final del juego.
     * @throws IOException          Si ocurre un error durante la lectura del
     *                              archivo de comandos.
