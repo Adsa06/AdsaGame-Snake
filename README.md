@@ -51,7 +51,7 @@ VideojuegoFundamentos/
 
 ### Compilación con Maven
 
-1. Abre una terminal y navega al directorio del proyecto.
+1. Abre una terminal y dirigete a la raiz del proyecto `videojuegoFundamentos/`.
 2. Ejecuta el siguiente comando para compilar el proyecto:
    ```bash
    mvn clean compile
@@ -60,7 +60,7 @@ VideojuegoFundamentos/
 
 ### Ejecución del Juego
 
-1. Abre dos terminales.
+1. Abre dos terminales y dirigete a la raiz del proyecto `videojuegoFundamentos/`.
 2. En la primera terminal, ejecuta la clase principal:
    ```bash
    mvn exec:java -Dexec.mainClass="dev.adsa.Main"
@@ -72,8 +72,8 @@ VideojuegoFundamentos/
 
 ### Creacion del javadoc con maven
 
-1. Abre una terminal y navega al directorio del proyecto.
-2. Ejecuta el siguiente comando para compilar el proyecto:
+1. Abre una terminal  y dirigete a la raiz del proyecto `videojuegoFundamentos/`.
+2. Ejecuta el siguiente comando para crear la documentacion del proyecto:
    ```bash
    mvn javadoc:javadoc
    ```
