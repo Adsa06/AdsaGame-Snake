@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"dev.adsa"},{"l":"dev.adsa.bbdd"},{"l":"dev.adsa.clases"},{"l":"dev.adsa.clases.modos"},{"l":"dev.adsa.utils"}];updateSearchResults();
